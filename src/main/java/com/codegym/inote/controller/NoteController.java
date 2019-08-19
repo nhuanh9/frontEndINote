@@ -61,4 +61,21 @@ public class NoteController {
         modelAndView.addObject("message", "Updated!");
         return modelAndView;
     }
+
+    @GetMapping("/delete/{id}")
+    public ModelAndView showDeleteForm(@PathVariable Long id){
+        Note note = noteService.findById(id);
+        if (note != null) {
+            ModelAndView modelAndView = new ModelAndView("/note/delete");
+            modelAndView.addObject("note", note);
+            return modelAndView;
+        }
+        return new ModelAndView("/error-404");
+    }
+
+    @PostMapping("/delete")
+    public String deleteNoteType(@ModelAttribute Note note){
+        noteService.remove(note.getId());
+        return "redirect:/note/notes";
+    }
 }
