@@ -19,9 +19,9 @@
         <tr>
             <td th:text="${noteType.name}"></td>
             <td th:text="${noteType.description}"></td>
-            <td><a th:href="@{/inote/noteType/edit/__${noteType.id}__}">edit</a></td>
-            <td><a th:href="@{/inote/noteType/delete/__${noteType.id}__}">delete</a></td>
-            <td><a th:href="@{/inote/noteType/view/__${noteType.id}__}">view</a></td>
+            <td><a th:href="@{/noteType/edit/__${noteType.id}__}">edit</a></td>
+            <td><a th:href="@{/noteType/delete/__${noteType.id}__}">delete</a></td>
+            <td><a th:href="@{/noteType/view/__${noteType.id}__}">view</a></td>
         </tr>
     </th:block>
 </table>

@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -41,6 +38,27 @@ public class NoteTypeController {
         ModelAndView modelAndView = new ModelAndView("/noteType/create");
         modelAndView.addObject("noteType", new NoteType());
         modelAndView.addObject("message", "Created!");
+        return modelAndView;
+    }
+
+    @GetMapping("/edit/{id}")
+    public ModelAndView showEditForm(@PathVariable Long id) {
+        NoteType noteType = noteTypeService.findById(id);
+        if (noteType != null) {
+            ModelAndView modelAndView = new ModelAndView("/noteType/edit");
+            modelAndView.addObject("noteType", noteType);
+            return modelAndView;
+        }
+        return new ModelAndView("/error-404");
+    }
+
+    @PostMapping("/edit")
+    public ModelAndView editNoteType(@ModelAttribute NoteType noteType) {
+        noteTypeService.save(noteType);
+
+        ModelAndView modelAndView = new ModelAndView("/noteType/edit");
+        modelAndView.addObject("noteType", noteType);
+        modelAndView.addObject("message", "Updated!");
         return modelAndView;
     }
 }
