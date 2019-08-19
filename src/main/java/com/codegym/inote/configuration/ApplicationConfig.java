@@ -1,6 +1,8 @@
 package com.codegym.inote.configuration;
 
+import com.codegym.inote.service.NoteService;
 import com.codegym.inote.service.NoteTypeService;
+import com.codegym.inote.service.impl.NoteServiceImpl;
 import com.codegym.inote.service.impl.NoteTypeServiceImpl;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -49,6 +51,11 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
     @Bean
     public NoteTypeService noteTypeService() {
         return new NoteTypeServiceImpl();
+    }
+
+    @Bean
+    public NoteService noteService() {
+        return new NoteServiceImpl();
     }
 
     @Bean(name = "Hello World")
