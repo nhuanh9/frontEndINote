@@ -8,10 +8,10 @@
 <th:block th:if="${message}">
     <p th:text="${message}"></p>
 </th:block>
-<form th:action="@{/user/register}" th:object="${user}" method="post">
+<form th:action="@{/register}" th:object="${user}" method="post">
     <table>
         <tr>
-            <td>UserName:</td>
+            <td>Username:</td>
             <td><input type="text" name="username" th:field="*{username}"></td>
         </tr>
         <tr>
@@ -24,5 +24,6 @@
         </tr>
     </table>
 </form>
+<a href="/inote/login">Go to login site</a>
 </body>
 </html>

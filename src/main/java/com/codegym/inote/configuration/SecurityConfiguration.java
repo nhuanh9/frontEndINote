@@ -31,15 +31,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
-        auth.inMemoryAuthentication().withUser("bill").password("123456").roles("USER");
         auth.inMemoryAuthentication().withUser("admin").password("123456").roles("ADMIN");
+        auth.inMemoryAuthentication().withUser("bill").password("123456").roles("USER");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/admin/**").access("hasRole('ADMIN')")
-                .antMatchers("/**","/user/**").access("hasRole('USER')")
+                .antMatchers("/user/**").access("hasRole('USER')")
                 .and().formLogin().loginPage("/login").permitAll()
                 .loginProcessingUrl("/login").successHandler(customSuccessHandler)
                 .usernameParameter("ssoId").passwordParameter("password")
