@@ -1,6 +1,7 @@
 package com.codegym.inote.service.impl;
 
 import com.codegym.inote.model.Note;
+import com.codegym.inote.model.NoteType;
 import com.codegym.inote.repository.NoteRepository;
 import com.codegym.inote.service.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,5 +30,10 @@ public class NoteServiceImpl implements NoteService {
     @Override
     public void remove(Long id) {
         noteRepository.delete(id);
+    }
+
+    @Override
+    public Page<Note> findAllByNoteType(NoteType noteType, Pageable pageable) {
+        return noteRepository.findAllByNoteType(noteType, pageable);
     }
 }
