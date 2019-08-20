@@ -5,7 +5,7 @@
     <title>List Note</title>
 </head>
 <body>
-<a href="/inote/note/create">Create new note</a>
+<a href="/inote/admin/note/create">Create new note</a>
 <h1>List Note</h1>
 <table>
     <tr>
@@ -18,8 +18,8 @@
         <tr>
             <td th:text="${note.title}"></td>
             <td th:text="${note.content}"></td>
-            <td><a th:href="@{/note/edit/__${note.id}__}">edit</a></td>
-            <td><a th:href="@{/note/delete/__${note.id}__}">delete</a></td>
+            <td><a th:href="@{/admin/note/edit/__${note.id}__}">edit</a></td>
+            <td><a th:href="@{/admin/note/delete/__${note.id}__}">delete</a></td>
         </tr>
     </th:block>
 </table>

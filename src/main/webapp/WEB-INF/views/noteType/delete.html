@@ -5,7 +5,7 @@
     <title>Delete NoteType</title>
 </head>
 <body>
-<a href="/inote/noteType/noteTypeList">NoteType List</a>
+<a href="/inote/admin/noteType/noteTypeList">NoteType List</a>
 <form th:action="@{/noteType/delete}" th:object="${noteType}" method="post">
     <input th:type="hidden" th:field="*{id}">
     <table>
