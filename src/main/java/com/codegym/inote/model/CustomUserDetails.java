@@ -1,6 +1,5 @@
 package com.codegym.inote.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -10,7 +9,6 @@ import java.util.Collection;
 import java.util.Collections;
 
 @Data
-@AllArgsConstructor
 public class CustomUserDetails implements UserDetails {
 
     private User user;
@@ -18,6 +16,13 @@ public class CustomUserDetails implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"));
+    }
+
+    public CustomUserDetails() {
+    }
+
+    public CustomUserDetails(User user) {
+        this.user = user;
     }
 
     @Override
