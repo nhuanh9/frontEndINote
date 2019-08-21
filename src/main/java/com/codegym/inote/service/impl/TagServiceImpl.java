@@ -37,4 +37,9 @@ public class TagServiceImpl implements TagService {
     public Iterable<Tag> findAllByNotes(Note note) {
         return tagRepository.findAllByNotes(note);
     }
+
+    @Override
+    public Page<Tag> findTagByName(String name, Pageable pageable) {
+        return tagRepository.findTagByName(name, pageable);
+    }
 }

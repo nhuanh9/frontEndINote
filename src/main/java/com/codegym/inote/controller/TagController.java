@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/user/tag")
 public class TagController {
@@ -22,8 +24,15 @@ public class TagController {
     private NoteService noteService;
 
     @GetMapping("/tags")
-    public ModelAndView showAllTag(Pageable pageable) {
-        Page<Tag> tags = tagService.findAll(pageable);
+    public ModelAndView showAllTag(@RequestParam("search") Optional<String> search, Pageable pageable) {
+        Page<Tag> tags;
+
+        if (search.isPresent()) {
+            tags = tagService.findTagByName(search.get(), pageable);
+        } else {
+            tags = tagService.findAll(pageable);
+        }
+
         ModelAndView modelAndView = new ModelAndView("/tag/list");
         modelAndView.addObject("tags", tags);
         return modelAndView;
