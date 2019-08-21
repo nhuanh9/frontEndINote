@@ -9,8 +9,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
 
 @Controller
 public class UserController {
@@ -32,16 +35,23 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ModelAndView registerNewUser(@RequestParam("username") String username, @RequestParam("password") String password) {
-        User currentUser = new User();
+    public ModelAndView registerNewUser(@Valid @ModelAttribute User user, BindingResult bindingResult) {
 
-        currentUser.setUsername(username);
-        currentUser.setPassword(passwordEncoder.encode(password));
-        userService.save(currentUser);
 
-        ModelAndView modelAndView = new ModelAndView("/user/register");
-        modelAndView.addObject("user", currentUser);
-        modelAndView.addObject("message", "Success!");
+        if (bindingResult.hasFieldErrors()) {
+            ModelAndView modelAndView = new ModelAndView("/user/register");
+            return modelAndView;
+        }
+            User currentUser = new User();
+
+            currentUser.setUsername(user.getUsername());
+            currentUser.setPassword(passwordEncoder.encode(user.getPassword()));
+            userService.save(currentUser);
+
+            ModelAndView modelAndView = new ModelAndView("/user/register");
+            modelAndView.addObject("user", currentUser);
+            modelAndView.addObject("message", "Success!");
+
         return modelAndView;
     }
 
