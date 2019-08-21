@@ -9,7 +9,7 @@
 <th:block th:if="${message}">
     <p th:text="${message}"></p>
 </th:block>
-<form th:action="@{/note/create}" th:object="${note}" method="post">
+<form th:action="@{/user/note/create}" th:object="${note}" method="post">
     <table>
         <tr>
             <td>Title:</td>
@@ -18,6 +18,22 @@
         <tr>
             <td>Content:</td>
             <td><input type="text" th:field="*{content}"></td>
+        </tr>
+        <tr>
+            <td>Note type:</td>
+            <td>
+                <select th:field="*{noteType}">
+                    <option th:each="p:${noteTypes}" th:value="${p.id}" th:text="${p.name}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Tag:</td>
+            <th:block th:each="tag:${tags}">
+                <td>
+                    <input type="checkbox" th:text="${tag.name}" th:value="${tag.id}" th:field="*{tags}">
+                </td>
+            </th:block>
         </tr>
         <tr>
             <td></td>

@@ -13,10 +13,6 @@ public class Tag {
     private String name;
 
     @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            },
             mappedBy = "tags")
 
     private List<Note> notes;

@@ -6,7 +6,7 @@
 </head>
 <body>
 <a href="/inote/user/note/notes">Note List</a>
-<form th:action="@{/note/delete}" th:object="${note}" method="post">
+<form th:action="@{/user/note/delete}" th:object="${note}" method="post">
     <input th:type="hidden" th:field="*{id}">
     <table>
         <tr>

@@ -1,7 +1,11 @@
 package com.codegym.inote.controller;
 
 import com.codegym.inote.model.Note;
+import com.codegym.inote.model.NoteType;
+import com.codegym.inote.model.Tag;
 import com.codegym.inote.service.NoteService;
+import com.codegym.inote.service.NoteTypeService;
+import com.codegym.inote.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,15 +13,38 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/user/note")
 public class NoteController {
     @Autowired
     private NoteService noteService;
 
+    @Autowired
+    private NoteTypeService noteTypeService;
+
+    @Autowired
+    private TagService tagService;
+
+    @ModelAttribute("noteTypes")
+    public Page<NoteType> noteTypes(Pageable pageable) {
+        return noteTypeService.findAll(pageable);
+    }
+
+    @ModelAttribute("tags")
+    public Page<Tag> tags(Pageable pageable) {
+        return tagService.findAll(pageable);
+    }
+
     @GetMapping("/notes")
     public ModelAndView showNoteList(Pageable pageable) {
         Page<Note> notes = noteService.findAll(pageable);
+        List<Tag> tags;
+        for (Note note : notes) {
+            tags = (List<Tag>) tagService.findAllByNotes(note);
+            note.setTags(tags);
+        }
 
         ModelAndView modelAndView = new ModelAndView("/note/list");
         modelAndView.addObject("notes", notes);
@@ -63,7 +90,7 @@ public class NoteController {
     }
 
     @GetMapping("/delete/{id}")
-    public ModelAndView showDeleteForm(@PathVariable Long id){
+    public ModelAndView showDeleteForm(@PathVariable Long id) {
         Note note = noteService.findById(id);
         if (note != null) {
             ModelAndView modelAndView = new ModelAndView("/note/delete");
@@ -74,8 +101,8 @@ public class NoteController {
     }
 
     @PostMapping("/delete")
-    public String deleteNoteType(@ModelAttribute Note note){
+    public String deleteNoteType(@ModelAttribute Note note) {
         noteService.remove(note.getId());
-        return "redirect:/note/notes";
+        return "redirect:/user/note/notes";
     }
 }

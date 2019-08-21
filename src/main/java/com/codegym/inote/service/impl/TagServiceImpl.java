@@ -1,5 +1,6 @@
 package com.codegym.inote.service.impl;
 
+import com.codegym.inote.model.Note;
 import com.codegym.inote.model.Tag;
 import com.codegym.inote.repository.TagRepository;
 import com.codegym.inote.service.TagService;
@@ -30,5 +31,10 @@ public class TagServiceImpl implements TagService {
     @Override
     public void remove(Long id) {
         tagRepository.delete(id);
+    }
+
+    @Override
+    public Iterable<Tag> findAllByNotes(Note note) {
+        return tagRepository.findAllByNotes(note);
     }
 }

@@ -1,6 +1,7 @@
 package com.codegym.inote.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,13 +17,9 @@ public class Note {
     @JoinColumn(name = "type_id")
     private NoteType noteType;
 
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            })
-    @JoinTable(name = "post_tags",
-            joinColumns = {@JoinColumn(name = "post_id")},
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "note_tags",
+            joinColumns = {@JoinColumn(name = "note_id")},
             inverseJoinColumns = {@JoinColumn(name = "tag_id")})
     private List<Tag> tags;
 

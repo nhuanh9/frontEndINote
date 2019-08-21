@@ -5,11 +5,14 @@
     <title>List Note</title>
 </head>
 <body>
+<a href="/inote/user/homepage">Go to homepage</a>
 <h1>List Note</h1>
 <table>
     <tr>
         <td>Title</td>
         <td>Content</td>
+        <td>Note Type</td>
+        <td>Tag</td>
         <td>Edit</td>
         <td>Delete</td>
     </tr>
@@ -17,6 +20,8 @@
         <tr>
             <td th:text="${note.title}"></td>
             <td th:text="${note.content}"></td>
+            <td th:text="${note.noteType.name}"></td>
+            <td th:each="tag:${note.tags}" th:text="${tag.name}"></td>
             <td><a th:href="@{/user/note/edit/__${note.id}__}">edit</a></td>
             <td><a th:href="@{/user/note/delete/__${note.id}__}">delete</a></td>
         </tr>
