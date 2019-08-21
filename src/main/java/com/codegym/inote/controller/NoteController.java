@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/user/note")
@@ -38,8 +39,15 @@ public class NoteController {
     }
 
     @GetMapping("/notes")
-    public ModelAndView showNoteList(Pageable pageable) {
-        Page<Note> notes = noteService.findAll(pageable);
+    public ModelAndView showNoteList(Pageable pageable, @RequestParam("search") Optional<String> search) {
+        Page<Note> notes;
+
+        if (search.isPresent()) {
+            notes = noteService.findNoteByTitleContains(search.get(), pageable);
+        } else {
+            notes = noteService.findAll(pageable);
+        }
+
         List<Tag> tags;
         for (Note note : notes) {
             tags = (List<Tag>) tagService.findAllByNotes(note);

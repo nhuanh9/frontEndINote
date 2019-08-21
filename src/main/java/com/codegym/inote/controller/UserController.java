@@ -57,17 +57,8 @@ public class UserController {
     }
 
     @GetMapping("/user/homepage")
-    public ModelAndView home(Pageable pageable, @RequestParam("search") Optional<String> search) {
-        Page<Note> notes;
-
-        if (search.isPresent()) {
-            notes = noteService.findNoteByTitleContains(search.get(), pageable);
-        } else {
-            notes = noteService.findAll(pageable);
-        }
-
+    public ModelAndView home(Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("/user/homepage");
-        modelAndView.addObject("notes", notes);
         return modelAndView;
     }
 }

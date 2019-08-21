@@ -5,6 +5,7 @@
     <title>Tag List</title>
 </head>
 <body>
+<a href="/inote/user/homepage">Go to homepage</a>
 <a href="/inote/user/tag/create">Create New Tag</a>
 <h1>Tags</h1>
 <form>
@@ -18,7 +19,7 @@
     </tr>
     <th:block th:each="tag : ${tags}">
         <tr>
-            <td th:text="${tag.name}"></td>
+            <td><a th:href="@{/user/tag/view/__${tag.id}__}" th:text="${tag.name}"></a></td>
         </tr>
     </th:block>
 </table>

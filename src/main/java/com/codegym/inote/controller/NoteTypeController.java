@@ -90,7 +90,7 @@ public class NoteTypeController {
     @PostMapping("/delete")
     public String deleteNoteType(@ModelAttribute NoteType noteType) {
         noteTypeService.remove(noteType.getId());
-        return "redirect:/noteType/noteTypeList";
+        return "redirect:/user/noteType/noteTypeList";
     }
 
     @GetMapping("/view/{id}")

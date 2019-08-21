@@ -90,7 +90,7 @@ public class TagController {
     @PostMapping("/delete")
     public String deleteTag(@ModelAttribute Tag tag) {
         tagService.remove(tag.getId());
-        return "redirect:/tag/noteTypeList";
+        return "redirect:/user/tag/tags";
     }
 
     @GetMapping("/view/{id}")
