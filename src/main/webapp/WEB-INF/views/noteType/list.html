@@ -24,12 +24,11 @@
     </tr>
     <th:block th:each="noteType : ${noteTypes}">
         <tr>
-            <td th:text="${noteType.name}"></td>
+            <td ><a th:href="@{/user/noteType/view/__${noteType.id}__}" th:text="${noteType.name}"></a></td>
             <td th:text="${noteType.description}"></td>
             <td th:text="${noteType.stack.name}"></td>
             <td><a th:href="@{/user/noteType/edit/__${noteType.id}__}">edit</a></td>
             <td><a th:href="@{/user/noteType/delete/__${noteType.id}__}">delete</a></td>
-            <td><a th:href="@{/user/noteType/view/__${noteType.id}__}">view</a></td>
         </tr>
     </th:block>
 </table>
