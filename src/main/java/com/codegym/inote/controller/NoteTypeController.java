@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/admin/noteType")
+@RequestMapping("/user/noteType")
 public class NoteTypeController {
 
     @Autowired

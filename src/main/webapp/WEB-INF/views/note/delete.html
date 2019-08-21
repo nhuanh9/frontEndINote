@@ -5,7 +5,7 @@
     <title>Delete Note</title>
 </head>
 <body>
-<a href="/inote/admin/note/notes">Note List</a>
+<a href="/inote/user/note/notes">Note List</a>
 <form th:action="@{/note/delete}" th:object="${note}" method="post">
     <input th:type="hidden" th:field="*{id}">
     <table>

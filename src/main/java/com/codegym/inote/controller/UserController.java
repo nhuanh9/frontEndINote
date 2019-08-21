@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 public class UserController {
@@ -42,22 +43,28 @@ public class UserController {
             ModelAndView modelAndView = new ModelAndView("/user/register");
             return modelAndView;
         }
-            User currentUser = new User();
+        User currentUser = new User();
 
-            currentUser.setUsername(user.getUsername());
-            currentUser.setPassword(passwordEncoder.encode(user.getPassword()));
-            userService.save(currentUser);
+        currentUser.setUsername(user.getUsername());
+        currentUser.setPassword(passwordEncoder.encode(user.getPassword()));
+        userService.save(currentUser);
 
-            ModelAndView modelAndView = new ModelAndView("/user/register");
-            modelAndView.addObject("user", currentUser);
-            modelAndView.addObject("message", "Success!");
+        ModelAndView modelAndView = new ModelAndView("/user/register");
+        modelAndView.addObject("user", currentUser);
+        modelAndView.addObject("message", "Success!");
 
         return modelAndView;
     }
 
     @GetMapping("/user/homepage")
-    public ModelAndView home(Pageable pageable){
-        Page<Note> notes = noteService.findAll(pageable);
+    public ModelAndView home(Pageable pageable, @RequestParam("search") Optional<String> search) {
+        Page<Note> notes;
+
+        if (search.isPresent()) {
+            notes = noteService.findNoteByTitleContains(search.get(), pageable);
+        } else {
+            notes = noteService.findAll(pageable);
+        }
 
         ModelAndView modelAndView = new ModelAndView("/user/homepage");
         modelAndView.addObject("notes", notes);

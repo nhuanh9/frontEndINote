@@ -1,6 +1,7 @@
 package com.codegym.inote.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "note")
@@ -14,6 +15,24 @@ public class Note {
     @ManyToOne
     @JoinColumn(name = "type_id")
     private NoteType noteType;
+
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
+    @JoinTable(name = "post_tags",
+            joinColumns = {@JoinColumn(name = "post_id")},
+            inverseJoinColumns = {@JoinColumn(name = "tag_id")})
+    private List<Tag> tags;
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
 
     public Note() {
     }

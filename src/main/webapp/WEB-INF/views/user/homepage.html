@@ -2,21 +2,20 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>List Note</title>
+    <title>Note</title>
 </head>
 <body>
-<h1>List Note</h1>
-<table>
-    <tr>
-        <td>Title</td>
-        <td>Content</td>
-    </tr>
-    <th:block th:each="note : ${notes}">
-        <tr>
-            <td th:text="${note.title}"></td>
-            <td th:text="${note.content}"></td>
-        </tr>
-    </th:block>
-</table>
+<form>
+    Search by title:
+    <input type="text" name="search">
+    <input type="submit" value="Search">
+</form>
+<a href="/inote/user/note/create">Create new note</a>
+<br>
+<a href="/inote/user/note/notes">List note</a>
+<br>
+<a href="/inote/user/noteType/noteTypeList">Note type list</a>
+<br>
+<a href="/inote/user/tag/tags">Tags</a>
 </body>
 </html>

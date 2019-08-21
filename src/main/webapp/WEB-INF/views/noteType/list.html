@@ -5,7 +5,7 @@
     <title>NoteType List</title>
 </head>
 <body>
-<a href="/inote/admin/noteType/create">Create New NoteType</a>
+<a href="/inote/user/noteType/create">Create New NoteType</a>
 <h1>NoteType List</h1>
 <table>
     <tr>
@@ -19,9 +19,9 @@
         <tr>
             <td th:text="${noteType.name}"></td>
             <td th:text="${noteType.description}"></td>
-            <td><a th:href="@{/admin/noteType/edit/__${noteType.id}__}">edit</a></td>
-            <td><a th:href="@{/admin/noteType/delete/__${noteType.id}__}">delete</a></td>
-            <td><a th:href="@{/admin/noteType/view/__${noteType.id}__}">view</a></td>
+            <td><a th:href="@{/user/noteType/edit/__${noteType.id}__}">edit</a></td>
+            <td><a th:href="@{/user/noteType/delete/__${noteType.id}__}">delete</a></td>
+            <td><a th:href="@{/user/noteType/view/__${noteType.id}__}">view</a></td>
         </tr>
     </th:block>
 </table>
