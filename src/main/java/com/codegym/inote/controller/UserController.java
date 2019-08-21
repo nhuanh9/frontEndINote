@@ -56,7 +56,7 @@ public class UserController {
         return modelAndView;
     }
 
-    @GetMapping("/user/homepage")
+    @GetMapping("/homepage")
     public ModelAndView home(Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("/user/homepage");
         return modelAndView;
