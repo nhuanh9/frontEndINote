@@ -2,8 +2,10 @@ package com.codegym.inote.controller;
 
 import com.codegym.inote.model.Note;
 import com.codegym.inote.model.NoteType;
+import com.codegym.inote.model.Stack;
 import com.codegym.inote.service.NoteService;
 import com.codegym.inote.service.NoteTypeService;
+import com.codegym.inote.service.StackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,8 +25,16 @@ public class NoteTypeController {
     @Autowired
     private NoteService noteService;
 
+    @Autowired
+    private StackService stackService;
+
+    @ModelAttribute("stacks")
+    public Page<Stack> stacks(Pageable pageable) {
+        return stackService.findAll(pageable);
+    }
+
     @GetMapping("/noteTypeList")
-    public ModelAndView showNoteTypeList(@RequestParam("search") Optional<String> search,Pageable pageable) {
+    public ModelAndView showNoteTypeList(@RequestParam("search") Optional<String> search, Pageable pageable) {
         Page<NoteType> noteTypes;
 
         if (search.isPresent()) {

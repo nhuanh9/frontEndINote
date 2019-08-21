@@ -1,6 +1,7 @@
 package com.codegym.inote.service.impl;
 
 import com.codegym.inote.model.NoteType;
+import com.codegym.inote.model.Stack;
 import com.codegym.inote.repository.NoteTypeRepository;
 import com.codegym.inote.service.NoteTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +36,10 @@ public class NoteTypeServiceImpl implements NoteTypeService {
     @Override
     public Page<NoteType> findNoteTypeByName(String name, Pageable pageable) {
         return noteTypeRepository.findNoteTypeByName(name, pageable);
+    }
+
+    @Override
+    public Page<NoteType> findNoteTypeByStack(Stack stack, Pageable pageable) {
+        return noteTypeRepository.findNoteTypeByStack(stack, pageable);
     }
 }

@@ -20,6 +20,14 @@
             <td><input type="text" th:field="*{description}"></td>
         </tr>
         <tr>
+            <td>Stack:</td>
+            <td>
+                <select th:field="*{stack}">
+                    <option th:each="p:${stacks}" th:value="${p.id}" th:text="${p.name}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
             <td></td>
             <td><input type="submit" value="Create"></td>
         </tr>

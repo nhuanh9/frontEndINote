@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View Tags</title>
+</head>
+<body>
+<a href="/inote/user/stack/stacks">Stacks</a>
+<h1>View Stack: <span th:text="${stack.name}"></span></h1>
+<table>
+    <tr>
+        <td>Name</td>
+    </tr>
+    <th:block th:each="noteType : ${noteTypes}">
+        <tr>
+            <td th:text="${noteType.name}"></td>
+        </tr>
+    </th:block>
+</table>
+</body>
+</html>

@@ -15,6 +15,18 @@ public class NoteType {
     @OneToMany(targetEntity = Note.class)
     private List<Note> notes;
 
+    @ManyToOne
+    @JoinColumn(name = "stack_id")
+    private Stack stack;
+
+    public Stack getStack() {
+        return stack;
+    }
+
+    public void setStack(Stack stack) {
+        this.stack = stack;
+    }
+
     public List<Note> getNotes() {
         return notes;
     }

@@ -17,6 +17,7 @@
     <tr>
         <td>Name</td>
         <td>Description</td>
+        <td>Stack</td>
         <td>Edit</td>
         <td>Delete</td>
         <td>View</td>
@@ -25,6 +26,7 @@
         <tr>
             <td th:text="${noteType.name}"></td>
             <td th:text="${noteType.description}"></td>
+            <td th:text="${noteType.stack.name}"></td>
             <td><a th:href="@{/user/noteType/edit/__${noteType.id}__}">edit</a></td>
             <td><a th:href="@{/user/noteType/delete/__${noteType.id}__}">delete</a></td>
             <td><a th:href="@{/user/noteType/view/__${noteType.id}__}">view</a></td>
