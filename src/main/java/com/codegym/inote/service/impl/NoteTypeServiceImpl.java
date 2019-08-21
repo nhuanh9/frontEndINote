@@ -31,4 +31,9 @@ public class NoteTypeServiceImpl implements NoteTypeService {
     public void remove(Long id) {
         noteTypeRepository.delete(id);
     }
+
+    @Override
+    public Page<NoteType> findNoteTypeByName(String name, Pageable pageable) {
+        return noteTypeRepository.findNoteTypeByName(name, pageable);
+    }
 }

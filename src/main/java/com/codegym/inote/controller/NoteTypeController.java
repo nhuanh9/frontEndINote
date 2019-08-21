@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/user/noteType")
 public class NoteTypeController {
@@ -22,8 +24,14 @@ public class NoteTypeController {
     private NoteService noteService;
 
     @GetMapping("/noteTypeList")
-    public ModelAndView showNoteTypeList(Pageable pageable) {
-        Page<NoteType> noteTypes = noteTypeService.findAll(pageable);
+    public ModelAndView showNoteTypeList(@RequestParam("search") Optional<String> search,Pageable pageable) {
+        Page<NoteType> noteTypes;
+
+        if (search.isPresent()) {
+            noteTypes = noteTypeService.findNoteTypeByName(search.get(), pageable);
+        } else {
+            noteTypes = noteTypeService.findAll(pageable);
+        }
 
         ModelAndView modelAndView = new ModelAndView("/noteType/list");
         modelAndView.addObject("noteTypes", noteTypes);
