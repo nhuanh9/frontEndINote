@@ -1,12 +1,9 @@
 package com.codegym.inote.controller;
 
-import com.codegym.inote.model.Note;
 import com.codegym.inote.model.User;
 import com.codegym.inote.service.NoteService;
 import com.codegym.inote.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -14,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
 @Controller
 public class UserController {
@@ -57,8 +53,10 @@ public class UserController {
     }
 
     @GetMapping("/homepage")
-    public ModelAndView home(Pageable pageable) {
-        ModelAndView modelAndView = new ModelAndView("/user/homepage");
+    public ModelAndView home() {
+        ModelAndView modelAndView = new ModelAndView("homepage");
         return modelAndView;
     }
+
+
 }

@@ -27,11 +27,13 @@ public class LoginController {
         ArrayList<User> users = (ArrayList<User>) userService.findAll();
         for (User user : users) {
             if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                return new ModelAndView("/user/homepage");
+                return new ModelAndView("user/homepage");
             }
         }
         ModelAndView modelAndView = new ModelAndView("/login");
         modelAndView.addObject("message", "username or password incorrect");
         return modelAndView;
     }
+
+
 }

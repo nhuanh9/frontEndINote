@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Note</title>
+</head>
+<body>
+<div sec:authorize="isAnonymous()">
+    <a th:href="@{/login}">Login</a>|<a href="/inote/register">Register</a>
+</div>
+<br>
+<a href="/inote/user/note/create">Create new note</a>
+<br>
+<a href="/inote/user/note/notes">List note</a>
+<br>
+<a href="/inote/user/tag/tags">Tags</a>
+<br>
+<a href="/inote/user/stack/stacks">Stacks</a>
+</body>
+</html>
