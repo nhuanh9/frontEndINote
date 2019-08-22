@@ -48,12 +48,6 @@ public class NoteController {
             notes = noteService.findAll(pageable);
         }
 
-        List<Tag> tags;
-        for (Note note : notes) {
-            tags = (List<Tag>) tagService.findAllByNotes(note);
-            note.setTags(tags);
-        }
-
         ModelAndView modelAndView = new ModelAndView("/note/list");
         modelAndView.addObject("notes", notes);
         return modelAndView;
@@ -112,5 +106,21 @@ public class NoteController {
     public String deleteNoteType(@ModelAttribute Note note) {
         noteService.remove(note.getId());
         return "redirect:/user/note/notes";
+    }
+
+    @GetMapping("/view/{id}")
+    public ModelAndView viewNote(@PathVariable Long id, Pageable pageable) {
+        Note note = noteService.findById(id);
+        if (note == null) {
+            return new ModelAndView("/error-404");
+        }
+
+        List<Tag> tags;
+        tags = (List<Tag>) tagService.findAllByNotes(note);
+        note.setTags(tags);
+
+        ModelAndView modelAndView = new ModelAndView("/note/view");
+        modelAndView.addObject("note", note);
+        return modelAndView;
     }
 }

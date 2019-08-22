@@ -14,7 +14,7 @@
     </tr>
     <th:block th:each="note : ${notes}">
         <tr>
-            <td th:text="${note.title}"></td>
+            <td><a th:href="@{/user/note/view/__${note.id}__}" th:text="${note.title}"></a></td>
             <td th:text="${note.content}"></td>
         </tr>
     </th:block>
