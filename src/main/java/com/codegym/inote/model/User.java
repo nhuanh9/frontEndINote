@@ -35,6 +35,17 @@ public class User {
     @OneToMany(targetEntity = Stack.class)
     List<Stack> stacks;
 
+    @OneToMany(targetEntity = Tag.class)
+    List<Stack> tags;
+
+    public List<Stack> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Stack> tags) {
+        this.tags = tags;
+    }
+
     public List<Stack> getStacks() {
         return stacks;
     }

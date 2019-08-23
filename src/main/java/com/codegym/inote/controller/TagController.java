@@ -4,6 +4,7 @@ import com.codegym.inote.model.Note;
 import com.codegym.inote.model.Tag;
 import com.codegym.inote.service.NoteService;
 import com.codegym.inote.service.TagService;
+import com.codegym.inote.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,6 +24,9 @@ public class TagController {
     @Autowired
     private NoteService noteService;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping("/tags")
     public ModelAndView showAllTag(@RequestParam("search") Optional<String> search, Pageable pageable) {
         Page<Tag> tags;
@@ -30,7 +34,7 @@ public class TagController {
         if (search.isPresent()) {
             tags = tagService.findTagByName(search.get(), pageable);
         } else {
-            tags = tagService.findAll(pageable);
+            tags = tagService.findAllByUser(userService.getCurrentUser(), pageable);
         }
 
         ModelAndView modelAndView = new ModelAndView("/tag/list");
@@ -47,6 +51,7 @@ public class TagController {
 
     @PostMapping("/create")
     public ModelAndView saveTag(@ModelAttribute Tag tag) {
+        tag.setUser(userService.getCurrentUser());
         tagService.save(tag);
 
         ModelAndView modelAndView = new ModelAndView("/tag/create");

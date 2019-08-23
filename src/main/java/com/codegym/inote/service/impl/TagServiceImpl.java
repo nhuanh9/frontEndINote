@@ -2,6 +2,7 @@ package com.codegym.inote.service.impl;
 
 import com.codegym.inote.model.Note;
 import com.codegym.inote.model.Tag;
+import com.codegym.inote.model.User;
 import com.codegym.inote.repository.TagRepository;
 import com.codegym.inote.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,10 @@ public class TagServiceImpl implements TagService {
     @Override
     public Page<Tag> findTagByName(String name, Pageable pageable) {
         return tagRepository.findTagByName(name, pageable);
+    }
+
+    @Override
+    public Page<Tag> findAllByUser(User user, Pageable pageable) {
+        return tagRepository.findAllByUser(user, pageable);
     }
 }
