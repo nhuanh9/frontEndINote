@@ -29,6 +29,17 @@ public class User {
     @OneToMany(targetEntity = Note.class)
     List<Note> notes;
 
+    @OneToMany(targetEntity = NoteType.class)
+    List<NoteType> noteTypes;
+
+    public List<NoteType> getNoteTypes() {
+        return noteTypes;
+    }
+
+    public void setNoteTypes(List<NoteType> noteTypes) {
+        this.noteTypes = noteTypes;
+    }
+
     public List<Note> getNotes() {
         return notes;
     }

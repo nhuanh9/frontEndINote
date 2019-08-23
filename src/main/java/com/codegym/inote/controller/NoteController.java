@@ -32,20 +32,6 @@ public class NoteController {
     @Autowired
     private UserService userService;
 
-    private User getCurrentUser() {
-        User user;
-        String userName;
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        if (principal instanceof UserDetails) {
-            userName = ((UserDetails) principal).getUsername();
-        } else {
-            userName = principal.toString();
-        }
-        user = userService.findByUsername(userName);
-        return user;
-    }
-
     @ModelAttribute("noteTypes")
     public Page<NoteType> noteTypes(Pageable pageable) {
         return noteTypeService.findAll(pageable);
@@ -63,7 +49,7 @@ public class NoteController {
         if (search.isPresent()) {
             notes = noteService.findNoteByTitleContains(search.get(), pageable);
         } else {
-            notes = noteService.findAllByUser(getCurrentUser(), pageable);
+            notes = noteService.findAllByUser(userService.getCurrentUser(), pageable);
         }
 
         ModelAndView modelAndView = new ModelAndView("/note/list");
@@ -80,7 +66,7 @@ public class NoteController {
 
     @PostMapping("/create")
     public ModelAndView saveNoteType(@ModelAttribute Note note) {
-        note.setUser(getCurrentUser());
+        note.setUser(userService.getCurrentUser());
         noteService.save(note);
 
         ModelAndView modelAndView = new ModelAndView("/note/create");

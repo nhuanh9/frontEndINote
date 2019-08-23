@@ -6,6 +6,7 @@ import com.codegym.inote.model.Stack;
 import com.codegym.inote.service.NoteService;
 import com.codegym.inote.service.NoteTypeService;
 import com.codegym.inote.service.StackService;
+import com.codegym.inote.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,6 +29,9 @@ public class NoteTypeController {
     @Autowired
     private StackService stackService;
 
+    @Autowired
+    private UserService userService;
+
     @ModelAttribute("stacks")
     public Page<Stack> stacks(Pageable pageable) {
         return stackService.findAll(pageable);
@@ -40,7 +44,7 @@ public class NoteTypeController {
         if (search.isPresent()) {
             noteTypes = noteTypeService.findNoteTypeByName(search.get(), pageable);
         } else {
-            noteTypes = noteTypeService.findAll(pageable);
+            noteTypes = noteTypeService.findAllByUser(userService.getCurrentUser(), pageable);
         }
 
         ModelAndView modelAndView = new ModelAndView("/noteType/list");
@@ -57,6 +61,7 @@ public class NoteTypeController {
 
     @PostMapping("/create")
     public ModelAndView saveNoteType(@ModelAttribute NoteType noteType) {
+        noteType.setUser(userService.getCurrentUser());
         noteTypeService.save(noteType);
 
         ModelAndView modelAndView = new ModelAndView("/noteType/create");
