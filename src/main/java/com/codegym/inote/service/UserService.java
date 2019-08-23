@@ -7,4 +7,7 @@ public interface UserService extends UserDetailsService {
     void save(User user);
 
     Iterable<User> findAll();
+
+    User findByUsername(String username);
+
 }

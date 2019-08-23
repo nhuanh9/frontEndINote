@@ -21,8 +21,6 @@ public class UserController {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private NoteService noteService;
 
     @GetMapping("/register")
     public ModelAndView showRegisterForm() {
@@ -33,8 +31,6 @@ public class UserController {
 
     @PostMapping("/register")
     public ModelAndView registerNewUser(@Valid @ModelAttribute User user, BindingResult bindingResult) {
-
-
         if (bindingResult.hasFieldErrors()) {
             ModelAndView modelAndView = new ModelAndView("/user/register");
             return modelAndView;

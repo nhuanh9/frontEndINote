@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.transaction.Transactional;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Transactional
@@ -24,6 +25,17 @@ public class User {
     @NotEmpty(message = "password must be fill")
     @Size(min = 6, message = "password length must be at least 6 characters")
     private String password;
+
+    @OneToMany(targetEntity = Note.class)
+    List<Note> notes;
+
+    public List<Note> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(List<Note> notes) {
+        this.notes = notes;
+    }
 
     public User() {
     }

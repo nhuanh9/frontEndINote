@@ -1,16 +1,12 @@
 package com.codegym.inote.controller;
 
-import com.codegym.inote.model.Note;
-import com.codegym.inote.model.NoteType;
-import com.codegym.inote.model.Tag;
-import com.codegym.inote.model.Trash;
-import com.codegym.inote.service.NoteService;
-import com.codegym.inote.service.NoteTypeService;
-import com.codegym.inote.service.RecycleBinService;
-import com.codegym.inote.service.TagService;
+import com.codegym.inote.model.*;
+import com.codegym.inote.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -33,6 +29,23 @@ public class NoteController {
     @Autowired
     private RecycleBinService recycleBinService;
 
+    @Autowired
+    private UserService userService;
+
+    private User getCurrentUser() {
+        User user;
+        String userName;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserDetails) {
+            userName = ((UserDetails) principal).getUsername();
+        } else {
+            userName = principal.toString();
+        }
+        user = userService.findByUsername(userName);
+        return user;
+    }
+
     @ModelAttribute("noteTypes")
     public Page<NoteType> noteTypes(Pageable pageable) {
         return noteTypeService.findAll(pageable);
@@ -50,7 +63,7 @@ public class NoteController {
         if (search.isPresent()) {
             notes = noteService.findNoteByTitleContains(search.get(), pageable);
         } else {
-            notes = noteService.findAll(pageable);
+            notes = noteService.findAllByUser(getCurrentUser(), pageable);
         }
 
         ModelAndView modelAndView = new ModelAndView("/note/list");
@@ -67,6 +80,7 @@ public class NoteController {
 
     @PostMapping("/create")
     public ModelAndView saveNoteType(@ModelAttribute Note note) {
+        note.setUser(getCurrentUser());
         noteService.save(note);
 
         ModelAndView modelAndView = new ModelAndView("/note/create");
@@ -119,7 +133,7 @@ public class NoteController {
     }
 
     @GetMapping("/view/{id}")
-    public ModelAndView viewNote(@PathVariable Long id, Pageable pageable) {
+    public ModelAndView viewNote(@PathVariable Long id) {
         Note note = noteService.findById(id);
         if (note == null) {
             return new ModelAndView("/error-404");

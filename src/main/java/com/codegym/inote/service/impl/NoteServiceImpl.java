@@ -3,6 +3,7 @@ package com.codegym.inote.service.impl;
 import com.codegym.inote.model.Note;
 import com.codegym.inote.model.NoteType;
 import com.codegym.inote.model.Tag;
+import com.codegym.inote.model.User;
 import com.codegym.inote.repository.NoteRepository;
 import com.codegym.inote.service.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +47,10 @@ public class NoteServiceImpl implements NoteService {
     @Override
     public Page<Note> findAllByTags(Tag tag, Pageable pageable) {
         return noteRepository.findAllByTags(tag, pageable);
+    }
+
+    @Override
+    public Page<Note> findAllByUser(User user, Pageable pageable) {
+        return noteRepository.findAllByUser(user, pageable);
     }
 }
