@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View Note</title>
+</head>
+<body>
+<a href="/inote/user/recycleBin/trashes">Recycle Bin</a>
+<h1>View Note: <span th:text="${trash.title}"></span></h1>
+<table>
+    <tr>
+        <td>Title:</td>
+        <td th:text="${trash.title}"></td>
+    </tr>
+    <tr>
+        <td>Content:</td>
+        <td th:text="${trash.content}"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><a th:href="@{/user/recycleBin/delete/__${trash.id}__}">Delete</a></td>
+    </tr>
+</table>
+</body>
+</html>
