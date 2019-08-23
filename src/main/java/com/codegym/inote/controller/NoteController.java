@@ -3,8 +3,10 @@ package com.codegym.inote.controller;
 import com.codegym.inote.model.Note;
 import com.codegym.inote.model.NoteType;
 import com.codegym.inote.model.Tag;
+import com.codegym.inote.model.Trash;
 import com.codegym.inote.service.NoteService;
 import com.codegym.inote.service.NoteTypeService;
+import com.codegym.inote.service.RecycleBinService;
 import com.codegym.inote.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,6 +29,9 @@ public class NoteController {
 
     @Autowired
     private TagService tagService;
+
+    @Autowired
+    private RecycleBinService recycleBinService;
 
     @ModelAttribute("noteTypes")
     public Page<NoteType> noteTypes(Pageable pageable) {
@@ -104,6 +109,11 @@ public class NoteController {
 
     @PostMapping("/delete")
     public String deleteNoteType(@ModelAttribute Note note) {
+        Note currentNote = noteService.findById(note.getId());
+        Trash trash = new Trash();
+        trash.setTitle(currentNote.getTitle());
+        trash.setContent(currentNote.getContent());
+        recycleBinService.save(trash);
         noteService.remove(note.getId());
         return "redirect:/user/note/notes";
     }

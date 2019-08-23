@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Recycle Bin</title>
+</head>
+<body>
+<a href="/inote/user/homepage">Go to homepage</a>
+<h1>Recycle Bin</h1>
+<table>
+    <tr>
+        <td>Title</td>
+        <td>Content</td>
+    </tr>
+    <th:block th:each="trash : ${trashes}">
+        <tr>
+            <td th:text="${trash.title}"></td>
+            <td th:text="${trash.content}"></td>
+        </tr>
+    </th:block>
+</table>
+</body>
+</html>
