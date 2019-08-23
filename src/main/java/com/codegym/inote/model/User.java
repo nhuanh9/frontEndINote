@@ -38,6 +38,17 @@ public class User {
     @OneToMany(targetEntity = Tag.class)
     List<Stack> tags;
 
+    @OneToOne(mappedBy = "user")
+    private Trash trash;
+
+    public Trash getTrash() {
+        return trash;
+    }
+
+    public void setTrash(Trash trash) {
+        this.trash = trash;
+    }
+
     public List<Stack> getTags() {
         return tags;
     }
@@ -73,7 +84,7 @@ public class User {
     public User() {
     }
 
-    public User(String username,String password) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
     }

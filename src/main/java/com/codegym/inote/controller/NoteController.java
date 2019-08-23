@@ -113,6 +113,7 @@ public class NoteController {
         Trash trash = new Trash();
         trash.setTitle(currentNote.getTitle());
         trash.setContent(currentNote.getContent());
+        trash.setUser(userService.getCurrentUser());
         recycleBinService.save(trash);
         noteService.remove(note.getId());
         return "redirect:/user/note/notes";

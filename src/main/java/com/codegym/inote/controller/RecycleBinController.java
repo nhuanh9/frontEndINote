@@ -2,6 +2,7 @@ package com.codegym.inote.controller;
 
 import com.codegym.inote.model.Trash;
 import com.codegym.inote.service.RecycleBinService;
+import com.codegym.inote.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,9 +17,12 @@ public class RecycleBinController {
     @Autowired
     private RecycleBinService recycleBinService;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping("/trashes")
     public ModelAndView recycleBin(Pageable pageable) {
-        Page<Trash> trashes = recycleBinService.findAll(pageable);
+        Page<Trash> trashes = recycleBinService.findAllByUser(userService.getCurrentUser(), pageable);
 
         ModelAndView modelAndView = new ModelAndView("/recycleBin/list");
         modelAndView.addObject("trashes", trashes);
