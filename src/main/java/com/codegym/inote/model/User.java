@@ -32,6 +32,17 @@ public class User {
     @OneToMany(targetEntity = NoteType.class)
     List<NoteType> noteTypes;
 
+    @OneToMany(targetEntity = Stack.class)
+    List<Stack> stacks;
+
+    public List<Stack> getStacks() {
+        return stacks;
+    }
+
+    public void setStacks(List<Stack> stacks) {
+        this.stacks = stacks;
+    }
+
     public List<NoteType> getNoteTypes() {
         return noteTypes;
     }
