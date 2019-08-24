@@ -34,12 +34,12 @@ public class NoteController {
 
     @ModelAttribute("noteTypes")
     public Page<NoteType> noteTypes(Pageable pageable) {
-        return noteTypeService.findAll(pageable);
+        return noteTypeService.findAllByUser(userService.getCurrentUser(), pageable);
     }
 
     @ModelAttribute("tags")
     public Page<Tag> tags(Pageable pageable) {
-        return tagService.findAll(pageable);
+        return tagService.findAllByUser(userService.getCurrentUser(), pageable);
     }
 
     @GetMapping("/notes")

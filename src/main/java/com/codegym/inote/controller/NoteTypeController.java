@@ -34,7 +34,7 @@ public class NoteTypeController {
 
     @ModelAttribute("stacks")
     public Page<Stack> stacks(Pageable pageable) {
-        return stackService.findAll(pageable);
+        return stackService.findAllByUser(userService.getCurrentUser(), pageable);
     }
 
     @GetMapping("/noteTypeList")

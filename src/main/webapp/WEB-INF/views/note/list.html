@@ -16,6 +16,7 @@
     <tr>
         <td>Title</td>
         <td>Content</td>
+        <td>User</td>
         <td>Edit</td>
         <td>Delete</td>
         <td>View</td>
@@ -24,6 +25,7 @@
         <tr>
             <td th:text="${note.title}"></td>
             <td th:text="${note.content}"></td>
+            <td th:text="${note.user.username}"></td>
             <td><a th:href="@{/user/note/edit/__${note.id}__}">edit</a></td>
             <td><a th:href="@{/user/note/delete/__${note.id}__}">delete</a></td>
             <td><a th:href="@{/user/note/view/__${note.id}__}">view</a></td>
