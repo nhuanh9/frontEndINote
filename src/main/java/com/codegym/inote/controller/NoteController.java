@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -67,6 +68,9 @@ public class NoteController {
     @PostMapping("/create")
     public ModelAndView saveNoteType(@ModelAttribute Note note) {
         note.setUser(userService.getCurrentUser());
+        long millis = System.currentTimeMillis();
+        Date date = new Date(millis);
+        note.setTime(date);
         noteService.save(note);
 
         ModelAndView modelAndView = new ModelAndView("/note/create");
@@ -88,6 +92,10 @@ public class NoteController {
 
     @PostMapping("/edit")
     public ModelAndView editNoteType(@ModelAttribute Note note) {
+        note.setUser(userService.getCurrentUser());
+        long millis = System.currentTimeMillis();
+        Date date = new Date(millis);
+        note.setTime(date);
         noteService.save(note);
 
         ModelAndView modelAndView = new ModelAndView("/note/edit");
@@ -114,6 +122,7 @@ public class NoteController {
         trash.setTitle(currentNote.getTitle());
         trash.setContent(currentNote.getContent());
         trash.setUser(userService.getCurrentUser());
+        trash.setTime(currentNote.getTime());
         recycleBinService.save(trash);
         noteService.remove(note.getId());
         return "redirect:/user/note/notes";

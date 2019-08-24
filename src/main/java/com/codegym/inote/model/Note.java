@@ -1,6 +1,7 @@
 package com.codegym.inote.model;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -11,6 +12,15 @@ public class Note {
     private Long id;
     private String title;
     private String content;
+    private Date time;
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
+    }
 
     @ManyToOne
     @JoinColumn(name = "type_id")

@@ -1,6 +1,7 @@
 package com.codegym.inote.model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "trash")
@@ -11,6 +12,15 @@ public class Trash {
 
     private String title;
     private String content;
+    private Date time;
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
+    }
 
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")

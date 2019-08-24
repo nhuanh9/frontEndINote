@@ -17,6 +17,10 @@
         <td th:text="${note.content}"></td>
     </tr>
     <tr>
+        <td>Time</td>
+        <td th:text="${note.time}"></td>
+    </tr>
+    <tr>
         <td>Note type:</td>
         <td><a th:href="@{/user/noteType/view/__${note.noteType.id}__}" th:text="${note.noteType.name}"></a></td>
     </tr>
