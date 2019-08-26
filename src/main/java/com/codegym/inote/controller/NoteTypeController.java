@@ -83,6 +83,7 @@ public class NoteTypeController {
 
     @PostMapping("/edit")
     public ModelAndView editNoteType(@ModelAttribute NoteType noteType) {
+        noteType.setUser(userService.getCurrentUser());
         noteTypeService.save(noteType);
 
         ModelAndView modelAndView = new ModelAndView("/noteType/edit");

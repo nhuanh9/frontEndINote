@@ -64,6 +64,7 @@ public class StackController {
 
     @PostMapping("/edit")
     public ModelAndView updateStack(@ModelAttribute Stack stack) {
+        stack.setUser(userService.getCurrentUser());
         stackService.save(stack);
 
         ModelAndView modelAndView = new ModelAndView("/stack/edit");

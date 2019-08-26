@@ -73,6 +73,7 @@ public class TagController {
 
     @PostMapping("/edit")
     public ModelAndView updateTag(@ModelAttribute Tag tag) {
+        tag.setUser(userService.getCurrentUser());
         tagService.save(tag);
 
         ModelAndView modelAndView = new ModelAndView("/tag/edit");
