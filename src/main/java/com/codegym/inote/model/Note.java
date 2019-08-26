@@ -1,6 +1,5 @@
 package com.codegym.inote.model;
 
-import org.hibernate.annotations.Columns;
 
 import javax.persistence.*;
 import java.util.Date;
