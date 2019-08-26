@@ -4,18 +4,38 @@
 <head>
     <meta charset="UTF-8">
     <title>Note</title>
+    <style>
+        .select {
+            position: absolute;
+            display: block;
+            left: 20px;
+            top: 50px;
+            color: rgba(255, 254, 250, 1);
+            opacity: 2;
+            font-size: 25px;
+        }
+        .login{
+            position: absolute;
+            display: block;
+            right: 20px;
+            color: rgba(255, 254, 250, 1);
+            opacity: 2;
+            font-size: 16px;
+        }
+    </style>
 </head>
 <body>
-<div sec:authorize="isAnonymous()">
+<div class="login" sec:authorize="isAnonymous()">
     <a th:href="@{/login}">Login</a>|<a href="/inote/register">Register</a>
 </div>
-<br>
-<a href="/inote/user/note/create">Create new note</a>
-<br>
-<a href="/inote/user/note/notes">List note</a>
-<br>
-<a href="/inote/user/tag/tags">Tags</a>
-<br>
-<a href="/inote/user/stack/stacks">Stacks</a>
+<div class="select">
+    <a href="/inote/user/note/create">Create new note</a>
+    <br>
+    <a href="/inote/user/note/notes">List note</a>
+    <br>
+    <a href="/inote/user/tag/tags">Tags</a>
+    <br>
+    <a href="/inote/user/stack/stacks">Stacks</a>
+</div>
 </body>
 </html>

@@ -3,21 +3,38 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Note</title>
+    <title>Home</title>
+    <style>
+        .select {
+            position: absolute;
+            display: block;
+            left: 20px;
+            top: 50px;
+            color: rgba(255, 254, 250, 1);
+            opacity: 2;
+            font-size: 25px;
+        }
+        .login{
+            position: absolute;
+            display: block;
+            right: 20px;
+        }
+    </style>
 </head>
 <body>
-<div sec:authorize="isAuthenticated()">
-   Dear <span th:text="${user}"></span>|<a th:href="@{/logout}">Logout</a>
+<div class="login" sec:authorize="isAuthenticated()">
+   <span th:text="${user}"></span>|<a th:href="@{/logout}">Logout</a>
 </div>
-<br>
-<a href="/inote/user/note/create">Create new note</a>
-<br>
-<a href="/inote/user/note/notes">List note</a>
-<br>
-<a href="/inote/user/tag/tags">Tags</a>
-<br>
-<a href="/inote/user/stack/stacks">Stacks</a>
-<br>
-<a href="/inote/user/recycleBin/trashes">Recycle Bin</a>
+<div class="select">
+    <a href="/inote/user/note/create">Create new note</a>
+    <br>
+    <a href="/inote/user/note/notes">List note</a>
+    <br>
+    <a href="/inote/user/tag/tags">Tags</a>
+    <br>
+    <a href="/inote/user/stack/stacks">Stacks</a>
+    <br>
+    <a href="/inote/user/recycleBin/trashes">Recycle Bin</a>
+</div>
 </body>
 </html>
