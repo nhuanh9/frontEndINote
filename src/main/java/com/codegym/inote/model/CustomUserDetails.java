@@ -11,6 +11,7 @@ import java.util.Collections;
 @Data
 public class CustomUserDetails implements UserDetails{
 
+
     private User user;
 
     @Override

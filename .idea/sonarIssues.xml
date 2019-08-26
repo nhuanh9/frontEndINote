@@ -63,6 +63,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/homepage.html">
+          <value>
+            <set />
+          </value>
+        </entry>
       </map>
     </option>
   </component>

@@ -110,7 +110,7 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
-        em.setPackagesToScan(new String[]{"com.codegym.inote.model"});
+        em.setPackagesToScan("com.codegym.inote.model");
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
