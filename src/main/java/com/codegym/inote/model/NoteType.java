@@ -10,7 +10,6 @@ public class NoteType {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    private String description;
 
     @OneToMany(targetEntity = Note.class)
     private List<Note> notes;
@@ -50,9 +49,8 @@ public class NoteType {
     public NoteType() {
     }
 
-    public NoteType(String name, String description) {
+    public NoteType(String name) {
         this.name = name;
-        this.description = description;
     }
 
     public Long getId() {
@@ -69,13 +67,5 @@ public class NoteType {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 }
