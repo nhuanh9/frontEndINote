@@ -15,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/user/stack")
 public class StackController {
+    public static final String STACK = "stack";
+    public static final String ERROR_404 = "/error-404";
     @Autowired
     private StackService stackService;
 
@@ -36,7 +38,7 @@ public class StackController {
     @GetMapping("/create")
     public ModelAndView showCreateForm() {
         ModelAndView modelAndView = new ModelAndView("/stack/create");
-        modelAndView.addObject("stack", new Stack());
+        modelAndView.addObject(STACK, new Stack());
         return modelAndView;
     }
 
@@ -46,7 +48,7 @@ public class StackController {
         stackService.save(stack);
 
         ModelAndView modelAndView = new ModelAndView("/stack/create");
-        modelAndView.addObject("stack", new Stack());
+        modelAndView.addObject(STACK, new Stack());
         modelAndView.addObject("message", "Created!");
         return modelAndView;
     }
@@ -56,10 +58,10 @@ public class StackController {
         Stack stack = stackService.findById(id);
         if (stack != null) {
             ModelAndView modelAndView = new ModelAndView("/stack/edit");
-            modelAndView.addObject("stack", stack);
+            modelAndView.addObject(STACK, stack);
             return modelAndView;
         }
-        return new ModelAndView("/error-404");
+        return new ModelAndView(ERROR_404);
     }
 
     @PostMapping("/edit")
@@ -68,7 +70,7 @@ public class StackController {
         stackService.save(stack);
 
         ModelAndView modelAndView = new ModelAndView("/stack/edit");
-        modelAndView.addObject("stack", stack);
+        modelAndView.addObject(STACK, stack);
         modelAndView.addObject("message", "Updated!");
         return modelAndView;
     }
@@ -78,10 +80,10 @@ public class StackController {
         Stack stack = stackService.findById(id);
         if (stack != null) {
             ModelAndView modelAndView = new ModelAndView("/stack/delete");
-            modelAndView.addObject("stack", stack);
+            modelAndView.addObject(STACK, stack);
             return modelAndView;
         }
-        return new ModelAndView("/error-404");
+        return new ModelAndView(ERROR_404);
     }
 
     @PostMapping("/delete")
@@ -94,11 +96,11 @@ public class StackController {
     public ModelAndView viewTag(@PathVariable Long id, Pageable pageable) {
         Stack stack = stackService.findById(id);
         if (stack == null) {
-            return new ModelAndView("/error-404");
+            return new ModelAndView(ERROR_404);
         }
         Page<NoteType> noteTypes = noteTypeService.findNoteTypeByStack(stack, pageable);
         ModelAndView modelAndView = new ModelAndView("/stack/view");
-        modelAndView.addObject("stack", stack);
+        modelAndView.addObject(STACK, stack);
         modelAndView.addObject("noteTypes", noteTypes);
         return modelAndView;
     }

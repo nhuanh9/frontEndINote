@@ -16,6 +16,7 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/user/note")
 public class NoteController {
+    public static final String ERROR_404 = "/error-404";
     @Autowired
     private NoteService noteService;
 
@@ -85,7 +86,7 @@ public class NoteController {
             modelAndView.addObject("note", note);
             return modelAndView;
         }
-        return new ModelAndView("/error-404");
+        return new ModelAndView(ERROR_404);
     }
 
     @PostMapping("/edit")
@@ -110,7 +111,7 @@ public class NoteController {
             modelAndView.addObject("note", note);
             return modelAndView;
         }
-        return new ModelAndView("/error-404");
+        return new ModelAndView(ERROR_404);
     }
 
     @PostMapping("/delete")
@@ -130,7 +131,7 @@ public class NoteController {
     public ModelAndView viewNote(@PathVariable Long id) {
         Note note = noteService.findById(id);
         if (note == null) {
-            return new ModelAndView("/error-404");
+            return new ModelAndView(ERROR_404);
         }
 
         List<Tag> tags;

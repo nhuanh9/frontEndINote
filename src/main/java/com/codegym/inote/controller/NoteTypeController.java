@@ -20,6 +20,8 @@ import java.util.Optional;
 @RequestMapping("/user/noteType")
 public class NoteTypeController {
 
+    public static final String NOTE_TYPE = "noteType";
+    public static final String ERROR_404 = "/error-404";
     @Autowired
     private NoteTypeService noteTypeService;
 
@@ -55,7 +57,7 @@ public class NoteTypeController {
     @GetMapping("/create")
     public ModelAndView showCreateForm() {
         ModelAndView modelAndView = new ModelAndView("/noteType/create");
-        modelAndView.addObject("noteType", new NoteType());
+        modelAndView.addObject(NOTE_TYPE, new NoteType());
         return modelAndView;
     }
 
@@ -65,7 +67,7 @@ public class NoteTypeController {
         noteTypeService.save(noteType);
 
         ModelAndView modelAndView = new ModelAndView("/noteType/create");
-        modelAndView.addObject("noteType", new NoteType());
+        modelAndView.addObject(NOTE_TYPE, new NoteType());
         modelAndView.addObject("message", "Created!");
         return modelAndView;
     }
@@ -75,10 +77,10 @@ public class NoteTypeController {
         NoteType noteType = noteTypeService.findById(id);
         if (noteType != null) {
             ModelAndView modelAndView = new ModelAndView("/noteType/edit");
-            modelAndView.addObject("noteType", noteType);
+            modelAndView.addObject(NOTE_TYPE, noteType);
             return modelAndView;
         }
-        return new ModelAndView("/error-404");
+        return new ModelAndView(ERROR_404);
     }
 
     @PostMapping("/edit")
@@ -87,7 +89,7 @@ public class NoteTypeController {
         noteTypeService.save(noteType);
 
         ModelAndView modelAndView = new ModelAndView("/noteType/edit");
-        modelAndView.addObject("noteType", noteType);
+        modelAndView.addObject(NOTE_TYPE, noteType);
         modelAndView.addObject("message", "Updated!");
         return modelAndView;
     }
@@ -97,10 +99,10 @@ public class NoteTypeController {
         NoteType noteType = noteTypeService.findById(id);
         if (noteType != null) {
             ModelAndView modelAndView = new ModelAndView("/noteType/delete");
-            modelAndView.addObject("noteType", noteType);
+            modelAndView.addObject(NOTE_TYPE, noteType);
             return modelAndView;
         }
-        return new ModelAndView("/error-404");
+        return new ModelAndView(ERROR_404);
     }
 
     @PostMapping("/delete")
@@ -113,11 +115,11 @@ public class NoteTypeController {
     public ModelAndView viewNoteType(@PathVariable Long id, Pageable pageable) {
         NoteType noteType = noteTypeService.findById(id);
         if (noteType == null) {
-            return new ModelAndView("/error-404");
+            return new ModelAndView(ERROR_404);
         }
         Page<Note> notes = noteService.findAllByNoteType(noteType, pageable);
         ModelAndView modelAndView = new ModelAndView("/noteType/view");
-        modelAndView.addObject("noteType", noteType);
+        modelAndView.addObject(NOTE_TYPE, noteType);
         modelAndView.addObject("notes", notes);
         return modelAndView;
     }

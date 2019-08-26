@@ -18,6 +18,7 @@ import java.util.Optional;
 @RequestMapping("/user/tag")
 public class TagController {
 
+    public static final String ERROR_404 = "/error-404";
     @Autowired
     private TagService tagService;
 
@@ -68,7 +69,7 @@ public class TagController {
             modelAndView.addObject("tag", tag);
             return modelAndView;
         }
-        return new ModelAndView("/error-404");
+        return new ModelAndView(ERROR_404);
     }
 
     @PostMapping("/edit")
@@ -90,7 +91,7 @@ public class TagController {
             modelAndView.addObject("tag", tag);
             return modelAndView;
         }
-        return new ModelAndView("/error-404");
+        return new ModelAndView(ERROR_404);
     }
 
     @PostMapping("/delete")
@@ -103,7 +104,7 @@ public class TagController {
     public ModelAndView viewTag(@PathVariable Long id, Pageable pageable) {
         Tag tag = tagService.findById(id);
         if (tag == null) {
-            return new ModelAndView("/error-404");
+            return new ModelAndView(ERROR_404);
         }
         Page<Note> notes = noteService.findAllByTags(tag, pageable);
         ModelAndView modelAndView = new ModelAndView("/tag/view");

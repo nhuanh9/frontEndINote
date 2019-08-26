@@ -14,6 +14,7 @@ import javax.validation.Valid;
 @Controller
 public class UserController {
 
+    public static final String USER_REGISTER = "/user/register";
     @Autowired
     UserService userService;
 
@@ -23,7 +24,7 @@ public class UserController {
 
     @GetMapping("/register")
     public ModelAndView showRegisterForm() {
-        ModelAndView modelAndView = new ModelAndView("/user/register");
+        ModelAndView modelAndView = new ModelAndView(USER_REGISTER);
         modelAndView.addObject("user", new User());
         return modelAndView;
     }
@@ -31,7 +32,7 @@ public class UserController {
     @PostMapping("/register")
     public ModelAndView registerNewUser(@Valid @ModelAttribute User user, BindingResult bindingResult) {
         if (bindingResult.hasFieldErrors()) {
-            return new ModelAndView("/user/register");
+            return new ModelAndView(USER_REGISTER);
         }
         User currentUser = new User();
 
@@ -39,7 +40,7 @@ public class UserController {
         currentUser.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.save(currentUser);
 
-        ModelAndView modelAndView = new ModelAndView("/user/register");
+        ModelAndView modelAndView = new ModelAndView(USER_REGISTER);
         modelAndView.addObject("user", currentUser);
         modelAndView.addObject("message", "Success!");
 
