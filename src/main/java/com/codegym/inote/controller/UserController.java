@@ -31,8 +31,7 @@ public class UserController {
     @PostMapping("/register")
     public ModelAndView registerNewUser(@Valid @ModelAttribute User user, BindingResult bindingResult) {
         if (bindingResult.hasFieldErrors()) {
-            ModelAndView modelAndView = new ModelAndView("/user/register");
-            return modelAndView;
+            return new ModelAndView("/user/register");
         }
         User currentUser = new User();
 
@@ -49,8 +48,7 @@ public class UserController {
 
     @GetMapping("/homepage")
     public ModelAndView home() {
-        ModelAndView modelAndView = new ModelAndView("homepage");
-        return modelAndView;
+        return new ModelAndView("homepage");
     }
 
 

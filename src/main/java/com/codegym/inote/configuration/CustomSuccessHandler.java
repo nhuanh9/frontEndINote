@@ -24,7 +24,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         String targetUrl = determineTargetUrl(authentication);
 
         if (response.isCommitted()) {
-            System.out.println("Can't redirect");
+            logger.error("Can't redirect");
             return;
         }
 
@@ -40,7 +40,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 
-        List<String> roles = new ArrayList<String>();
+        List<String> roles = new ArrayList<>();
 
         for (GrantedAuthority a : authorities) {
             roles.add(a.getAuthority());
@@ -58,23 +58,27 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
     }
 
     private boolean isUser(List<String> roles) {
+        boolean isUser = false;
         if (roles.contains("ROLE_USER")) {
-            return true;
+            isUser = true;
         }
-        return false;
+        return isUser;
     }
 
     private boolean isAdmin(List<String> roles) {
+        boolean isAdmin = false;
         if (roles.contains("ROLE_ADMIN")) {
-            return true;
+            isAdmin = true;
         }
-        return false;
+        return isAdmin;
     }
 
+    @Override
     public void setRedirectStrategy(RedirectStrategy redirectStrategy) {
         this.redirectStrategy = redirectStrategy;
     }
 
+    @Override
     protected RedirectStrategy getRedirectStrategy() {
         return redirectStrategy;
     }

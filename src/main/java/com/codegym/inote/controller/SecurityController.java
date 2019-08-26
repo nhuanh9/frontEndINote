@@ -6,8 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -24,26 +22,26 @@ public class SecurityController {
         return userName;
     }
 
-    @RequestMapping(value = {"/"})
+    @GetMapping("/")
     public String homePage(Model model){
         model.addAttribute("user",getPrincipal());
         return "user/homepage";
     }
 
-    @RequestMapping(value = "/admin", method = RequestMethod.GET)
+    @GetMapping("/admin")
     public String adminPage(ModelMap model) {
         model.addAttribute("user", getPrincipal());
         return "user/menu";
     }
 
-    @RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
+    @GetMapping("/Access_Denied")
     public String accessDeniedPage(ModelMap model) {
         model.addAttribute("user", getPrincipal());
         return "user/accessDenied";
     }
 
     @GetMapping("/user/homepage")
-    public ModelAndView homepage() {
+    public ModelAndView goHomePage() {
         ModelAndView modelAndView = new ModelAndView("/user/homepage");
         modelAndView.addObject("user",getPrincipal());
         return modelAndView;
