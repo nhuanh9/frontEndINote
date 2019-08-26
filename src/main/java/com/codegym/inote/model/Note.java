@@ -1,5 +1,7 @@
 package com.codegym.inote.model;
 
+import org.hibernate.annotations.Columns;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -11,6 +13,8 @@ public class Note {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String title;
+
+    @Column(name = "content",columnDefinition = "LONGTEXT")
     private String content;
     private Date time;
 

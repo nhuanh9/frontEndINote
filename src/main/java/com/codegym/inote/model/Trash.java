@@ -11,6 +11,8 @@ public class Trash {
     private Long id;
 
     private String title;
+
+    @Column(name = "content",columnDefinition = "LONGTEXT")
     private String content;
     private Date time;
 
