@@ -49,7 +49,7 @@ public class UserController {
 
     @GetMapping("/homepage")
     public ModelAndView home() {
-        return new ModelAndView("homepage");
+        return new ModelAndView("/user/homepage");
     }
 
 

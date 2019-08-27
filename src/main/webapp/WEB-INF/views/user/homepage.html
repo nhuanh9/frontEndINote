@@ -22,8 +22,15 @@
     </style>
 </head>
 <body>
-<div class="login" sec:authorize="isAuthenticated()">
-   <span th:text="${user}"></span>|<a th:href="@{/logout}">Logout</a>
+<div th:if="${user}">
+    <div class="login" sec:authorize="isAuthenticated()">
+        <span th:text="${user}"></span>|<a th:href="@{/logout}">Logout</a>
+    </div>
+</div>
+<div th:if="${user==null}">
+    <div class="login" sec:authorize="isAnonymous()">
+        <a th:href="@{/login}">Login</a>|<a href="/inote/register">Register</a>
+    </div>
 </div>
 <div class="select">
     <a href="/inote/user/note/create">Create new note</a>
