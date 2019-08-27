@@ -24,7 +24,7 @@ public class Trash {
         this.time = time;
     }
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 

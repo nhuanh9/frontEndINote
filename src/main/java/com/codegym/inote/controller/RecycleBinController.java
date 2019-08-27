@@ -26,6 +26,7 @@ public class RecycleBinController {
 
         ModelAndView modelAndView = new ModelAndView("/recycleBin/list");
         modelAndView.addObject("trashes", trashes);
+        modelAndView.addObject("user",userService.getCurrentUser());
         return modelAndView;
     }
 

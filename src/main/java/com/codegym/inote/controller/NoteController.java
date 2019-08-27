@@ -54,6 +54,7 @@ public class NoteController {
 
         ModelAndView modelAndView = new ModelAndView("/note/list");
         modelAndView.addObject("notes", notes);
+        modelAndView.addObject("user",userService.getCurrentUser());
         return modelAndView;
     }
 

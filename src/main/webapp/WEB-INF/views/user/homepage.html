@@ -4,22 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
-    <style>
-        .select {
-            position: absolute;
-            display: block;
-            left: 20px;
-            top: 50px;
-            color: rgba(255, 254, 250, 1);
-            opacity: 2;
-            font-size: 25px;
-        }
-        .login{
-            position: absolute;
-            display: block;
-            right: 20px;
-        }
-    </style>
+    <style th:replace="layout/head::style"></style>
 </head>
 <body>
 <div th:if="${user}">

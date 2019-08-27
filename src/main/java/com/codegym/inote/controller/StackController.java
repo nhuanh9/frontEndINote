@@ -32,6 +32,7 @@ public class StackController {
 
         ModelAndView modelAndView = new ModelAndView("/stack/list");
         modelAndView.addObject("stacks", stacks);
+        modelAndView.addObject("user",userService.getCurrentUser());
         return modelAndView;
     }
 

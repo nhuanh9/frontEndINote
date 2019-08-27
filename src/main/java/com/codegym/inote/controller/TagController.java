@@ -40,6 +40,7 @@ public class TagController {
 
         ModelAndView modelAndView = new ModelAndView("/tag/list");
         modelAndView.addObject("tags", tags);
+        modelAndView.addObject("user",userService.getCurrentUser());
         return modelAndView;
     }
 

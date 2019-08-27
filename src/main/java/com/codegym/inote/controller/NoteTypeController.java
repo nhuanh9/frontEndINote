@@ -51,6 +51,7 @@ public class NoteTypeController {
 
         ModelAndView modelAndView = new ModelAndView("/noteType/list");
         modelAndView.addObject("noteTypes", noteTypes);
+        modelAndView.addObject("user",userService.getCurrentUser());
         return modelAndView;
     }
 

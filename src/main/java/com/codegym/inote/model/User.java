@@ -38,15 +38,15 @@ public class User {
     @OneToMany(targetEntity = Tag.class)
     List<Stack> tags;
 
-    @OneToOne(mappedBy = "user")
-    private Trash trash;
+    @OneToMany(targetEntity = Trash.class)
+    private List<Trash> trashes;
 
-    public Trash getTrash() {
-        return trash;
+    public List<Trash> getTrashes() {
+        return trashes;
     }
 
-    public void setTrash(Trash trash) {
-        this.trash = trash;
+    public void setTrash(List<Trash> trashes) {
+        this.trashes = trashes;
     }
 
     public List<Stack> getTags() {
