@@ -1,6 +1,5 @@
 package com.codegym.inote.model;
 
-import lombok.Data;
 
 import javax.persistence.*;
 import javax.transaction.Transactional;
@@ -11,7 +10,6 @@ import java.util.List;
 @Entity
 @Transactional
 @Table(name = "user")
-@Data
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

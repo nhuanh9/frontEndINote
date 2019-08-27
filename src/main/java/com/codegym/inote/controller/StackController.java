@@ -1,6 +1,5 @@
 package com.codegym.inote.controller;
 
-import com.codegym.inote.model.Note;
 import com.codegym.inote.model.NoteType;
 import com.codegym.inote.model.Stack;
 import com.codegym.inote.service.NoteService;

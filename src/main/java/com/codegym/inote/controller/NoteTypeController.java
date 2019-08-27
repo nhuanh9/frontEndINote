@@ -3,7 +3,6 @@ package com.codegym.inote.controller;
 import com.codegym.inote.model.Note;
 import com.codegym.inote.model.NoteType;
 import com.codegym.inote.model.Stack;
-import com.codegym.inote.model.Trash;
 import com.codegym.inote.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
