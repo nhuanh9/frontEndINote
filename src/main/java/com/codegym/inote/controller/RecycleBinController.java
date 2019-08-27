@@ -1,6 +1,8 @@
 package com.codegym.inote.controller;
 
+import com.codegym.inote.model.Note;
 import com.codegym.inote.model.Trash;
+import com.codegym.inote.service.NoteService;
 import com.codegym.inote.service.RecycleBinService;
 import com.codegym.inote.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +16,14 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/user/recycleBin")
 public class RecycleBinController {
 
+    public static final String ERROR_404 = "/error-404";
+    public static final String TRASH = "trash";
+
     @Autowired
     private RecycleBinService recycleBinService;
+
+    @Autowired
+    private NoteService noteService;
 
     @Autowired
     private UserService userService;
@@ -26,8 +34,36 @@ public class RecycleBinController {
 
         ModelAndView modelAndView = new ModelAndView("/recycleBin/list");
         modelAndView.addObject("trashes", trashes);
-        modelAndView.addObject("user",userService.getCurrentUser());
+        modelAndView.addObject("user", userService.getCurrentUser());
         return modelAndView;
+    }
+
+    @GetMapping("/recovery/{id}")
+    public ModelAndView showRecoveryForm(@PathVariable Long id) {
+        Trash trash = recycleBinService.findById(id);
+        if (trash != null) {
+            ModelAndView modelAndView = new ModelAndView("/recycleBin/recovery");
+            modelAndView.addObject(TRASH, trash);
+            return modelAndView;
+        }
+        return new ModelAndView(ERROR_404);
+    }
+
+    @PostMapping("/recovery")
+    public String recoveryNote(@ModelAttribute Trash trash) {
+        Trash currentTrash = recycleBinService.findById(trash.getId());
+        Note note = new Note();
+        note.setTitle(currentTrash.getTitle());
+        note.setContent(currentTrash.getContent());
+        note.setUser(currentTrash.getUser());
+        note.setTime(currentTrash.getTime());
+        noteService.save(note);
+        recycleBinService.remove(trash.getId());
+
+        ModelAndView modelAndView = new ModelAndView("/recycleBin/recovery");
+        modelAndView.addObject("trash", trash);
+        modelAndView.addObject("note", note);
+        return "redirect:/user/recycleBin/trashes";
     }
 
     @GetMapping("/delete/{id}")
@@ -35,10 +71,10 @@ public class RecycleBinController {
         Trash trash = recycleBinService.findById(id);
         if (trash != null) {
             ModelAndView modelAndView = new ModelAndView("/recycleBin/delete");
-            modelAndView.addObject("trash", trash);
+            modelAndView.addObject(TRASH, trash);
             return modelAndView;
         }
-        return new ModelAndView("/error-404");
+        return new ModelAndView(ERROR_404);
     }
 
     @PostMapping("/delete")
@@ -51,11 +87,11 @@ public class RecycleBinController {
     public ModelAndView viewNote(@PathVariable Long id) {
         Trash trash = recycleBinService.findById(id);
         if (trash == null) {
-            return new ModelAndView("/error-404");
+            return new ModelAndView(ERROR_404);
         }
 
         ModelAndView modelAndView = new ModelAndView("/recycleBin/view");
-        modelAndView.addObject("trash", trash);
+        modelAndView.addObject(TRASH, trash);
         return modelAndView;
     }
 }

@@ -40,7 +40,7 @@ public class TagController {
 
         ModelAndView modelAndView = new ModelAndView("/tag/list");
         modelAndView.addObject("tags", tags);
-        modelAndView.addObject("user",userService.getCurrentUser());
+        modelAndView.addObject("user", userService.getCurrentUser());
         return modelAndView;
     }
 
@@ -96,7 +96,14 @@ public class TagController {
     }
 
     @PostMapping("/delete")
-    public String deleteTag(@ModelAttribute Tag tag) {
+    public String deleteTag(@ModelAttribute Tag tag, Pageable pageable) {
+        Tag currentTag = tagService.findById(tag.getId());
+        Page<Note> notes = noteService.findAllByTags(currentTag, pageable);
+        for (Note note : notes
+        ) {
+            note.setTags(null);
+            noteService.save(note);
+        }
         tagService.remove(tag.getId());
         return "redirect:/user/tag/tags";
     }

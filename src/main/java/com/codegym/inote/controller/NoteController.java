@@ -118,13 +118,7 @@ public class NoteController {
     @PostMapping("/delete")
     public String deleteNoteType(@ModelAttribute Note note) {
         Note currentNote = noteService.findById(note.getId());
-        Trash trash = new Trash();
-        trash.setTitle(currentNote.getTitle());
-        trash.setContent(currentNote.getContent());
-        trash.setUser(userService.getCurrentUser());
-        trash.setTime(currentNote.getTime());
-        recycleBinService.save(trash);
-        noteService.remove(note.getId());
+        recycleBinService.addNoteToRecycleBin(currentNote);
         return "redirect:/user/note/notes";
     }
 

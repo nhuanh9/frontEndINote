@@ -3,10 +3,8 @@ package com.codegym.inote.controller;
 import com.codegym.inote.model.Note;
 import com.codegym.inote.model.NoteType;
 import com.codegym.inote.model.Stack;
-import com.codegym.inote.service.NoteService;
-import com.codegym.inote.service.NoteTypeService;
-import com.codegym.inote.service.StackService;
-import com.codegym.inote.service.UserService;
+import com.codegym.inote.model.Trash;
+import com.codegym.inote.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -34,6 +32,9 @@ public class NoteTypeController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private RecycleBinService recycleBinService;
+
     @ModelAttribute("stacks")
     public Page<Stack> stacks(Pageable pageable) {
         return stackService.findAllByUser(userService.getCurrentUser(), pageable);
@@ -51,7 +52,7 @@ public class NoteTypeController {
 
         ModelAndView modelAndView = new ModelAndView("/noteType/list");
         modelAndView.addObject("noteTypes", noteTypes);
-        modelAndView.addObject("user",userService.getCurrentUser());
+        modelAndView.addObject("user", userService.getCurrentUser());
         return modelAndView;
     }
 
@@ -107,7 +108,12 @@ public class NoteTypeController {
     }
 
     @PostMapping("/delete")
-    public String deleteNoteType(@ModelAttribute NoteType noteType) {
+    public String deleteNoteType(@ModelAttribute NoteType noteType, Pageable pageable) {
+        NoteType currentNoteType = noteTypeService.findById(noteType.getId());
+        Page<Note> notes = noteService.findAllByNoteType(currentNoteType, pageable);
+        for (Note note : notes) {
+            recycleBinService.addNoteToRecycleBin(note);
+        }
         noteTypeService.remove(noteType.getId());
         return "redirect:/user/noteType/noteTypeList";
     }
