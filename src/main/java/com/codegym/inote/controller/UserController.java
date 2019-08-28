@@ -15,6 +15,9 @@ import javax.validation.Valid;
 public class UserController {
 
     public static final String USER_REGISTER = "/user/register";
+
+    public static final String ERROR_404 = "/error-404";
+
     @Autowired
     UserService userService;
 
@@ -51,6 +54,40 @@ public class UserController {
     public ModelAndView home() {
         ModelAndView modelAndView = new ModelAndView("/user/homepage");
         modelAndView.addObject("user", userService.getCurrentUser());
+        return modelAndView;
+    }
+
+    @GetMapping("/edit/{id}")
+    public ModelAndView showEditForm(@PathVariable Long id) {
+        User user = userService.findById(id);
+        if (user != null) {
+            ModelAndView modelAndView = new ModelAndView("/user/edit");
+            modelAndView.addObject("user", user);
+            return modelAndView;
+        }
+        return new ModelAndView(ERROR_404);
+    }
+
+    @PostMapping("/edit")
+    public ModelAndView editNoteType(@ModelAttribute User user) {
+        userService.save(user);
+
+        ModelAndView modelAndView = new ModelAndView("/user/edit");
+        modelAndView.addObject("user", user);
+        modelAndView.addObject("message", "Updated!");
+        return modelAndView;
+    }
+
+    @GetMapping("/view/{id}")
+    public ModelAndView viewUser(@PathVariable Long id) {
+        User user = userService.findById(id);
+        if (user == null) {
+            return new ModelAndView(ERROR_404);
+        }
+
+
+        ModelAndView modelAndView = new ModelAndView("/user/view");
+        modelAndView.addObject("user", user);
         return modelAndView;
     }
 }

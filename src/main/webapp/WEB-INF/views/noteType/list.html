@@ -9,7 +9,8 @@
 <body>
 <div th:if="${user}">
     <div class="login" sec:authorize="isAuthenticated()">
-        <span th:text="${user.username}"></span>|<a th:href="@{/logout}">Logout</a>
+        <span><a th:href="@{/view/__${user.id}__}" th:text="${user.username}"></a></span>|<a
+            th:href="@{/logout}">Logout</a>
     </div>
 </div>
 <div th:replace="layout/select::select"></div>
@@ -30,7 +31,7 @@
         </tr>
         <th:block th:each="noteType : ${noteTypes}">
             <tr>
-                <td ><a th:href="@{/user/noteType/view/__${noteType.id}__}" th:text="${noteType.name}"></a></td>
+                <td><a th:href="@{/user/noteType/view/__${noteType.id}__}" th:text="${noteType.name}"></a></td>
                 <td th:text="${noteType.stack.name}"></td>
                 <td><a th:href="@{/user/noteType/edit/__${noteType.id}__}">edit</a></td>
                 <td><a th:href="@{/user/noteType/delete/__${noteType.id}__}">delete</a></td>

@@ -3,28 +3,31 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Delete NoteType</title>
+    <title>Update stack</title>
     <style th:replace="layout/head::style"></style>
 </head>
 <body>
 <div th:if="${user}">
     <div class="login" sec:authorize="isAuthenticated()">
-        <span><a th:href="@{/view/__${user.id}__}" th:text="${user.username}"></a></span>|<a
-            th:href="@{/logout}">Logout</a>
+        <span th:text="${user.username}"></span>|<a th:href="@{/logout}">Logout</a>
     </div>
 </div>
 <div th:replace="layout/select::select"></div>
 <div class="start">
-    <form th:action="@{/user/noteType/delete}" th:object="${noteType}" method="post">
+    <h1>Change Password</h1>
+    <th:block th:if="${message}">
+        <p th:text="${message}"></p>
+    </th:block>
+    <form th:action="@{/edit}" th:object="${user}" method="post">
         <input th:type="hidden" th:field="*{id}">
         <table>
             <tr>
-                <td>Name:</td>
-                <td th:text="${noteType.name}"></td>
+                <td>Password:</td>
+                <td><input type="password" th:field="*{password}"></td>
             </tr>
             <tr>
                 <td></td>
-                <td><input type="submit" value="Delete"></td>
+                <td><input type="submit" value="Change"></td>
             </tr>
         </table>
     </form>

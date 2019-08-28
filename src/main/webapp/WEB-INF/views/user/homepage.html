@@ -9,7 +9,7 @@
 <body>
 <div th:if="${user}">
     <div class="login" sec:authorize="isAuthenticated()">
-        <span th:text="${user.username}"></span>|<a th:href="@{/logout}">Logout</a>
+        <span><a th:href="@{/view/__${user.id}__}" th:text="${user.username}"></a></span>|<a th:href="@{/logout}">Logout</a>
     </div>
 </div>
 <div th:if="${user==null}">
