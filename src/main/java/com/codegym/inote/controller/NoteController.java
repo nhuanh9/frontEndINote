@@ -44,6 +44,11 @@ public class NoteController {
         return tagService.findAllByUser(userService.getCurrentUser(), pageable);
     }
 
+    @ModelAttribute("user")
+    public User user(){
+        return userService.getCurrentUser();
+    }
+
     @GetMapping("/notes")
     public ModelAndView showNoteList(@PageableDefault(sort = "time",direction = Sort.Direction.DESC) Pageable pageable, @RequestParam("search") Optional<String> search) {
         Page<Note> notes;
@@ -56,7 +61,6 @@ public class NoteController {
 
         ModelAndView modelAndView = new ModelAndView("/note/list");
         modelAndView.addObject("notes", notes);
-        modelAndView.addObject("user",userService.getCurrentUser());
         return modelAndView;
     }
 

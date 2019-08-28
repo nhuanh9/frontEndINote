@@ -3,6 +3,7 @@ package com.codegym.inote.controller;
 import com.codegym.inote.model.Note;
 import com.codegym.inote.model.NoteType;
 import com.codegym.inote.model.Stack;
+import com.codegym.inote.model.User;
 import com.codegym.inote.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -39,6 +40,11 @@ public class NoteTypeController {
         return stackService.findAllByUser(userService.getCurrentUser(), pageable);
     }
 
+    @ModelAttribute("user")
+    public User user(){
+        return userService.getCurrentUser();
+    }
+
     @GetMapping("/noteTypeList")
     public ModelAndView showNoteTypeList(@RequestParam("search") Optional<String> search, Pageable pageable) {
         Page<NoteType> noteTypes;
@@ -51,7 +57,6 @@ public class NoteTypeController {
 
         ModelAndView modelAndView = new ModelAndView("/noteType/list");
         modelAndView.addObject("noteTypes", noteTypes);
-        modelAndView.addObject("user", userService.getCurrentUser());
         return modelAndView;
     }
 

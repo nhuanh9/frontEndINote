@@ -2,7 +2,7 @@ package com.codegym.inote.controller;
 
 import com.codegym.inote.model.NoteType;
 import com.codegym.inote.model.Stack;
-import com.codegym.inote.service.NoteService;
+import com.codegym.inote.model.User;
 import com.codegym.inote.service.NoteTypeService;
 import com.codegym.inote.service.StackService;
 import com.codegym.inote.service.UserService;
@@ -25,10 +25,12 @@ public class StackController {
     private NoteTypeService noteTypeService;
 
     @Autowired
-    private NoteService noteService;
-
-    @Autowired
     private UserService userService;
+
+    @ModelAttribute("user")
+    public User user(){
+        return userService.getCurrentUser();
+    }
 
     @GetMapping("/stacks")
     public ModelAndView showAllStack(Pageable pageable) {
@@ -36,7 +38,6 @@ public class StackController {
 
         ModelAndView modelAndView = new ModelAndView("/stack/list");
         modelAndView.addObject("stacks", stacks);
-        modelAndView.addObject("user", userService.getCurrentUser());
         return modelAndView;
     }
 

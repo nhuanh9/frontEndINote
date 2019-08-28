@@ -1,22 +1,31 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>View Tags</title>
+    <style th:replace="layout/head::style"></style>
 </head>
 <body>
-<a href="/inote/user/tag/tags">Tags</a>
-<h1>Tag: <span th:text="${tag.name}"></span></h1>
-<table>
-    <tr>
-        <td>Title</td>
-    </tr>
-    <th:block th:each="note : ${notes}">
+<div th:if="${user}">
+    <div class="login" sec:authorize="isAuthenticated()">
+        <span th:text="${user.username}"></span>|<a th:href="@{/logout}">Logout</a>
+    </div>
+</div>
+<div th:replace="layout/select::select"></div>
+<div class="start">
+    <h1>Tag: <span th:text="${tag.name}"></span></h1>
+    <table>
         <tr>
-            <td th:text="${note.title}"></td>
-            <td th:text="${note.content}"></td>
+            <td>Title</td>
         </tr>
-    </th:block>
-</table>
+        <th:block th:each="note : ${notes}">
+            <tr>
+                <td th:text="${note.title}"></td>
+                <td th:text="${note.content}"></td>
+            </tr>
+        </th:block>
+    </table>
+</div>
 </body>
 </html>

@@ -2,6 +2,7 @@ package com.codegym.inote.controller;
 
 import com.codegym.inote.model.Note;
 import com.codegym.inote.model.Trash;
+import com.codegym.inote.model.User;
 import com.codegym.inote.service.NoteService;
 import com.codegym.inote.service.RecycleBinService;
 import com.codegym.inote.service.UserService;
@@ -28,13 +29,17 @@ public class RecycleBinController {
     @Autowired
     private UserService userService;
 
+    @ModelAttribute("user")
+    public User user() {
+        return userService.getCurrentUser();
+    }
+
     @GetMapping("/trashes")
     public ModelAndView recycleBin(Pageable pageable) {
         Page<Trash> trashes = recycleBinService.findAllByUser(userService.getCurrentUser(), pageable);
 
         ModelAndView modelAndView = new ModelAndView("/recycleBin/list");
         modelAndView.addObject("trashes", trashes);
-        modelAndView.addObject("user", userService.getCurrentUser());
         return modelAndView;
     }
 

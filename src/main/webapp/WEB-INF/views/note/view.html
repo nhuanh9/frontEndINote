@@ -1,33 +1,43 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>View Note</title>
+    <style th:replace="layout/head::style"></style>
+
 </head>
 <body>
-<a href="/inote/user/note/notes">Note List</a>
-<h1>Note: <span th:text="${note.title}"></span></h1>
-<table>
-    <tr>
-        <td>Title:</td>
-        <td th:text="${note.title}"></td>
-    </tr>
-    <tr>
-        <td>Content:</td>
-        <td th:text="${note.content}"></td>
-    </tr>
-    <tr>
-        <td>Time</td>
-        <td th:text="${note.time}"></td>
-    </tr>
-    <tr>
-        <td>Note type:</td>
-        <td><a th:href="@{/user/noteType/view/__${note.noteType.id}__}" th:text="${note.noteType.name}"></a></td>
-    </tr>
-    <tr>
-        <td>Tag:</td>
-        <td th:each="tag:${note.tags}"><a th:href="@{/user/tag/view/__${tag.id}__}" th:text="${tag.name}"></a></td>
-    </tr>
-</table>
+<div th:if="${user}">
+    <div class="login" sec:authorize="isAuthenticated()">
+        <span th:text="${user.username}"></span>|<a th:href="@{/logout}">Logout</a>
+    </div>
+</div>
+<div th:replace="layout/select::select"></div>
+<div class="start">
+    <h1>Note: <span th:text="${note.title}"></span></h1>
+    <table>
+        <tr>
+            <td>Title:</td>
+            <td th:text="${note.title}"></td>
+        </tr>
+        <tr>
+            <td>Content:</td>
+            <td th:text="${note.content}"></td>
+        </tr>
+        <tr>
+            <td>Time</td>
+            <td th:text="${note.time}"></td>
+        </tr>
+        <tr>
+            <td>Note type:</td>
+            <td><a th:href="@{/user/noteType/view/__${note.noteType.id}__}" th:text="${note.noteType.name}"></a></td>
+        </tr>
+        <tr>
+            <td>Tag:</td>
+            <td th:each="tag:${note.tags}"><a th:href="@{/user/tag/view/__${tag.id}__}" th:text="${tag.name}"></a></td>
+        </tr>
+    </table>
+</div>
 </body>
 </html>

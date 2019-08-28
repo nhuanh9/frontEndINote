@@ -1,23 +1,33 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Delete stack</title>
+    <style th:replace="layout/head::style"></style>
 </head>
 <body>
-<a href="/inote/user/stack/stacks">Stacks</a>
-<form th:action="@{/user/stack/delete}" th:object="${stack}" method="post">
-    <input th:type="hidden" th:field="*{id}">
-    <table>
-        <tr>
-            <td>Name:</td>
-            <td th:text="${stack.name}"></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><input type="submit" value="Delete"></td>
-        </tr>
-    </table>
-</form>
+<div th:if="${user}">
+    <div class="login" sec:authorize="isAuthenticated()">
+        <span th:text="${user.username}"></span>|<a th:href="@{/logout}">Logout</a>
+    </div>
+</div>
+<div th:replace="layout/select::select"></div>
+<div class="start">
+    <h1>Delete</h1>
+    <form th:action="@{/user/stack/delete}" th:object="${stack}" method="post">
+        <input th:type="hidden" th:field="*{id}">
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td th:text="${stack.name}"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Delete"></td>
+            </tr>
+        </table>
+    </form>
+</div>
 </body>
 </html>

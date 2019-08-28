@@ -1,45 +1,55 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Create New Note</title>
+    <style th:replace="layout/head::style"></style>
 </head>
 <body>
-<a href="/inote/user/note/notes">Note List</a>
-<th:block th:if="${message}">
-    <p th:text="${message}"></p>
-</th:block>
-<form th:action="@{/user/note/create}" th:object="${note}" method="post">
-    <table>
-        <tr>
-            <td>Title:</td>
-            <td><input type="text" th:field="*{title}"></td>
-        </tr>
-        <tr>
-            <td>Content:</td>
-            <td><input type="text" th:field="*{content}"></td>
-        </tr>
-        <tr>
-            <td>Note type:</td>
-            <td>
-                <select th:field="*{noteType}">
-                    <option th:each="p:${noteTypes}" th:value="${p.id}" th:text="${p.name}"></option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>Tag:</td>
-            <th:block th:each="tag:${tags}">
+<div th:if="${user}">
+    <div class="login" sec:authorize="isAuthenticated()">
+        <span th:text="${user.username}"></span>|<a th:href="@{/logout}">Logout</a>
+    </div>
+</div>
+<div th:replace="layout/select::select"></div>
+<div class="start">
+    <h1>Create new note</h1>
+    <th:block th:if="${message}">
+        <p th:text="${message}"></p>
+    </th:block>
+    <form th:action="@{/user/note/create}" th:object="${note}" method="post">
+        <table>
+            <tr>
+                <td>Title:</td>
+                <td><input type="text" th:field="*{title}"></td>
+            </tr>
+            <tr>
+                <td>Content:</td>
+                <td><input type="text" th:field="*{content}"></td>
+            </tr>
+            <tr>
+                <td>Note type:</td>
                 <td>
-                    <input type="checkbox" th:text="${tag.name}" th:value="${tag.id}" th:field="*{tags}">
+                    <select th:field="*{noteType}">
+                        <option th:each="p:${noteTypes}" th:value="${p.id}" th:text="${p.name}"></option>
+                    </select>
                 </td>
-            </th:block>
-        </tr>
-        <tr>
-            <td></td>
-            <td><input type="submit" value="Create"></td>
-        </tr>
-    </table>
-</form>
+            </tr>
+            <tr>
+                <td>Tag:</td>
+                <th:block th:each="tag:${tags}">
+                    <td>
+                        <input type="checkbox" th:text="${tag.name}" th:value="${tag.id}" th:field="*{tags}">
+                    </td>
+                </th:block>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Create"></td>
+            </tr>
+        </table>
+    </form>
+</div>
 </body>
 </html>

@@ -2,6 +2,7 @@ package com.codegym.inote.controller;
 
 import com.codegym.inote.model.Note;
 import com.codegym.inote.model.Tag;
+import com.codegym.inote.model.User;
 import com.codegym.inote.service.NoteService;
 import com.codegym.inote.service.TagService;
 import com.codegym.inote.service.UserService;
@@ -28,6 +29,11 @@ public class TagController {
     @Autowired
     private UserService userService;
 
+    @ModelAttribute("user")
+    public User user() {
+        return userService.getCurrentUser();
+    }
+
     @GetMapping("/tags")
     public ModelAndView showAllTag(@RequestParam("search") Optional<String> search, Pageable pageable) {
         Page<Tag> tags;
@@ -40,7 +46,6 @@ public class TagController {
 
         ModelAndView modelAndView = new ModelAndView("/tag/list");
         modelAndView.addObject("tags", tags);
-        modelAndView.addObject("user", userService.getCurrentUser());
         return modelAndView;
     }
 
