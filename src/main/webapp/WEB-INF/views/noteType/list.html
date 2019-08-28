@@ -7,34 +7,36 @@
     <style th:replace="layout/head::style"></style>
 </head>
 <body>
-<a href="/inote/user/homepage">Go to homepage</a>
 <div th:if="${user}">
     <div class="login" sec:authorize="isAuthenticated()">
         <span th:text="${user.username}"></span>|<a th:href="@{/logout}">Logout</a>
     </div>
 </div>
-<a href="/inote/user/noteType/create">Create New NoteType</a>
-<h1>NoteType List</h1>
-<form>
-    Search by name:
-    <input type="text" name="search">
-    <input type="submit" value="Search">
-</form>
-<table>
-    <tr>
-        <td>Name</td>
-        <td>Stack</td>
-        <td>Edit</td>
-        <td>Delete</td>
-    </tr>
-    <th:block th:each="noteType : ${noteTypes}">
+<div th:replace="layout/select::select"></div>
+<div class="start">
+    <a href="/inote/user/noteType/create">Create New NoteType</a>
+    <h1>NoteType List</h1>
+    <form>
+        Search by name:
+        <input type="text" name="search">
+        <input type="submit" value="Search">
+    </form>
+    <table>
         <tr>
-            <td ><a th:href="@{/user/noteType/view/__${noteType.id}__}" th:text="${noteType.name}"></a></td>
-            <td th:text="${noteType.stack.name}"></td>
-            <td><a th:href="@{/user/noteType/edit/__${noteType.id}__}">edit</a></td>
-            <td><a th:href="@{/user/noteType/delete/__${noteType.id}__}">delete</a></td>
+            <td>Name</td>
+            <td>Stack</td>
+            <td>Edit</td>
+            <td>Delete</td>
         </tr>
-    </th:block>
-</table>
+        <th:block th:each="noteType : ${noteTypes}">
+            <tr>
+                <td ><a th:href="@{/user/noteType/view/__${noteType.id}__}" th:text="${noteType.name}"></a></td>
+                <td th:text="${noteType.stack.name}"></td>
+                <td><a th:href="@{/user/noteType/edit/__${noteType.id}__}">edit</a></td>
+                <td><a th:href="@{/user/noteType/delete/__${noteType.id}__}">delete</a></td>
+            </tr>
+        </th:block>
+    </table>
+</div>
 </body>
 </html>

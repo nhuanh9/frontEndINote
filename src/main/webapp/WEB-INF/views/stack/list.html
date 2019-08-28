@@ -7,31 +7,32 @@
     <style th:replace="layout/head::style"></style>
 </head>
 <body>
-<a href="/inote/user/homepage">Go to homepage</a>
 <div th:if="${user}">
     <div class="login" sec:authorize="isAuthenticated()">
         <span th:text="${user.username}"></span>|<a th:href="@{/logout}">Logout</a>
     </div>
 </div>
-<br>
-<a href="/inote/user/stack/create">Create New Stack</a>
-<br>
-<a href="/inote/user/noteType/create">Create new note type</a>
-
-<h1>Stacks</h1>
-<table>
-    <tr>
-        <td>Name</td>
-        <td>Edit</td>
-        <td>Delete</td>
-    </tr>
-    <th:block th:each="stack : ${stacks}">
+<div th:replace="layout/select::select"></div>
+<div class="start">
+    <a href="/inote/user/stack/create">Create New Stack</a>
+    <br>
+    <a href="/inote/user/noteType/noteTypeList">NoteTypes</a>
+    <br>
+    <h1>Stacks</h1>
+    <table>
         <tr>
-            <td><a th:href="@{/user/stack/view/__${stack.id}__}" th:text="${stack.name}"></a></td>
-            <td><a th:href="@{/user/stack/edit/__${stack.id}__}">edit</a></td>
-            <td><a th:href="@{/user/stack/delete/__${stack.id}__}">delete</a></td>
+            <td>Name</td>
+            <td>Edit</td>
+            <td>Delete</td>
         </tr>
-    </th:block>
-</table>
+        <th:block th:each="stack : ${stacks}">
+            <tr>
+                <td><a th:href="@{/user/stack/view/__${stack.id}__}" th:text="${stack.name}"></a></td>
+                <td><a th:href="@{/user/stack/edit/__${stack.id}__}">edit</a></td>
+                <td><a th:href="@{/user/stack/delete/__${stack.id}__}">delete</a></td>
+            </tr>
+        </th:block>
+    </table>
+</div>
 </body>
 </html>

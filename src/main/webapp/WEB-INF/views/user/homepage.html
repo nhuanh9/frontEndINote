@@ -9,7 +9,7 @@
 <body>
 <div th:if="${user}">
     <div class="login" sec:authorize="isAuthenticated()">
-        <span th:text="${user}"></span>|<a th:href="@{/logout}">Logout</a>
+        <span th:text="${user.username}"></span>|<a th:href="@{/logout}">Logout</a>
     </div>
 </div>
 <div th:if="${user==null}">
@@ -17,16 +17,6 @@
         <a th:href="@{/login}">Login</a>|<a href="/inote/register">Register</a>
     </div>
 </div>
-<div class="select">
-    <a href="/inote/user/note/create">Create new note</a>
-    <br>
-    <a href="/inote/user/note/notes">List note</a>
-    <br>
-    <a href="/inote/user/tag/tags">Tags</a>
-    <br>
-    <a href="/inote/user/stack/stacks">Stacks</a>
-    <br>
-    <a href="/inote/user/recycleBin/trashes">Recycle Bin</a>
-</div>
+<div th:replace="layout/select::select"></div>
 </body>
 </html>

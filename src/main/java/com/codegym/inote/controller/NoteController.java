@@ -5,6 +5,8 @@ import com.codegym.inote.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -43,7 +45,7 @@ public class NoteController {
     }
 
     @GetMapping("/notes")
-    public ModelAndView showNoteList(Pageable pageable, @RequestParam("search") Optional<String> search) {
+    public ModelAndView showNoteList(@PageableDefault(sort = "time",direction = Sort.Direction.DESC) Pageable pageable, @RequestParam("search") Optional<String> search) {
         Page<Note> notes;
 
         if (search.isPresent()) {

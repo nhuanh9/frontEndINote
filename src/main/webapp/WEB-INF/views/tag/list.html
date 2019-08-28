@@ -5,30 +5,33 @@
     <meta charset="UTF-8">
     <title>Tag List</title>
     <style th:replace="layout/head::style"></style>
+
 </head>
 <body>
-<a href="/inote/user/homepage">Go to homepage</a>
 <div th:if="${user}">
     <div class="login" sec:authorize="isAuthenticated()">
         <span th:text="${user.username}"></span>|<a th:href="@{/logout}">Logout</a>
     </div>
 </div>
-<a href="/inote/user/tag/create">Create New Tag</a>
-<h1>Tags</h1>
-<form>
-    Search by name:
-    <input type="text" name="search">
-    <input type="submit" value="Search">
-</form>
-<table>
-    <tr>
-        <td>Name</td>
-    </tr>
-    <th:block th:each="tag : ${tags}">
+<div th:replace="layout/select::select"></div>
+<div class="start">
+    <a href="/inote/user/tag/create">Create New Tag</a>
+    <h1>Tags</h1>
+    <form>
+        Search by name:
+        <input type="text" name="search">
+        <input type="submit" value="Search">
+    </form>
+    <table>
         <tr>
-            <td><a th:href="@{/user/tag/view/__${tag.id}__}" th:text="${tag.name}"></a></td>
+            <td>Name</td>
         </tr>
-    </th:block>
-</table>
+        <th:block th:each="tag : ${tags}">
+            <tr>
+                <td><a th:href="@{/user/tag/view/__${tag.id}__}" th:text="${tag.name}"></a></td>
+            </tr>
+        </th:block>
+    </table>
+</div>
 </body>
 </html>

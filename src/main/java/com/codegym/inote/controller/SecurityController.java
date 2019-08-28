@@ -40,10 +40,4 @@ public class SecurityController {
         return "user/accessDenied";
     }
 
-    @GetMapping("/user/homepage")
-    public ModelAndView goHomePage() {
-        ModelAndView modelAndView = new ModelAndView("/user/homepage");
-        modelAndView.addObject("user",getPrincipal());
-        return modelAndView;
-    }
 }
