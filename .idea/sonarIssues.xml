@@ -38,6 +38,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/codegym/inote/controller/NoteRestController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/com/codegym/inote/controller/NoteTypeController.java">
           <value>
             <set />
@@ -284,6 +289,11 @@
           </value>
         </entry>
         <entry key="$USER_HOME$/IdeaProjects/Productive-working-music/src/main/java/com/codegym/music/model/User.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/IdeaProjects/WEBSERVICE_RESTFUL-customer-management/build.gradle">
           <value>
             <set />
           </value>
