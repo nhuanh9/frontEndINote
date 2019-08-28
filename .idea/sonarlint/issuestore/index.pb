@@ -123,8 +123,6 @@ b
 2src/main/webapp/WEB-INF/views/recycleBin/view.html,d/8/d8ca3c283c6e4b873b46fd590efc44beb8b9a053
 d
 4src/main/webapp/WEB-INF/views/recycleBin/delete.html,a/e/aed4b2a3d33d41e8a2b45082457bac78a26ee364
-[
-+src/main/webapp/WEB-INF/views/homepage.html,7/3/739130e8271f85547308f3ec84936ab8379b7692
 \
 ,src/main/webapp/WEB-INF/views/error-404.html,a/3/a306d64c2762002e85d1e06bb121003c417466df
 X
@@ -153,3 +151,7 @@ r
 Bsrc/main/java/com/codegym/inote/controller/NoteTypeController.java,e/4/e456f3a82cd754f42c1ffdd6af7a5fa39f15fc9e
 x
 Hsrc/main/java/com/codegym/inote/configuration/SecurityConfiguration.java,d/d/dd1f9c2d83987173f0dfad1b997bff61f7d2a35d
+^
+.src/main/webapp/WEB-INF/views/layout/head.html,5/7/5740e43457777777cec7d946470a0fb941d353c6
+f
+6src/main/webapp/WEB-INF/views/recycleBin/recovery.html,f/8/f810c662f8f766f3324282168420b7387a4d7512

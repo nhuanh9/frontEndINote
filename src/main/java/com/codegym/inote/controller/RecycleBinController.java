@@ -39,7 +39,7 @@ public class RecycleBinController {
     }
 
     @GetMapping("/recovery/{id}")
-    public ModelAndView showRecoveryForm(@PathVariable Long id) {
+    public ModelAndView RecoveryForm(@PathVariable Long id) {
         Trash trash = recycleBinService.findById(id);
         if (trash != null) {
             ModelAndView modelAndView = new ModelAndView("/recycleBin/recovery");
@@ -50,7 +50,7 @@ public class RecycleBinController {
     }
 
     @PostMapping("/recovery")
-    public String recoveryNote(@ModelAttribute Trash trash) {
+    public String recoverNote(@ModelAttribute Trash trash) {
         Trash currentTrash = recycleBinService.findById(trash.getId());
         Note note = new Note();
         note.setTitle(currentTrash.getTitle());

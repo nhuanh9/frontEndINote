@@ -5,11 +5,11 @@
     <title>Recovery</title>
 </head>
 <body>
-<h1>Do you want to recovery this note ?</h1>
+<h1>Do you want to recover this note ?</h1>
 <br>
 <form th:action="@{/user/recycleBin/recovery}" th:object="${trash}" method="post">
     <input th:type="hidden" th:field="*{id}">
-    <input type="submit" value="Recovery">
+    <input type="submit" value="Recover">
 </form>
 </body>
 </html>
