@@ -19,7 +19,7 @@ public class NoteRestController {
     @Autowired
     private NoteService noteService;
 
-    @RequestMapping(value = "/notes", method = RequestMethod.GET)
+    @GetMapping("/notes")
     public ResponseEntity<Page<Note>> showAllNote(Pageable pageable) {
         Page<Note> notes = noteService.findAll(pageable);
         if (notes.getTotalElements() == 0) {
@@ -28,7 +28,7 @@ public class NoteRestController {
         return new ResponseEntity<>(notes, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/notes/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/notes/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Note> getNote(@PathVariable Long id) {
         Note note = noteService.findById(id);
         if (note == null) {
@@ -37,7 +37,7 @@ public class NoteRestController {
         return new ResponseEntity<>(note, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/notes", method = RequestMethod.POST)
+    @PostMapping("/notes")
     public ResponseEntity<Void> createNote(@RequestBody Note note, UriComponentsBuilder ucBuilder) {
         noteService.save(note);
         HttpHeaders headers = new HttpHeaders();
@@ -45,7 +45,7 @@ public class NoteRestController {
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/notes/{id}", method = RequestMethod.PUT)
+    @PutMapping("/notes/{id}")
     public ResponseEntity<Note> updateNote(@PathVariable Long id, @RequestBody Note note) {
         Note currentNote = noteService.findById(id);
         if (currentNote == null) {
@@ -62,7 +62,7 @@ public class NoteRestController {
         return new ResponseEntity<>(currentNote, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/notes/{id}", method = RequestMethod.DELETE)
+    @DeleteMapping("/notes/{id}")
     public ResponseEntity<Note> deleteNote(@PathVariable Long id) {
         Note note = noteService.findById(id);
         if (note == null) {
