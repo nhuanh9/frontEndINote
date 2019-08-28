@@ -14,14 +14,17 @@
     </div>
 </div>
 <div th:replace="layout/select::select"></div>
-<div class="start">
-    <a href="/inote/user/tag/create">Create New Tag</a>
-    <h1>Tags</h1>
+<div class="search">
     <form>
         Search by name:
         <input type="text" name="search">
         <input type="submit" value="Search">
     </form>
+</div>
+<div class="start">
+    <br>
+    <a href="/inote/user/tag/create">Create New Tag</a>
+    <h1>Tags</h1>
     <table>
         <tr>
             <td>Name</td>
