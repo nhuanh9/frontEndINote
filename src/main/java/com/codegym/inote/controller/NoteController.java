@@ -45,14 +45,13 @@ public class NoteController {
     }
 
     @ModelAttribute("user")
-    public User user(){
+    public User user() {
         return userService.getCurrentUser();
     }
 
     @GetMapping("/notes")
-    public ModelAndView showNoteList(@PageableDefault(sort = "time",direction = Sort.Direction.DESC) Pageable pageable, @RequestParam("search") Optional<String> search) {
+    public ModelAndView showNoteList(@PageableDefault(size = 5, sort = "time", direction = Sort.Direction.DESC) Pageable pageable, @RequestParam("search") Optional<String> search) {
         Page<Note> notes;
-
         if (search.isPresent()) {
             notes = noteService.findNoteByTitleContains(search.get(), pageable);
         } else {
