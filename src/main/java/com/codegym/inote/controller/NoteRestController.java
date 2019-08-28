@@ -34,7 +34,7 @@ public class NoteRestController {
         if (note == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<Note>(note, HttpStatus.OK);
+        return new ResponseEntity<>(note, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/notes", method = RequestMethod.POST)
@@ -42,7 +42,7 @@ public class NoteRestController {
         noteService.save(note);
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/notes/{id}").buildAndExpand(note.getId()).toUri());
-        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+        return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/notes/{id}", method = RequestMethod.PUT)
