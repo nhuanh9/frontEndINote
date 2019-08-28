@@ -10,7 +10,8 @@
 <body>
 <div th:if="${user}">
     <div class="login" sec:authorize="isAuthenticated()">
-        <span><a th:href="@{/view/__${user.id}__}" th:text="${user.username}"></a></span>|<a th:href="@{/logout}">Logout</a>
+        <span><a th:href="@{/view/__${user.id}__}" th:text="${user.username}"></a></span>|<a
+            th:href="@{/logout}">Logout</a>
     </div>
 </div>
 <div th:replace="layout/select::select"></div>
@@ -22,7 +23,6 @@
     </form>
 </div>
 <div class="start">
-    <br>
     <a href="/inote/user/tag/create">Create New Tag</a>
     <h1>Tags</h1>
     <table>

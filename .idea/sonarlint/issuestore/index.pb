@@ -87,8 +87,6 @@ Tsrc/main/java/com/codegym/inote/configuration/SecurityWebApplicationInitializer
 .src/main/webapp/WEB-INF/views/note/create.html,e/6/e6950651e86b9600c5b109ae52cf9d2c1221a1e0
 ^
 .src/main/webapp/WEB-INF/views/note/delete.html,1/a/1a3f4318ee0156a7aab51d8432fea16c9ddf7eb8
-\
-,src/main/webapp/WEB-INF/views/user/menu.html,f/b/fbf75bd4ba60f234504520490f990fea4d248340
 `
 0src/main/webapp/WEB-INF/views/user/homepage.html,0/b/0b5ed6ae5167a57f81c378577624d1ef599f9729
 `

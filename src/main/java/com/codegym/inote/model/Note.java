@@ -12,7 +12,6 @@ public class Note {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-//    @Column(name = "title",columnDefinition = "NVARCHAR(255)")
     private String title;
 
     @Column(name = "content",columnDefinition = "LONGTEXT")
