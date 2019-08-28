@@ -53,13 +53,4 @@ public class UserController {
         modelAndView.addObject("user", userService.getCurrentUser());
         return modelAndView;
     }
-
-    @GetMapping("/user/homepage")
-    public ModelAndView goHomePage() {
-        ModelAndView modelAndView = new ModelAndView("/user/homepage");
-        modelAndView.addObject("user",userService.getCurrentUser());
-        return modelAndView;
-    }
-
-
 }

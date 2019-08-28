@@ -44,7 +44,7 @@ public class RecycleBinController {
     }
 
     @GetMapping("/recovery/{id}")
-    public ModelAndView RecoveryForm(@PathVariable Long id) {
+    public ModelAndView recoveryForm(@PathVariable Long id) {
         Trash trash = recycleBinService.findById(id);
         if (trash != null) {
             ModelAndView modelAndView = new ModelAndView("/recycleBin/recovery");
@@ -66,7 +66,7 @@ public class RecycleBinController {
         recycleBinService.remove(trash.getId());
 
         ModelAndView modelAndView = new ModelAndView("/recycleBin/recovery");
-        modelAndView.addObject("trash", trash);
+        modelAndView.addObject(TRASH, trash);
         modelAndView.addObject("note", note);
         return "redirect:/user/recycleBin/trashes";
     }
