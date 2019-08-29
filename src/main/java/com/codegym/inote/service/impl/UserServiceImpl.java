@@ -60,4 +60,13 @@ public class UserServiceImpl implements UserService {
     public User findById(Long id) {
         return userRepository.findOne(id);
     }
+
+    @Override
+    public UserDetails loadUserById(Long id) {
+        User user = userRepository.findOne(id);
+        if (user == null) {
+            throw new UsernameNotFoundException(user.getUsername());
+        }
+        return new CustomUserDetails(user);
+    }
 }
