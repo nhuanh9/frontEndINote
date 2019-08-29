@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/user/note")
+@RequestMapping("/note")
 public class NoteController {
     public static final String ERROR_404 = "/error-404";
     @Autowired
@@ -124,7 +124,7 @@ public class NoteController {
     public String deleteNoteType(@ModelAttribute Note note) {
         Note currentNote = noteService.findById(note.getId());
         recycleBinService.addNoteToRecycleBin(currentNote);
-        return "redirect:/user/note/notes";
+        return "redirect:/note/notes";
     }
 
     @GetMapping("/view/{id}")

@@ -23,7 +23,7 @@
         </tr>
         <th:block th:each="trash : ${trashes}">
             <tr>
-                <td><a th:href="@{/user/recycleBin/view/__${trash.id}__}" th:text="${trash.title}"></a></td>
+                <td><a th:href="@{r/recycleBin/view/__${trash.id}__}" th:text="${trash.title}"></a></td>
                 <td th:text="${trash.content}"></td>
             </tr>
         </th:block>

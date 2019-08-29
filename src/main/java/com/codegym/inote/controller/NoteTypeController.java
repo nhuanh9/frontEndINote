@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/user/noteType")
+@RequestMapping("/noteType")
 public class NoteTypeController {
 
     public static final String NOTE_TYPE = "noteType";
@@ -119,7 +119,7 @@ public class NoteTypeController {
             recycleBinService.addNoteToRecycleBin(note);
         }
         noteTypeService.remove(noteType.getId());
-        return "redirect:/user/noteType/noteTypeList";
+        return "redirect:/noteType/noteTypeList";
     }
 
     @GetMapping("/view/{id}")

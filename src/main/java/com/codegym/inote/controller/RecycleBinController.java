@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/user/recycleBin")
+@RequestMapping("/recycleBin")
 public class RecycleBinController {
 
     public static final String ERROR_404 = "/error-404";
@@ -68,7 +68,7 @@ public class RecycleBinController {
         ModelAndView modelAndView = new ModelAndView("/recycleBin/recovery");
         modelAndView.addObject(TRASH, trash);
         modelAndView.addObject("note", note);
-        return "redirect:/user/recycleBin/trashes";
+        return "redirect:/recycleBin/trashes";
     }
 
     @GetMapping("/delete/{id}")
@@ -85,7 +85,7 @@ public class RecycleBinController {
     @PostMapping("/delete")
     public String deleteNoteType(@ModelAttribute Trash trash) {
         recycleBinService.remove(trash.getId());
-        return "redirect:/user/recycleBin/trashes";
+        return "redirect:/recycleBin/trashes";
     }
 
     @GetMapping("/view/{id}")

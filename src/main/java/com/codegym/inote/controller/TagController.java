@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/user/tag")
+@RequestMapping("/tag")
 public class TagController {
 
     public static final String ERROR_404 = "/error-404";
@@ -110,7 +110,7 @@ public class TagController {
             noteService.save(note);
         }
         tagService.remove(tag.getId());
-        return "redirect:/user/tag/tags";
+        return "redirect:/tag/tags";
     }
 
     @GetMapping("/view/{id}")

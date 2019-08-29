@@ -19,7 +19,7 @@
     <th:block th:if="${message}">
         <p th:text="${message}"></p>
     </th:block>
-    <form th:action="@{/user/noteType/create}" th:object="${noteType}" method="post">
+    <form th:action="@{/noteType/create}" th:object="${noteType}" method="post">
         <table>
             <tr>
                 <td>Name:</td>

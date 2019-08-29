@@ -23,7 +23,7 @@
     </form>
 </div>
 <div class="start">
-    <a href="/inote/user/tag/create">Create New Tag</a>
+    <a href="/inote/tag/create">Create New Tag</a>
     <h1>Tags</h1>
     <table>
         <tr>
@@ -31,7 +31,7 @@
         </tr>
         <th:block th:each="tag : ${tags}">
             <tr>
-                <td><a th:href="@{/user/tag/view/__${tag.id}__}" th:text="${tag.name}"></a></td>
+                <td><a th:href="@{/tag/view/__${tag.id}__}" th:text="${tag.name}"></a></td>
             </tr>
         </th:block>
     </table>

@@ -16,7 +16,7 @@
 <div th:replace="layout/select::select"></div>
 <div class="start">
     <h1>Delete</h1>
-    <form th:action="@{/user/note/delete}" th:object="${note}" method="post">
+    <form th:action="@{/note/delete}" th:object="${note}" method="post">
         <input th:type="hidden" th:field="*{id}">
         <table>
             <tr>

@@ -15,7 +15,7 @@
 </div>
 <div th:replace="layout/select::select"></div>
 <div class="start">
-    <form th:action="@{/user/recycleBin/delete}" th:object="${trash}" method="post">
+    <form th:action="@{/recycleBin/delete}" th:object="${trash}" method="post">
         <input th:type="hidden" th:field="*{id}">
         <table>
             <tr>

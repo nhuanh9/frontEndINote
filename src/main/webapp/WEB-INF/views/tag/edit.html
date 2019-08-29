@@ -18,7 +18,7 @@
     <th:block th:if="${message}">
         <p th:text="${message}"></p>
     </th:block>
-    <form th:action="@{/user/tag/edit}" th:object="${tag}" method="post">
+    <form th:action="@{/tag/edit}" th:object="${tag}" method="post">
         <input th:type="hidden" th:field="*{id}">
         <table>
             <tr>

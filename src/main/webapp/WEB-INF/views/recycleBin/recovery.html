@@ -17,7 +17,7 @@
 <div class="start">
     <h1>Do you want to recover this note ?</h1>
     <br>
-    <form th:action="@{/user/recycleBin/recovery}" th:object="${trash}" method="post">
+    <form th:action="@{/recycleBin/recovery}" th:object="${trash}" method="post">
         <input th:type="hidden" th:field="*{id}">
         <input type="submit" value="Recover">
     </form>
