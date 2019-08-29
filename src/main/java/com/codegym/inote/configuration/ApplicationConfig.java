@@ -2,7 +2,6 @@ package com.codegym.inote.configuration;
 
 import com.codegym.inote.service.*;
 import com.codegym.inote.service.impl.*;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -55,7 +54,7 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
     }
 
     @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+    public void setApplicationContext(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
     }
 

@@ -11,7 +11,6 @@ import java.util.Collections;
 @Data
 public class CustomUserDetails implements UserDetails{
 
-
     private User user;
 
     @Override
@@ -19,8 +18,6 @@ public class CustomUserDetails implements UserDetails{
         return Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
-    public CustomUserDetails() {
-    }
 
     public CustomUserDetails(User user) {
         this.user = user;
