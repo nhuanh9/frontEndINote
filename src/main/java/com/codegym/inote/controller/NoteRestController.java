@@ -19,6 +19,7 @@ public class NoteRestController {
     @Autowired
     private NoteService noteService;
 
+
     @GetMapping("/notes")
     public ResponseEntity<Page<Note>> showAllNote(Pageable pageable) {
         Page<Note> notes = noteService.findAll(pageable);
@@ -37,11 +38,12 @@ public class NoteRestController {
         return new ResponseEntity<>(note, HttpStatus.OK);
     }
 
-    @PostMapping("/notes")
+    @PostMapping(value = "/notes",produces = {MediaType.APPLICATION_JSON_VALUE})
+    @ResponseBody
     public ResponseEntity<Void> createNote(@RequestBody Note note, UriComponentsBuilder ucBuilder) {
         noteService.save(note);
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/notes/{id}").buildAndExpand(note.getId()).toUri());
+        headers.setLocation(ucBuilder.path("/note/{id}").buildAndExpand(note.getId()).toUri());
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 

@@ -138,6 +138,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/login.html">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/note/create.html">
           <value>
             <set />
@@ -269,6 +274,61 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user/view.html">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../WEBSERVICE_Note/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../WEBSERVICE_Note/src/main/java/com/codegym/inote/ApplicationConfig.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../WEBSERVICE_Note/src/main/java/com/codegym/inote/ApplicationInitializer.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../WEBSERVICE_Note/src/main/java/com/codegym/inote/controller/NoteRestController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../WEBSERVICE_Note/src/main/java/com/codegym/inote/model/Note.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../WEBSERVICE_Note/src/main/java/com/codegym/inote/repository/NoteRepository.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../WEBSERVICE_Note/src/main/java/com/codegym/inote/service/NoteService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../WEBSERVICE_Note/src/main/java/com/codegym/inote/service/impl/NoteServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../WEBSERVICE_Note/src/main/java/com/codegym/inote/service/impl/RecycleBinServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../WEBSERVICE_Note/src/main/java/com/codegym/inote/service/impl/TagServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../WEBSERVICE_Note/src/main/java/com/codegym/inote/service/impl/UserServiceImpl.java">
           <value>
             <set />
           </value>

@@ -153,3 +153,11 @@ Hsrc/main/java/com/codegym/inote/configuration/SecurityConfiguration.java,d/d/d
 .src/main/webapp/WEB-INF/views/layout/head.html,5/7/5740e43457777777cec7d946470a0fb941d353c6
 f
 6src/main/webapp/WEB-INF/views/recycleBin/recovery.html,f/8/f810c662f8f766f3324282168420b7387a4d7512
+\
+,src/main/webapp/WEB-INF/views/user/edit.html,c/e/ceb782587633a69ed5ae4ea28c3cdac0275552f9
+\
+,src/main/webapp/WEB-INF/views/user/view.html,6/b/6bd6fe3cc90e6e07806ecdf40f43dacfd3c1cdf3
+`
+0src/main/webapp/WEB-INF/views/layout/select.html,c/5/c5a94a05c7a3954942e1c262731190739af9806c
+r
+Bsrc/main/java/com/codegym/inote/controller/NoteRestController.java,5/9/5951b1f11f818d6b77cf78c69e697b28bb59ee40
