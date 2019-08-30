@@ -2,13 +2,11 @@ package com.codegym.inote.model;
 
 
 import javax.persistence.*;
-import javax.transaction.Transactional;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
-@Transactional
 @Table(name = "user")
 public class User {
     @Id

@@ -363,6 +363,56 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../WebServiceRestful_JWT/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../WebServiceRestful_JWT/src/main/java/com/codegym/inote/configuration/ApplicationConfig.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../WebServiceRestful_JWT/src/main/java/com/codegym/inote/configuration/ApplicationInitializer.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../WebServiceRestful_JWT/src/main/java/com/codegym/inote/configuration/CustomAccessDeniedHandler.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../WebServiceRestful_JWT/src/main/java/com/codegym/inote/configuration/RestAuthenticationEntryPoint.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../WebServiceRestful_JWT/src/main/java/com/codegym/inote/configuration/SecurityConfiguration.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../WebServiceRestful_JWT/src/main/java/com/codegym/inote/configuration/SecurityWebApplicationInitializer.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../WebServiceRestful_JWT/src/main/java/com/codegym/inote/controller/UserRestController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../WebServiceRestful_JWT/src/main/java/com/codegym/inote/model/CustomUserDetails.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../WebServiceRestful_JWT/src/main/java/com/codegym/inote/model/User.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$USER_HOME$/IdeaProjects/JSP_UngDungTuDienDonGian/web/WEB-INF/index.jsp">
           <value>
             <set />

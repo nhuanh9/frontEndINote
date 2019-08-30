@@ -1,2 +1,3 @@
 
-¤%squid:RedundantThrowsDeclarationCheck:"sRemove the declaration of thrown exception 'org.springframework.beans.BeansException' which is a runtime exception.(¯¶…œ
+squid:UselessImportCheck"_Remove this unused import 'org.springframework.web.servlet.config.annotation.WebMvcConfigurer'.(’µ¥Êÿÿÿÿÿ8±ƒğÚÍ-
+‰squid:UselessImportCheck"[Remove this unused import 'org.springframework.web.servlet.config.annotation.CorsRegistry'.(âÁ’©şÿÿÿÿ8±ƒğÚÍ-
