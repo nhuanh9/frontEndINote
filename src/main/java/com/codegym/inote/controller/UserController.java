@@ -89,4 +89,19 @@ public class UserController {
         modelAndView.addObject("user", user);
         return modelAndView;
     }
+
+    @GetMapping("/login")
+    public ModelAndView loginForm() {
+        return new ModelAndView("/login");
+    }
+
+    @PostMapping("/login")
+    public ModelAndView login(@ModelAttribute User user) {
+        if (userService.checkLogin(user)) {
+            return new ModelAndView("/user/homepage");
+        }
+        ModelAndView modelAndView = new ModelAndView("/login");
+        modelAndView.addObject("message", "username or password incorrect");
+        return modelAndView;
+    }
 }

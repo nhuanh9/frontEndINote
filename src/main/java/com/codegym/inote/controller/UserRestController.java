@@ -47,17 +47,8 @@ public class UserRestController {
     public ResponseEntity<String> login(HttpServletRequest request, @RequestBody User user) {
         String result = "";
         HttpStatus httpStatus = null;
-        boolean isLogin = false;
         try {
-            Iterable<User> users = userService.findAll();
-            for (User currentUser : users) {
-                if (currentUser.getUsername().equals(user.getUsername())
-                        && passwordEncoder.matches(user.getPassword(),currentUser.getPassword())) {
-                    isLogin = true;
-                    break;
-                }
-            }
-            if (isLogin) {
+            if (userService.checkLogin(user)) {
                 result = jwtService.generateTokenLogin(user.getUsername());
                 httpStatus = HttpStatus.OK;
             } else {

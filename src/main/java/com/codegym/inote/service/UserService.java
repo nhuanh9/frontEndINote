@@ -16,4 +16,6 @@ public interface UserService extends UserDetailsService {
     User findById(Long id);
 
     UserDetails loadUserById(Long id);
+
+    boolean checkLogin(User user);
 }

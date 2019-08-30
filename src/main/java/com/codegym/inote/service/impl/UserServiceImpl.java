@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 public class UserServiceImpl implements UserService {
@@ -15,6 +16,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) {
@@ -69,4 +72,17 @@ public class UserServiceImpl implements UserService {
         }
         return new CustomUserDetails(user);
     }
+
+    @Override
+    public boolean checkLogin(User user) {
+        Iterable<User> users = this.findAll();
+        for (User currentUser : users) {
+            if (currentUser.getUsername().equals(user.getUsername())
+                    && passwordEncoder.matches(user.getPassword(), currentUser.getPassword())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
