@@ -54,4 +54,8 @@ dependencies {
     // https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt
     compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
 
+    // https://mvnrepository.com/artifact/com.nimbusds/nimbus-jose-jwt
+    compile group: 'com.nimbusds', name: 'nimbus-jose-jwt', version: '7.8'
+
+
 }

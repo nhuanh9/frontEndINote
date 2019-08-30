@@ -1,17 +1,17 @@
 package com.codegym.inote.controller;
 
-import com.codegym.inote.jwt.JwtTokenProvider;
+import com.codegym.inote.service.impl.JwtService;
 import com.codegym.inote.model.User;
 import com.codegym.inote.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/restful")
@@ -20,7 +20,7 @@ public class UserRestController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private JwtTokenProvider jwtTokenProvider;
+    private JwtService jwtService;
 
     @Autowired
     private UserService userService;
@@ -35,11 +35,45 @@ public class UserRestController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Void> createUser(@RequestBody User user, UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<String> createUser(@RequestBody User user, UriComponentsBuilder ucBuilder) {
+        Iterable<User> users = userService.findAll();
+        for (User currentUser : users) {
+            if (currentUser.getUsername().equals(user.getUsername())) {
+                return new ResponseEntity<>("User Existed!", HttpStatus.BAD_REQUEST);
+            }
+        }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.save(user);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/note/{id}").buildAndExpand(user.getId()).toUri());
-        return new ResponseEntity<>(headers, HttpStatus.CREATED);
+        return new ResponseEntity<>("Created!", HttpStatus.CREATED);
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(HttpServletRequest request, @RequestBody User user) {
+        String result = "";
+        HttpStatus httpStatus = null;
+        boolean isLogin = false;
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        try {
+            Iterable<User> users = userService.findAll();
+            for (User currentUser : users) {
+                if (user.getUsername().equals(user.getUsername())
+                        && user.getPassword().equals(user.getPassword())) {
+                    isLogin = true;
+                    break;
+                }
+            }
+            if (isLogin) {
+                result = jwtService.generateTokenLogin(user.getUsername());
+                httpStatus = HttpStatus.OK;
+            } else {
+                result = "Wrong userId and password";
+                httpStatus = HttpStatus.BAD_REQUEST;
+            }
+        } catch (Exception ex) {
+            result = "Server Error";
+            httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<>(result, httpStatus);
+    }
+
 }
