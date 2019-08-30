@@ -17,7 +17,7 @@ import java.util.Date;
 @Component
 public class JwtService {
     public static final String USERNAME = "username";
-    private final String SECRET_KEY = "everNote";
+    private final String SECRET_KEY = "11111111111111111111111111111111";
     private final long EXPIRE_TIME = 604800000L;
 
     public String generateTokenLogin(String username) {

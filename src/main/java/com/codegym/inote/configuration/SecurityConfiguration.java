@@ -62,7 +62,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf().ignoringAntMatchers("/restful/**");
         http.authorizeRequests().antMatchers("/restful/login**").permitAll();
         http.httpBasic().authenticationEntryPoint(restServicesEntryPoint()).and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers("/restful/register").permitAll();
         http.authorizeRequests().antMatchers("/homepage", "/register").permitAll()
                 .anyRequest().authenticated()
