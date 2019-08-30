@@ -108,6 +108,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/codegym/inote/controller/restful/NoteRestController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/codegym/inote/controller/restful/NoteTypeRestController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/com/codegym/inote/controller/restful/RecycleBinRestController.java">
           <value>
             <set />

@@ -1,6 +1,8 @@
 package com.codegym.inote.controller.restful;
 
+import com.codegym.inote.model.NoteType;
 import com.codegym.inote.model.Stack;
+import com.codegym.inote.service.NoteTypeService;
 import com.codegym.inote.service.StackService;
 import com.codegym.inote.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,9 @@ import org.springframework.web.bind.annotation.*;
 public class StackRestController {
     @Autowired
     private StackService stackService;
+
+    @Autowired
+    private NoteTypeService noteTypeService;
 
     @Autowired
     private UserService userService;
@@ -57,10 +62,16 @@ public class StackRestController {
     }
 
     @DeleteMapping("/stacks/{id}")
-    public ResponseEntity<Stack> deleteStack(@PathVariable Long id) {
+    public ResponseEntity<Stack> deleteStack(@PathVariable Long id, Pageable pageable) {
         Stack stack = stackService.findById(id);
         if (stack == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        Page<NoteType> noteTypes = noteTypeService.findNoteTypeByStack(stack, pageable);
+        for (NoteType noteType : noteTypes
+        ) {
+            noteType.setStack(null);
+            noteTypeService.save(noteType);
         }
         stackService.remove(stack.getId());
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

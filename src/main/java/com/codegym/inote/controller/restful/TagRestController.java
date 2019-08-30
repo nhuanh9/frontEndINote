@@ -1,6 +1,8 @@
 package com.codegym.inote.controller.restful;
 
+import com.codegym.inote.model.Note;
 import com.codegym.inote.model.Tag;
+import com.codegym.inote.service.NoteService;
 import com.codegym.inote.service.TagService;
 import com.codegym.inote.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class TagRestController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private NoteService noteService;
 
     @GetMapping("/tags")
     public ResponseEntity<Page<Tag>> showAllTags(Pageable pageable) {
@@ -57,10 +62,16 @@ public class TagRestController {
     }
 
     @DeleteMapping("/tags/{id}")
-    public ResponseEntity<Tag> deleteTag(@PathVariable Long id) {
+    public ResponseEntity<Tag> deleteTag(@PathVariable Long id, Pageable pageable) {
         Tag tag = tagService.findById(id);
         if (tag == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        Page<Note> notes = noteService.findAllByTags(tag, pageable);
+        for (Note note : notes
+        ) {
+            note.setTags(null);
+            noteService.save(note);
         }
         tagService.remove(tag.getId());
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

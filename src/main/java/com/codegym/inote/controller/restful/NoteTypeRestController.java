@@ -1,7 +1,10 @@
 package com.codegym.inote.controller.restful;
 
+import com.codegym.inote.model.Note;
 import com.codegym.inote.model.NoteType;
+import com.codegym.inote.service.NoteService;
 import com.codegym.inote.service.NoteTypeService;
+import com.codegym.inote.service.RecycleBinService;
 import com.codegym.inote.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,6 +22,12 @@ public class NoteTypeRestController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private RecycleBinService recycleBinService;
+
+    @Autowired
+    private NoteService noteService;
 
     @GetMapping("/noteTypes")
     public ResponseEntity<Page<NoteType>> showAllNoteType(Pageable pageable) {
@@ -60,10 +69,14 @@ public class NoteTypeRestController {
     }
 
     @DeleteMapping("/noteTypes/{id}")
-    public ResponseEntity<NoteType> deleteNoteType(@PathVariable Long id) {
+    public ResponseEntity<NoteType> deleteNoteType(@PathVariable Long id, Pageable pageable) {
         NoteType noteType = noteTypeService.findById(id);
         if (noteType == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        Page<Note> notes = noteService.findAllByNoteType(noteType, pageable);
+        for (Note note : notes) {
+            recycleBinService.addNoteToRecycleBin(note);
         }
         noteTypeService.remove(noteType.getId());
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
