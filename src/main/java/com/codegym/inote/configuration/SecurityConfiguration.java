@@ -55,7 +55,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
-        auth.inMemoryAuthentication().withUser("admin").password("123456").roles("ADMIN");
     }
 
     @Override
@@ -65,7 +64,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.httpBasic().authenticationEntryPoint(restServicesEntryPoint()).and()
                 .authorizeRequests().antMatchers("/restful/register").permitAll();
         http.authorizeRequests().antMatchers("/homepage", "/register").permitAll()
-                .antMatchers(HttpMethod.GET, "/restful/**").access("hasRole('ADMIN')")
+                .antMatchers(HttpMethod.GET, "/restful/**").access("hasRole('ROLE_USER')")
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login").permitAll()
                 .loginProcessingUrl("/login").successHandler(customSuccessHandler)
@@ -73,7 +72,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and().csrf()
                 .and().exceptionHandling().accessDeniedPage("/Access_Denied")
                 .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
-        http.addFilterBefore(new JwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling().accessDeniedHandler(customAccessDeniedHandler());
     }
 }

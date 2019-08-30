@@ -83,7 +83,17 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/codegym/inote/controller/StackRestController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/com/codegym/inote/controller/TagController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/codegym/inote/controller/TagRestController.java">
           <value>
             <set />
           </value>
