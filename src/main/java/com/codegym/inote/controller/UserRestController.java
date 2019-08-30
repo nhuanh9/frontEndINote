@@ -48,12 +48,11 @@ public class UserRestController {
         String result = "";
         HttpStatus httpStatus = null;
         boolean isLogin = false;
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         try {
             Iterable<User> users = userService.findAll();
             for (User currentUser : users) {
-                if (user.getUsername().equals(user.getUsername())
-                        && user.getPassword().equals(user.getPassword())) {
+                if (currentUser.getUsername().equals(user.getUsername())
+                        && passwordEncoder.matches(user.getPassword(),currentUser.getPassword())) {
                     isLogin = true;
                     break;
                 }
