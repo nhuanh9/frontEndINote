@@ -31,7 +31,7 @@ public class UserRestController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> createUser(@RequestBody User user, UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<String> createUser(@RequestBody User user) {
         Iterable<User> users = userService.findAll();
         for (User currentUser : users) {
             if (currentUser.getUsername().equals(user.getUsername())) {

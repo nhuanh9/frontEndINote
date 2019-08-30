@@ -2,6 +2,7 @@ package com.codegym.inote.controller;
 
 import com.codegym.inote.model.Note;
 import com.codegym.inote.service.NoteService;
+import com.codegym.inote.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,10 +20,13 @@ public class NoteRestController {
     @Autowired
     private NoteService noteService;
 
+    @Autowired
+    private UserService userService;
+
 
     @GetMapping("/notes")
     public ResponseEntity<Page<Note>> showAllNote(Pageable pageable) {
-        Page<Note> notes = noteService.findAll(pageable);
+        Page<Note> notes = noteService.findAllByUser(userService.getCurrentUser(), pageable);
         if (notes.getTotalElements() == 0) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -38,13 +42,11 @@ public class NoteRestController {
         return new ResponseEntity<>(note, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/notes",produces = {MediaType.APPLICATION_JSON_VALUE})
-    @ResponseBody
-    public ResponseEntity<Void> createNote(@RequestBody Note note, UriComponentsBuilder ucBuilder) {
+    @PostMapping(value = "/notes")
+    public ResponseEntity<String> createNote(@RequestBody Note note) {
+        note.setUser(userService.getCurrentUser());
         noteService.save(note);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/note/{id}").buildAndExpand(note.getId()).toUri());
-        return new ResponseEntity<>(headers, HttpStatus.CREATED);
+        return new ResponseEntity<String>("Created!", HttpStatus.CREATED);
     }
 
     @PutMapping("/notes/{id}")
