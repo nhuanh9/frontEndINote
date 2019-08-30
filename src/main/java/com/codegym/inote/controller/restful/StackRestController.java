@@ -1,4 +1,4 @@
-package com.codegym.inote.controller;
+package com.codegym.inote.controller.restful;
 
 import com.codegym.inote.model.Stack;
 import com.codegym.inote.service.StackService;

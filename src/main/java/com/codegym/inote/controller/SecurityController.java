@@ -27,11 +27,6 @@ public class SecurityController {
         return "user/homepage";
     }
 
-    @GetMapping("/admin")
-    public String adminPage(ModelMap model) {
-        model.addAttribute("user", getPrincipal());
-        return "user/menu";
-    }
 
     @GetMapping("/Access_Denied")
     public String accessDeniedPage(ModelMap model) {

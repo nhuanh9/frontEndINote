@@ -1,4 +1,4 @@
-package com.codegym.inote.controller;
+package com.codegym.inote.controller.restful;
 
 import com.codegym.inote.model.Tag;
 import com.codegym.inote.service.TagService;
