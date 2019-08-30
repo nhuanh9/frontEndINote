@@ -1,6 +1,9 @@
 package com.codegym.inote.model;
 
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -22,18 +25,23 @@ public class User {
     @Size(min = 6, message = "password length must be at least 6 characters")
     private String password;
 
+    @JsonIgnore
     @OneToMany(targetEntity = Note.class)
     List<Note> notes;
 
+    @JsonIgnore
     @OneToMany(targetEntity = NoteType.class)
     List<NoteType> noteTypes;
 
+    @JsonIgnore
     @OneToMany(targetEntity = Stack.class)
     List<Stack> stacks;
 
+    @JsonIgnore
     @OneToMany(targetEntity = Tag.class)
     List<Stack> tags;
 
+    @JsonIgnore
     @OneToMany(targetEntity = Trash.class)
     private List<Trash> trashes;
 

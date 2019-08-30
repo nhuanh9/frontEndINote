@@ -141,8 +141,6 @@ m
 ,src/main/webapp/WEB-INF/views/note/view.html,f/4/f4740ccea63dd03e6ce2ec27c9dad76606a57584
 \
 ,src/main/webapp/WEB-INF/views/note/list.html,1/7/17649f2b7fbd22251e3918e85b3e86e635d6192b
-o
-?src/main/java/com/codegym/inote/controller/LoginController.java,c/2/c25f6d5992177b26f560381dd89f9e51a5372b2e
 n
 >src/main/java/com/codegym/inote/controller/NoteController.java,1/8/18bf7aedfcd8018327140cf69830ce89800bb428
 r
@@ -161,9 +159,5 @@ f
 0src/main/webapp/WEB-INF/views/layout/select.html,c/5/c5a94a05c7a3954942e1c262731190739af9806c
 r
 Bsrc/main/java/com/codegym/inote/controller/NoteRestController.java,5/9/5951b1f11f818d6b77cf78c69e697b28bb59ee40
-i
-9src/main/java/com/codegym/inote/jwt/JwtTokenProvider.java,d/2/d22c1fd48ed17984d21bb873f2bb07040e2c90cd
 r
 Bsrc/main/java/com/codegym/inote/controller/UserRestController.java,f/7/f72c25fc31f823539544b91c2e2bf4f25d017e63
-p
-@src/main/java/com/codegym/inote/jwt/JwtAuthenticationFilter.java,1/f/1f69fee40cc5af53727704fce13c698918411769
