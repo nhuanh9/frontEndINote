@@ -17,6 +17,7 @@ public class UserController {
     public static final String USER_REGISTER = "/user/register";
 
     public static final String ERROR_404 = "/error-404";
+    public static final String MESSAGE = "message";
 
     @Autowired
     UserService userService;
@@ -45,7 +46,7 @@ public class UserController {
 
         ModelAndView modelAndView = new ModelAndView(USER_REGISTER);
         modelAndView.addObject("user", currentUser);
-        modelAndView.addObject("message", "Success!");
+        modelAndView.addObject(MESSAGE, "Success!");
 
         return modelAndView;
     }
@@ -74,7 +75,7 @@ public class UserController {
 
         ModelAndView modelAndView = new ModelAndView("/user/edit");
         modelAndView.addObject("user", user);
-        modelAndView.addObject("message", "Updated!");
+        modelAndView.addObject(MESSAGE, "Updated!");
         return modelAndView;
     }
 
@@ -97,11 +98,12 @@ public class UserController {
 
     @PostMapping("/login")
     public ModelAndView login(@ModelAttribute User user) {
+        user.getUsername();
         if (userService.checkLogin(user)) {
             return new ModelAndView("/user/homepage");
         }
         ModelAndView modelAndView = new ModelAndView("/login");
-        modelAndView.addObject("message", "username or password incorrect");
+        modelAndView.addObject(MESSAGE, "username or password incorrect");
         return modelAndView;
     }
 }

@@ -51,7 +51,7 @@ public class NoteTypeRestController {
     public ResponseEntity<String> createNoteType(@RequestBody NoteType noteType) {
         noteType.setUser(userService.getCurrentUser());
         noteTypeService.save(noteType);
-        return new ResponseEntity<String>("Created!", HttpStatus.CREATED);
+        return new ResponseEntity<>("Created!", HttpStatus.CREATED);
     }
 
     @PutMapping("/noteTypes/{id}")

@@ -3,11 +3,16 @@ package com.codegym.inote.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -24,6 +29,12 @@ public class User {
     @NotEmpty(message = "password must be fill")
     @Size(min = 6, message = "password length must be at least 6 characters")
     private String password;
+
+    @Column(name = "enabled", nullable = false, columnDefinition = "TINYINT(1)")
+    private boolean enabled;
+
+    @OneToMany(targetEntity = UsersRoles.class,mappedBy = "users",fetch = FetchType.EAGER)
+    private Set<UsersRoles> usersRoles = new HashSet<>(0);
 
     @JsonIgnore
     @OneToMany(targetEntity = Note.class)
@@ -88,9 +99,11 @@ public class User {
     public User() {
     }
 
-    public User(String username, String password) {
+    public User(String username, String password, boolean enabled, Set<UsersRoles> usersRoles) {
         this.username = username;
         this.password = password;
+        this.enabled = enabled;
+        this.usersRoles = usersRoles;
     }
 
     public Long getId() {
@@ -115,5 +128,30 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public Set<UsersRoles> getUsersRoles() {
+        return usersRoles;
+    }
+
+    public void setUsersRoles(Set<UsersRoles> usersRoles) {
+        this.usersRoles = usersRoles;
+    }
+
+    @Transient
+    public List<GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+        for (UsersRoles usersRoles: this.usersRoles) {
+            authorities.add(new SimpleGrantedAuthority(usersRoles.getRole().getName()));
+        }
+        return authorities;
     }
 }

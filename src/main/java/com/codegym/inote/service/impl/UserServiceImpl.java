@@ -1,6 +1,5 @@
 package com.codegym.inote.service.impl;
 
-import com.codegym.inote.model.CustomUserDetails;
 import com.codegym.inote.model.User;
 import com.codegym.inote.repository.UserRepository;
 import com.codegym.inote.service.UserService;
@@ -25,7 +24,17 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             throw new UsernameNotFoundException(username);
         }
-        return new CustomUserDetails(user);
+
+        boolean enabled = true;
+        boolean accountNonExpired = true;
+        boolean credentialsNonExpired = true;
+        boolean accountNonLocked = true;
+
+        org.springframework.security.core.userdetails.User user1 = new org.springframework.security.core.userdetails.User(username, user.getPassword(),
+                enabled, accountNonExpired, credentialsNonExpired,
+                accountNonLocked, user.getAuthorities());
+
+        return user1;
     }
 
 
@@ -68,9 +77,16 @@ public class UserServiceImpl implements UserService {
     public UserDetails loadUserById(Long id) {
         User user = userRepository.findOne(id);
         if (user == null) {
-            throw new UsernameNotFoundException(user.getUsername());
+            throw new NullPointerException();
         }
-        return new CustomUserDetails(user);
+        boolean enabled = true;
+        boolean accountNonExpired = true;
+        boolean credentialsNonExpired = true;
+        boolean accountNonLocked = true;
+
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
+                enabled, accountNonExpired, credentialsNonExpired,
+                accountNonLocked, user.getAuthorities());
     }
 
     @Override

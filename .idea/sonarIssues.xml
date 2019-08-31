@@ -373,6 +373,101 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../SpringSecurity_UserFromDatabase/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../SpringSecurity_UserFromDatabase/src/main/java/com/codegym/user/configuration/ApplicationConfig.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../SpringSecurity_UserFromDatabase/src/main/java/com/codegym/user/configuration/ApplicationInitializer.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../SpringSecurity_UserFromDatabase/src/main/java/com/codegym/user/configuration/CustomSuccessHandler.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../SpringSecurity_UserFromDatabase/src/main/java/com/codegym/user/configuration/SecurityConfiguration.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../SpringSecurity_UserFromDatabase/src/main/java/com/codegym/user/configuration/SecurityWebApplicationInitializer.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../SpringSecurity_UserFromDatabase/src/main/java/com/codegym/user/controller/UserController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../SpringSecurity_UserFromDatabase/src/main/java/com/codegym/user/model/Role.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../SpringSecurity_UserFromDatabase/src/main/java/com/codegym/user/model/User.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../SpringSecurity_UserFromDatabase/src/main/java/com/codegym/user/model/UsersRoles.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../SpringSecurity_UserFromDatabase/src/main/java/com/codegym/user/repository.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../SpringSecurity_UserFromDatabase/src/main/java/com/codegym/user/repository/UserRepository.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../SpringSecurity_UserFromDatabase/src/main/java/com/codegym/user/service/UserService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../SpringSecurity_UserFromDatabase/src/main/java/com/codegym/user/service/impl/UserServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../SpringSecurity_UserFromDatabase/src/main/webapp/WEB-INF/views/login.html">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../SpringSecurity_UserFromDatabase/src/main/webapp/WEB-INF/views/user/admin.html">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../SpringSecurity_UserFromDatabase/src/main/webapp/WEB-INF/views/user/edit.html">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../SpringSecurity_UserFromDatabase/src/main/webapp/WEB-INF/views/user/homepage.html">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../SpringSecurity_UserFromDatabase/src/main/webapp/WEB-INF/views/user/user.html">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../WEBSERVICE_Note/build.gradle">
           <value>
             <set />
@@ -493,7 +588,37 @@
             <set />
           </value>
         </entry>
+        <entry key="$USER_HOME$/IdeaProjects/Productive-working-music/src/main/java/com/codegym/music/controller/UserController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$USER_HOME$/IdeaProjects/Productive-working-music/src/main/java/com/codegym/music/model/User.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/IdeaProjects/Productive-working-music/src/main/java/com/codegym/music/repository/UserRepository.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/IdeaProjects/Productive-working-music/src/main/java/com/codegym/music/service/UserService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/IdeaProjects/Productive-working-music/src/main/java/com/codegym/music/service/impl/UserServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/IdeaProjects/Productive-working-music/src/main/webapp/WEB-INF/views/login.html">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/IdeaProjects/Productive-working-music/src/main/webapp/WEB-INF/views/user/register.html">
           <value>
             <set />
           </value>
