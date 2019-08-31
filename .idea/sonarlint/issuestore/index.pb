@@ -133,8 +133,6 @@ X
 build.gradle,f/0/f07866736216be0ee2aba49e392191aeae700a35
 ?
 settings.gradle,0/5/05efc8b1657769a27696d478ded1e95f38737233
-l
-<src/main/java/com/codegym/inote/model/CustomUserDetails.java,c/e/cec4e9afd3c9764a402ed3a3b3060342cba3267a
 m
 =src/main/java/com/codegym/inote/controller/TagController.java,3/5/35c4df088a1193fed521e06bc782cfd7e9dd2ad6
 \
@@ -171,3 +169,13 @@ z
 Jsrc/main/java/com/codegym/inote/controller/restful/UserRestController.java,f/d/fd62f9e1985462c7cd975e00bf0ce5fa9aacc315
 z
 Jsrc/main/java/com/codegym/inote/configuration/JwtAuthenticationFilter.java,5/d/5de6375e07cb38223f213f020602e194a1c154fe
+|
+Lsrc/main/java/com/codegym/inote/configuration/CustomAccessDeniedHandler.java,d/4/d42a017a664ffd5f6ffbae4ad967f7f17a1956cb
+
+Osrc/main/java/com/codegym/inote/configuration/RestAuthenticationEntryPoint.java,b/7/b732efba5f0da0b2bb620421cb63b940a75ab7ba
+l
+<src/main/java/com/codegym/inote/service/impl/JwtService.java,4/b/4b21d26d0357aa29bfc0415dfc0b0369903425c4
+_
+/src/main/java/com/codegym/inote/model/Role.java,3/b/3bca2cd1f81b7e88b938cbcce511057a2be1e6b8
+e
+5src/main/java/com/codegym/inote/model/UsersRoles.java,e/e/eee586876576d58c6f773bbaf24fb334b2bef374

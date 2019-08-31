@@ -1,6 +1,8 @@
 package com.codegym.inote.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -14,7 +16,7 @@ public class Note {
 
     private String title;
 
-    @Column(name = "content",columnDefinition = "LONGTEXT")
+    @Column(name = "content", columnDefinition = "LONGTEXT")
     private String content;
     private Date time;
 
@@ -26,16 +28,19 @@ public class Note {
         this.time = time;
     }
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "type_id")
     private NoteType noteType;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "note_tags",
             joinColumns = {@JoinColumn(name = "note_id")},
             inverseJoinColumns = {@JoinColumn(name = "tag_id")})
     private List<Tag> tags;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

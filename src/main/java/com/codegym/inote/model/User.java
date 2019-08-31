@@ -32,6 +32,7 @@ public class User {
     @Column(name = "enabled", nullable = false, columnDefinition = "TINYINT(1)")
     private boolean enabled;
 
+    @JsonIgnore
     @OneToMany(targetEntity = UsersRoles.class, mappedBy = "users"
             , fetch = FetchType.EAGER)
     private Set<UsersRoles> usersRoles = new HashSet<>(0);
