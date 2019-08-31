@@ -17,7 +17,6 @@ public class UsersRoles implements Serializable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    @Transient
     private User users;
 
     public UsersRoles() {
