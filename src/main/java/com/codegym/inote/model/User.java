@@ -8,6 +8,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -15,7 +16,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "user")
-public class User {
+public class User implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -39,19 +41,19 @@ public class User {
 
     @JsonIgnore
     @OneToMany(targetEntity = Note.class)
-    List<Note> notes;
+    private List<Note> notes;
 
     @JsonIgnore
     @OneToMany(targetEntity = NoteType.class)
-    List<NoteType> noteTypes;
+    private List<NoteType> noteTypes;
 
     @JsonIgnore
     @OneToMany(targetEntity = Stack.class)
-    List<Stack> stacks;
+    private List<Stack> stacks;
 
     @JsonIgnore
     @OneToMany(targetEntity = Tag.class)
-    List<Stack> tags;
+    private List<Stack> tags;
 
     @JsonIgnore
     @OneToMany(targetEntity = Trash.class)
@@ -149,9 +151,9 @@ public class User {
 
     @Transient
     public List<GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        for (UsersRoles usersRoles : this.usersRoles) {
-            authorities.add(new SimpleGrantedAuthority(usersRoles.getRole().getName()));
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        for (UsersRoles currentUsersRoles : this.usersRoles) {
+            authorities.add(new SimpleGrantedAuthority(currentUsersRoles.getRole().getName()));
         }
         return authorities;
     }

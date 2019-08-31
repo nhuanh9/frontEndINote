@@ -30,11 +30,9 @@ public class UserServiceImpl implements UserService {
         boolean credentialsNonExpired = true;
         boolean accountNonLocked = true;
 
-        org.springframework.security.core.userdetails.User user1 = new org.springframework.security.core.userdetails.User(username, user.getPassword(),
+        return new org.springframework.security.core.userdetails.User(username, user.getPassword(),
                 enabled, accountNonExpired, credentialsNonExpired,
                 accountNonLocked, user.getAuthorities());
-
-        return user1;
     }
 
 

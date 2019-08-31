@@ -10,6 +10,8 @@ import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -19,6 +21,7 @@ public class JwtService {
     public static final String USERNAME = "username";
     public static final String SECRET_KEY = "11111111111111111111111111111111";
     public static final long EXPIRE_TIME = 86400000;
+    public static final Logger logger = LoggerFactory.getLogger(JwtService.class.getName());
 
     public String generateTokenLogin(String username) {
         String token = null;
@@ -32,7 +35,7 @@ public class JwtService {
             signedJWT.sign(signer);
             token = signedJWT.serialize();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
         return token;
     }
@@ -46,7 +49,7 @@ public class JwtService {
                 claims = signedJWT.getJWTClaimsSet();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
         return claims;
     }
@@ -68,7 +71,7 @@ public class JwtService {
             JWTClaimsSet claims = getClaimsFromToken(token);
             username = claims.getStringClaim(USERNAME);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
         return username;
     }
@@ -83,7 +86,7 @@ public class JwtService {
     }
 
     private byte[] generateShareSecret() {
-        byte[] sharedSecret = new byte[32];
+        byte[] sharedSecret;
         sharedSecret = SECRET_KEY.getBytes();
         return sharedSecret;
     }
@@ -94,16 +97,17 @@ public class JwtService {
     }
 
     public Boolean validateTokenLogin(String token) {
+        boolean isValidated = true;
         if (token == null || token.trim().length() == 0) {
-            return false;
+            isValidated = false;
         }
         String username = getUsernameFromToken(token);
         if (username == null || username.isEmpty()) {
-            return false;
+            isValidated = false;
         }
-        if (isTokenExpired(token)) {
-            return false;
+        if (Boolean.TRUE.equals(isTokenExpired(token))) {
+            isValidated = false;
         }
-        return true;
+        return isValidated;
     }
 }
