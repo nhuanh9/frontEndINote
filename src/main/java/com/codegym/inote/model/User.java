@@ -1,7 +1,6 @@
 package com.codegym.inote.model;
 
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -33,7 +32,8 @@ public class User {
     @Column(name = "enabled", nullable = false, columnDefinition = "TINYINT(1)")
     private boolean enabled;
 
-    @OneToMany(targetEntity = UsersRoles.class,mappedBy = "users",fetch = FetchType.EAGER)
+    @OneToMany(targetEntity = UsersRoles.class, mappedBy = "users"
+            , fetch = FetchType.EAGER)
     private Set<UsersRoles> usersRoles = new HashSet<>(0);
 
     @JsonIgnore
@@ -149,9 +149,11 @@ public class User {
     @Transient
     public List<GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        for (UsersRoles usersRoles: this.usersRoles) {
+        for (UsersRoles usersRoles : this.usersRoles) {
             authorities.add(new SimpleGrantedAuthority(usersRoles.getRole().getName()));
         }
         return authorities;
     }
+
+
 }

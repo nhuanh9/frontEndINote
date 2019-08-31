@@ -1,6 +1,7 @@
 package com.codegym.inote.controller;
 
 import com.codegym.inote.model.User;
+import com.codegym.inote.model.UsersRoles;
 import com.codegym.inote.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 public class UserController {
@@ -98,7 +101,6 @@ public class UserController {
 
     @PostMapping("/login")
     public ModelAndView login(@ModelAttribute User user) {
-        user.getUsername();
         if (userService.checkLogin(user)) {
             return new ModelAndView("/user/homepage");
         }
