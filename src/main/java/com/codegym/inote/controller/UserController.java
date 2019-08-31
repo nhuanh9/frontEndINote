@@ -23,10 +23,10 @@ public class UserController {
     public static final String MESSAGE = "message";
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
 
     @GetMapping("/register")
