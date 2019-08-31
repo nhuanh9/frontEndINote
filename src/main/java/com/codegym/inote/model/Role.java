@@ -1,7 +1,5 @@
 package com.codegym.inote.model;
 
-import net.minidev.json.annotate.JsonIgnore;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -16,9 +14,8 @@ public class Role implements Serializable {
     private Long id;
     private String name;
 
-    @JsonIgnore
-    @OneToMany(targetEntity = UsersRoles.class, fetch = FetchType.LAZY, mappedBy = "role")
-    private Set<UsersRoles> usersRoles = new HashSet<>(0);
+    @OneToMany(targetEntity = UsersRoles.class, fetch = FetchType.EAGER, mappedBy = "role")
+    private Set<UsersRoles> usersRoles = new HashSet<>();
 
     public Role() {
     }

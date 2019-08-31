@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/note")
@@ -134,8 +134,8 @@ public class NoteController {
             return new ModelAndView(ERROR_404);
         }
 
-        List<Tag> tags;
-        tags = (List<Tag>) tagService.findAllByNotes(note);
+        Set<Tag> tags;
+        tags = (Set<Tag>) tagService.findAllByNotes(note);
         note.setTags(tags);
 
         ModelAndView modelAndView = new ModelAndView("/note/view");

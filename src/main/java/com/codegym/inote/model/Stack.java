@@ -1,8 +1,10 @@
 package com.codegym.inote.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "stack")
@@ -14,8 +16,9 @@ public class Stack implements Serializable {
 
     private String name;
 
-    @OneToMany(targetEntity = NoteType.class)
-    private List<NoteType> noteTypes;
+    @JsonIgnore
+    @OneToMany(targetEntity = NoteType.class, fetch = FetchType.EAGER)
+    private Set<NoteType> noteTypes;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -52,11 +55,11 @@ public class Stack implements Serializable {
         this.name = name;
     }
 
-    public List<NoteType> getNoteTypes() {
+    public Set<NoteType> getNoteTypes() {
         return noteTypes;
     }
 
-    public void setNoteTypes(List<NoteType> noteTypes) {
+    public void setNoteTypes(Set<NoteType> noteTypes) {
         this.noteTypes = noteTypes;
     }
 }

@@ -1,12 +1,13 @@
 package com.codegym.inote.model;
 
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "note")
@@ -30,19 +31,18 @@ public class Note implements Serializable {
         this.time = time;
     }
 
-    @JsonIgnore
+
     @ManyToOne
     @JoinColumn(name = "type_id")
     private NoteType noteType;
 
     @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "note_tags",
             joinColumns = {@JoinColumn(name = "note_id")},
             inverseJoinColumns = {@JoinColumn(name = "tag_id")})
-    private List<Tag> tags;
+    private Set<Tag> tags;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -55,11 +55,11 @@ public class Note implements Serializable {
         this.user = user;
     }
 
-    public List<Tag> getTags() {
+    public Set<Tag> getTags() {
         return tags;
     }
 
-    public void setTags(List<Tag> tags) {
+    public void setTags(Set<Tag> tags) {
         this.tags = tags;
     }
 

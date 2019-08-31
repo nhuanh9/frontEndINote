@@ -35,67 +35,67 @@ public class User implements Serializable {
     private boolean enabled;
 
     @JsonIgnore
-    @OneToMany(targetEntity = UsersRoles.class, mappedBy = "users"
-            , fetch = FetchType.EAGER)
+    @OneToMany(targetEntity = UsersRoles.class, mappedBy = "users",
+            fetch = FetchType.EAGER)
     private Set<UsersRoles> usersRoles = new HashSet<>(0);
 
     @JsonIgnore
-    @OneToMany(targetEntity = Note.class)
-    private List<Note> notes;
+    @OneToMany(targetEntity = Note.class, fetch = FetchType.EAGER)
+    private Set<Note> notes;
 
     @JsonIgnore
-    @OneToMany(targetEntity = NoteType.class)
-    private List<NoteType> noteTypes;
+    @OneToMany(targetEntity = NoteType.class, fetch = FetchType.EAGER)
+    private Set<NoteType> noteTypes;
 
     @JsonIgnore
-    @OneToMany(targetEntity = Stack.class)
-    private List<Stack> stacks;
+    @OneToMany(targetEntity = Stack.class, fetch = FetchType.EAGER)
+    private Set<Stack> stacks;
 
     @JsonIgnore
-    @OneToMany(targetEntity = Tag.class)
-    private List<Stack> tags;
+    @OneToMany(targetEntity = Tag.class, fetch = FetchType.EAGER)
+    private Set<Stack> tags;
 
     @JsonIgnore
-    @OneToMany(targetEntity = Trash.class)
-    private List<Trash> trashes;
+    @OneToMany(targetEntity = Trash.class, fetch = FetchType.EAGER)
+    private Set<Trash> trashes;
 
-    public List<Trash> getTrashes() {
+    public Set<Trash> getTrashes() {
         return trashes;
     }
 
-    public void setTrash(List<Trash> trashes) {
+    public void setTrash(Set<Trash> trashes) {
         this.trashes = trashes;
     }
 
-    public List<Stack> getTags() {
+    public Set<Stack> getTags() {
         return tags;
     }
 
-    public void setTags(List<Stack> tags) {
+    public void setTags(Set<Stack> tags) {
         this.tags = tags;
     }
 
-    public List<Stack> getStacks() {
+    public Set<Stack> getStacks() {
         return stacks;
     }
 
-    public void setStacks(List<Stack> stacks) {
+    public void setStacks(Set<Stack> stacks) {
         this.stacks = stacks;
     }
 
-    public List<NoteType> getNoteTypes() {
+    public Set<NoteType> getNoteTypes() {
         return noteTypes;
     }
 
-    public void setNoteTypes(List<NoteType> noteTypes) {
+    public void setNoteTypes(Set<NoteType> noteTypes) {
         this.noteTypes = noteTypes;
     }
 
-    public List<Note> getNotes() {
+    public Set<Note> getNotes() {
         return notes;
     }
 
-    public void setNotes(List<Note> notes) {
+    public void setNotes(Set<Note> notes) {
         this.notes = notes;
     }
 
