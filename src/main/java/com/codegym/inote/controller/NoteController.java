@@ -18,7 +18,9 @@ import java.util.Set;
 @Controller
 @RequestMapping("/note")
 public class NoteController {
-    public static final String ERROR_404 = "/error-404";
+
+    private static final String ERROR_404 = "/error-404";
+
     @Autowired
     private NoteService noteService;
 

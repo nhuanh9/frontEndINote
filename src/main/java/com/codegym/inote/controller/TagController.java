@@ -19,7 +19,8 @@ import java.util.Optional;
 @RequestMapping("/tag")
 public class TagController {
 
-    public static final String ERROR_404 = "/error-404";
+    private static final String ERROR_404 = "/error-404";
+
     @Autowired
     private TagService tagService;
 

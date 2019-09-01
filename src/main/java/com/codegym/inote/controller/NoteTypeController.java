@@ -18,8 +18,9 @@ import java.util.Optional;
 @RequestMapping("/noteType")
 public class NoteTypeController {
 
-    public static final String NOTE_TYPE = "noteType";
-    public static final String ERROR_404 = "/error-404";
+    private static final String NOTE_TYPE = "noteType";
+    private static final String ERROR_404 = "/error-404";
+
     @Autowired
     private NoteTypeService noteTypeService;
 

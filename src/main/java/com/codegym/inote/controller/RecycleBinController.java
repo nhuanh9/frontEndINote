@@ -17,8 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/recycleBin")
 public class RecycleBinController {
 
-    public static final String ERROR_404 = "/error-404";
-    public static final String TRASH = "trash";
+    private static final String ERROR_404 = "/error-404";
+    private static final String TRASH = "trash";
 
     @Autowired
     private RecycleBinService recycleBinService;

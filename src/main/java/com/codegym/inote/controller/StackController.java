@@ -16,8 +16,10 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/stack")
 public class StackController {
-    public static final String STACK = "stack";
-    public static final String ERROR_404 = "/error-404";
+
+    private static final String STACK = "stack";
+    private static final String ERROR_404 = "/error-404";
+
     @Autowired
     private StackService stackService;
 
@@ -28,7 +30,7 @@ public class StackController {
     private UserService userService;
 
     @ModelAttribute("user")
-    public User user(){
+    public User user() {
         return userService.getCurrentUser();
     }
 

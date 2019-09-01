@@ -18,10 +18,11 @@ import java.util.Set;
 @Controller
 public class UserController {
 
-    public static final String USER_REGISTER = "/user/register";
+    private static final String USER_REGISTER = "/user/register";
 
-    public static final String ERROR_404 = "/error-404";
-    public static final String MESSAGE = "message";
+    private static final String ERROR_404 = "/error-404";
+    private static final String MESSAGE = "message";
+    private static final String DEFAULT_ROLE = "ROLE_USER";
 
     @Autowired
     private UserService userService;
@@ -44,7 +45,7 @@ public class UserController {
         if (bindingResult.hasFieldErrors()) {
             return new ModelAndView(USER_REGISTER);
         }
-        Role role = roleService.findRoleByName("ROLE_USER");
+        Role role = roleService.findRoleByName(DEFAULT_ROLE);
         Set<Role> roles = new HashSet<>();
         roles.add(role);
         User currentUser = new User();
