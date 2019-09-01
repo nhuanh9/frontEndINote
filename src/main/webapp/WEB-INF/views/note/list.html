@@ -45,7 +45,7 @@
     <footer>
         <div>
             <a th:href="@{'/user/note/notes' (page=${notes.number - 1})}" th:if="${notes.hasPrevious()}">Previous</a>
-            <span th:text="${notes.number + 1}"></span>/<span th:text="${notes.totalPages + 1}"></span>
+            <span th:text="${notes.number + 1}"></span>/<span th:text="${notes.totalPages}"></span>
             <a th:href="@{'/user/note/notes' (page=${notes.number + 1})}" th:if="${notes.hasNext()}">Next</a>
         </div>
     </footer>

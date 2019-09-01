@@ -60,10 +60,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().ignoringAntMatchers("/restful/**");
-        http.authorizeRequests().antMatchers("/restful/login**").permitAll();
-        http.httpBasic().authenticationEntryPoint(restServicesEntryPoint()).and()
-                .authorizeRequests().antMatchers("/restful/register").permitAll();
-        http.authorizeRequests().antMatchers("/homepage", "/register").permitAll()
+        http.httpBasic().authenticationEntryPoint(restServicesEntryPoint());
+        http.authorizeRequests()
+                .antMatchers("/homepage",
+                "/register",
+                "/restful/register",
+                "/restful/login**").permitAll()
                 .antMatchers(HttpMethod.GET, "/restful/**").access("hasRole('ROLE_USER')")
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login").permitAll()
