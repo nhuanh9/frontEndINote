@@ -14,15 +14,15 @@ public class Role implements Serializable {
     private Long id;
     private String name;
 
-    @OneToMany(targetEntity = UsersRoles.class, fetch = FetchType.EAGER, mappedBy = "role")
-    private Set<UsersRoles> usersRoles = new HashSet<>();
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<User> users = new HashSet<>();
 
     public Role() {
     }
 
-    public Role(String name, Set<UsersRoles> usersRoles) {
+    public Role(String name, Set<User> users) {
         this.name = name;
-        this.usersRoles = usersRoles;
+        this.users = users;
     }
 
     public Long getId() {
@@ -33,7 +33,7 @@ public class Role implements Serializable {
         return name;
     }
 
-    public Set<UsersRoles> getUsersRoles() {
-        return usersRoles;
+    public Set<User> getUsers() {
+        return users;
     }
 }

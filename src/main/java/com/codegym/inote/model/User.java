@@ -35,9 +35,11 @@ public class User implements Serializable {
     private boolean enabled;
 
     @JsonIgnore
-    @OneToMany(targetEntity = UsersRoles.class, mappedBy = "users",
-            fetch = FetchType.EAGER)
-    private Set<UsersRoles> usersRoles = new HashSet<>(0);
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "users_roles",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id")})
+    private Set<Role> roles = new HashSet<>();
 
     @JsonIgnore
     @OneToMany(targetEntity = Note.class, fetch = FetchType.EAGER)
@@ -102,11 +104,11 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String username, String password, boolean enabled, Set<UsersRoles> usersRoles) {
+    public User(String username, String password, boolean enabled, Set<Role> roles) {
         this.username = username;
         this.password = password;
         this.enabled = enabled;
-        this.usersRoles = usersRoles;
+        this.roles = roles;
     }
 
     public Long getId() {
@@ -141,19 +143,19 @@ public class User implements Serializable {
         this.enabled = enabled;
     }
 
-    public Set<UsersRoles> getUsersRoles() {
-        return usersRoles;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setUsersRoles(Set<UsersRoles> usersRoles) {
-        this.usersRoles = usersRoles;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     @Transient
     public List<GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
-        for (UsersRoles currentUsersRoles : this.usersRoles) {
-            authorities.add(new SimpleGrantedAuthority(currentUsersRoles.getRole().getName()));
+        for (Role currentRole : this.roles) {
+            authorities.add(new SimpleGrantedAuthority(currentRole.getName()));
         }
         return authorities;
     }

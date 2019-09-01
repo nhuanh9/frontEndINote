@@ -1,6 +1,8 @@
 package com.codegym.inote.controller;
 
+import com.codegym.inote.model.Role;
 import com.codegym.inote.model.User;
+import com.codegym.inote.service.RoleService;
 import com.codegym.inote.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 public class UserController {
@@ -21,6 +25,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private RoleService roleService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -37,10 +44,14 @@ public class UserController {
         if (bindingResult.hasFieldErrors()) {
             return new ModelAndView(USER_REGISTER);
         }
+        Role role = roleService.findRoleByName("ROLE_USER");
+        Set<Role> roles = new HashSet<>();
+        roles.add(role);
         User currentUser = new User();
 
         currentUser.setUsername(user.getUsername());
         currentUser.setPassword(passwordEncoder.encode(user.getPassword()));
+        currentUser.setRoles(roles);
         userService.save(currentUser);
 
         ModelAndView modelAndView = new ModelAndView(USER_REGISTER);

@@ -75,6 +75,11 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
         return new RecycleBinServiceImpl();
     }
 
+    @Bean
+    public RoleService roleService() {
+        return new RoleServiceImpl();
+    }
+
     @Bean(name = "Hello World")
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
