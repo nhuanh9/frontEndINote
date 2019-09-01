@@ -177,5 +177,9 @@ l
 <src/main/java/com/codegym/inote/service/impl/JwtService.java,4/b/4b21d26d0357aa29bfc0415dfc0b0369903425c4
 _
 /src/main/java/com/codegym/inote/model/Role.java,3/b/3bca2cd1f81b7e88b938cbcce511057a2be1e6b8
-e
-5src/main/java/com/codegym/inote/model/UsersRoles.java,e/e/eee586876576d58c6f773bbaf24fb334b2bef374
+n
+>src/main/java/com/codegym/inote/repository/RoleRepository.java,b/c/bcb3f6fed82da9513c07a587612815085ecef676
+q
+Asrc/main/java/com/codegym/inote/service/impl/RoleServiceImpl.java,0/5/059af57c4710f2c988483ea97f0192e0e212ba98
+h
+8src/main/java/com/codegym/inote/service/RoleService.java,1/a/1aeaf5ca03c660e1483589054cfa3ae59a741569

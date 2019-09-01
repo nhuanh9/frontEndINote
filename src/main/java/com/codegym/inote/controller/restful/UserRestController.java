@@ -1,5 +1,7 @@
 package com.codegym.inote.controller.restful;
 
+import com.codegym.inote.model.Role;
+import com.codegym.inote.service.RoleService;
 import com.codegym.inote.service.impl.JwtService;
 import com.codegym.inote.model.User;
 import com.codegym.inote.service.UserService;
@@ -10,15 +12,23 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashSet;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/restful")
 public class UserRestController {
+
+    private static final String DEFAULT_ROLE = "ROLE_USER";
+
     @Autowired
     private JwtService jwtService;
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private RoleService roleService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -37,6 +47,10 @@ public class UserRestController {
                 return new ResponseEntity<>("User Existed!", HttpStatus.BAD_REQUEST);
             }
         }
+        Role role = roleService.findRoleByName(DEFAULT_ROLE);
+        Set<Role> roles = new HashSet<>();
+        roles.add(role);
+        user.setRoles(roles);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.save(user);
         return new ResponseEntity<>("Created!", HttpStatus.CREATED);
