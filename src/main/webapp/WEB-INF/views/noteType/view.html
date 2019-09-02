@@ -16,6 +16,8 @@
 <div th:replace="layout/select::select"></div>
 <div class="start">
     <h1>NoteType: <span th:text="${noteType.name}"></span></h1>
+    <a th:href="@{/noteType/edit/__${noteType.id}__}">edit</a> |
+    <a th:href="@{/noteType/delete/__${noteType.id}__}">delete</a>
     <table>
         <tr>
             <td>Title</td>

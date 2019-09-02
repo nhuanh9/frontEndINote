@@ -15,6 +15,8 @@
 <div th:replace="layout/select::select"></div>
 <div class="start">
     <h1>Tag: <span th:text="${tag.name}"></span></h1>
+    <a th:href="@{/tag/edit/__${tag.id}__}">edit</a> |
+    <a th:href="@{/tag/delete/__${tag.id}__}">delete</a>
     <table>
         <tr>
             <td>Title</td>

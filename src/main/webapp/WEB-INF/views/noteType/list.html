@@ -26,15 +26,11 @@
         <tr>
             <td>Name</td>
             <td>Stack</td>
-            <td>Edit</td>
-            <td>Delete</td>
         </tr>
         <th:block th:each="noteType : ${noteTypes}">
             <tr>
                 <td><a th:href="@{/noteType/view/__${noteType.id}__}" th:text="${noteType.name}"></a></td>
                 <td th:text="${noteType.stack.name}"></td>
-                <td><a th:href="@{/noteType/edit/__${noteType.id}__}">edit</a></td>
-                <td><a th:href="@{/noteType/delete/__${noteType.id}__}">delete</a></td>
             </tr>
         </th:block>
     </table>
