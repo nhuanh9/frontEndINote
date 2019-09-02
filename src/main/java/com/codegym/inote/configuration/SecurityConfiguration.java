@@ -63,10 +63,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.httpBasic().authenticationEntryPoint(restServicesEntryPoint());
         http.authorizeRequests()
                 .antMatchers("/homepage",
-                "/register",
-                "/restful/register",
-                "/restful/login**").permitAll()
-                .antMatchers(HttpMethod.GET, "/restful/**").access("hasRole('ROLE_USER')")
+                        "/register",
+                        "/restful/register",
+                        "/restful/login**").permitAll()
+                .antMatchers("/restful/users").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/restful/**").access("hasRole('ROLE_USER')")
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login").permitAll()
                 .loginProcessingUrl("/login").successHandler(customSuccessHandler)
