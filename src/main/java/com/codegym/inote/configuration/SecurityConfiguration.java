@@ -66,7 +66,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/register",
                         "/restful/register",
                         "/restful/login**").permitAll()
-                .antMatchers("/restful/users").access("hasRole('ROLE_ADMIN')")
+                .antMatchers(HttpMethod.GET, "/restful/users").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/restful/**").access("hasRole('ROLE_USER')")
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login").permitAll()
