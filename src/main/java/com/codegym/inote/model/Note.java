@@ -36,7 +36,6 @@ public class Note implements Serializable {
     @JoinColumn(name = "type_id")
     private NoteType noteType;
 
-    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "note_tags",
             joinColumns = {@JoinColumn(name = "note_id")},
