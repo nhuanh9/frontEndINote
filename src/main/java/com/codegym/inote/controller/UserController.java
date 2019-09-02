@@ -45,20 +45,23 @@ public class UserController {
         if (bindingResult.hasFieldErrors()) {
             return new ModelAndView(USER_REGISTER);
         }
-        Role role = roleService.findRoleByName(DEFAULT_ROLE);
-        Set<Role> roles = new HashSet<>();
-        roles.add(role);
-        User currentUser = new User();
-
-        currentUser.setUsername(user.getUsername());
-        currentUser.setPassword(passwordEncoder.encode(user.getPassword()));
-        currentUser.setRoles(roles);
-        userService.save(currentUser);
-
         ModelAndView modelAndView = new ModelAndView(USER_REGISTER);
-        modelAndView.addObject("user", currentUser);
-        modelAndView.addObject(MESSAGE, "Success!");
+        if (userService.isRegister(user)) {
+            modelAndView.addObject(MESSAGE, "username is already registered");
+        } else {
+            Role role = roleService.findRoleByName(DEFAULT_ROLE);
+            Set<Role> roles = new HashSet<>();
+            roles.add(role);
+            User currentUser = new User();
 
+            currentUser.setUsername(user.getUsername());
+            currentUser.setPassword(passwordEncoder.encode(user.getPassword()));
+            currentUser.setRoles(roles);
+            userService.save(currentUser);
+
+            modelAndView.addObject("user", currentUser);
+            modelAndView.addObject(MESSAGE, "Success!");
+        }
         return modelAndView;
     }
 

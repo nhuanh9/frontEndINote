@@ -99,4 +99,17 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
+    @Override
+    public boolean isRegister(User user) {
+        boolean isRegister = false;
+        Iterable<User> users = this.findAll();
+        for (User currentUser : users) {
+            if (user.getUsername().equals(currentUser.getUsername())) {
+                isRegister = true;
+                break;
+            }
+        }
+        return isRegister;
+    }
+
 }
