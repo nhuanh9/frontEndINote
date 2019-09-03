@@ -31,6 +31,24 @@
                 <td><input type="text" th:field="*{content}"></td>
             </tr>
             <tr>
+                <td>Note type:</td>
+                <td>
+                    <select th:field="*{noteType}">
+                        <option th:each="p:${noteTypes}" th:value="${p.id}" th:text="${p.name}"></option>
+                    </select>
+                </td>
+                <td><a th:href="@{/noteType/create}">new note type</a></td>
+            </tr>
+            <tr>
+                <td>Tag:</td>
+                <th:block th:each="tag:${tags}">
+                    <td>
+                        <input type="checkbox" th:text="${tag.name}" th:value="${tag.id}" th:field="*{tags}">
+                    </td>
+                </th:block>
+                <td><a th:href="@{/tag/create}">new tag</a></td>
+            </tr>
+            <tr>
                 <td></td>
                 <td><input type="submit" value="Update"></td>
             </tr>

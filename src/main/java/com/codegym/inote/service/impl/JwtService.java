@@ -20,7 +20,7 @@ import java.util.Date;
 public class JwtService {
     public static final String USERNAME = "username";
     public static final String SECRET_KEY = "11111111111111111111111111111111";
-    public static final long EXPIRE_TIME = 86400000;
+    public static final long EXPIRE_TIME = 8640000000L;
     public static final Logger logger = LoggerFactory.getLogger(JwtService.class.getName());
 
     public String generateTokenLogin(String username) {
