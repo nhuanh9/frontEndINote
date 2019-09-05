@@ -1,6 +1,8 @@
 package com.codegym.inote.service.impl;
 
+import com.codegym.inote.model.LoginForm;
 import com.codegym.inote.model.User;
+import com.codegym.inote.model.UserPrinciple;
 import com.codegym.inote.repository.UserRepository;
 import com.codegym.inote.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +27,7 @@ public class UserServiceImpl implements UserService {
             throw new UsernameNotFoundException(username);
         }
 
-        boolean enabled = true;
-        boolean accountNonExpired = true;
-        boolean credentialsNonExpired = true;
-        boolean accountNonLocked = true;
-
-        return new org.springframework.security.core.userdetails.User(username, user.getPassword(),
-                enabled, accountNonExpired, credentialsNonExpired,
-                accountNonLocked, user.getAuthorities());
+        return new UserPrinciple(user);
     }
 
 

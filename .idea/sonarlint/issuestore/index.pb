@@ -183,3 +183,7 @@ q
 Asrc/main/java/com/codegym/inote/service/impl/RoleServiceImpl.java,0/5/059af57c4710f2c988483ea97f0192e0e212ba98
 h
 8src/main/java/com/codegym/inote/service/RoleService.java,1/a/1aeaf5ca03c660e1483589054cfa3ae59a741569
+f
+6src/main/java/com/codegym/inote/model/JwtResponse.java,f/9/f9d8fe4fe3971f9b280003fc0c9dec25cf2ef431
+h
+8src/main/java/com/codegym/inote/model/UserPrinciple.java,5/1/5128e6bc4c04dafe80e45b235d8e67f8cb40bd42

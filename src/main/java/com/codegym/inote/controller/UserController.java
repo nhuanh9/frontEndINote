@@ -1,5 +1,6 @@
 package com.codegym.inote.controller;
 
+import com.codegym.inote.model.LoginForm;
 import com.codegym.inote.model.Role;
 import com.codegym.inote.model.User;
 import com.codegym.inote.service.RoleService;
@@ -110,12 +111,16 @@ public class UserController {
         return new ModelAndView("/login");
     }
 
-    @PostMapping("/login")
-    public ModelAndView login(@ModelAttribute User user) {
+    @PostMapping("/doLogin")
+    public ModelAndView login(User user) {
+        ModelAndView modelAndView;
+
         if (userService.checkLogin(user)) {
-            return new ModelAndView("/user/homepage");
+            modelAndView = new ModelAndView("/user/homepage");
+            modelAndView.addObject("user", user);
+            return modelAndView;
         }
-        ModelAndView modelAndView = new ModelAndView("/login");
+        modelAndView = new ModelAndView("/login");
         modelAndView.addObject(MESSAGE, "username or password incorrect");
         return modelAndView;
     }

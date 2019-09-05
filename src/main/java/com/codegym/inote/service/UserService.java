@@ -1,5 +1,6 @@
 package com.codegym.inote.service;
 
+import com.codegym.inote.model.LoginForm;
 import com.codegym.inote.model.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

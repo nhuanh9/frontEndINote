@@ -7,12 +7,12 @@
 <body>
 <a href="/inote/homepage">Go to homepage</a>
 <h1>Login</h1>
-<form th:action="@{/login}" method="POST">
+<form th:action="@{/doLogin}" method="POST">
     <table>
         <tbody>
         <tr>
             <td>Username:</td>
-            <td><input type="text" name="ssoId"></td>
+            <td><input type="text" name="username"></td>
         </tr>
         <tr>
             <td>Password:</td>

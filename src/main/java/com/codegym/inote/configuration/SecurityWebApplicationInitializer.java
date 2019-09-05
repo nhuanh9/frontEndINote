@@ -8,10 +8,10 @@ import javax.servlet.ServletContext;
 public class SecurityWebApplicationInitializer extends AbstractSecurityWebApplicationInitializer {
     @Override
     protected void beforeSpringSecurityFilterChain(ServletContext servletContext) {
-        CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
-        encodingFilter.setEncoding("UTF-8");
-        encodingFilter.setForceEncoding(true);
-        insertFilters(servletContext, encodingFilter);
+//        CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
+//        encodingFilter.setEncoding("UTF-8");
+//        encodingFilter.setForceEncoding(true);
+//        insertFilters(servletContext, encodingFilter);
     }
 
 }

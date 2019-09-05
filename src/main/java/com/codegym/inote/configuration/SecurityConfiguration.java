@@ -63,6 +63,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.httpBasic().authenticationEntryPoint(restServicesEntryPoint());
         http.authorizeRequests()
                 .antMatchers("/homepage",
+                        "/doLogin",
                         "/register",
                         "/restful/register",
                         "/restful/login**").permitAll()
@@ -70,8 +71,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/restful/**").access("hasRole('ROLE_USER')")
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login").permitAll()
-                .loginProcessingUrl("/login").successHandler(customSuccessHandler)
-                .usernameParameter("ssoId").passwordParameter("password")
+                .loginProcessingUrl("/doLi").successHandler(customSuccessHandler)
+                .usernameParameter("username").passwordParameter("password")
                 .and().csrf()
                 .and().exceptionHandling().accessDeniedPage("/Access_Denied")
                 .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));

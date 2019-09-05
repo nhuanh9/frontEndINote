@@ -1,5 +1,7 @@
 package com.codegym.inote.controller.restful;
 
+import com.codegym.inote.model.JwtResponse;
+import com.codegym.inote.model.LoginForm;
 import com.codegym.inote.model.Role;
 import com.codegym.inote.service.RoleService;
 import com.codegym.inote.service.impl.JwtService;
@@ -8,10 +10,14 @@ import com.codegym.inote.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,6 +26,9 @@ import java.util.Set;
 public class UserRestController {
 
     private static final String DEFAULT_ROLE = "ROLE_USER";
+
+    @Autowired
+    AuthenticationManager authenticationManager;
 
     @Autowired
     private JwtService jwtService;
@@ -57,22 +66,16 @@ public class UserRestController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(HttpServletRequest request, @RequestBody User user) {
-        String result = "";
-        HttpStatus httpStatus = null;
-        try {
-            if (userService.checkLogin(user)) {
-                result = jwtService.generateTokenLogin(user.getUsername());
-                httpStatus = HttpStatus.OK;
-            } else {
-                result = "Wrong userId and password";
-                httpStatus = HttpStatus.BAD_REQUEST;
-            }
-        } catch (Exception ex) {
-            result = "Server Error";
-            httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
-        }
-        return new ResponseEntity<>(result, httpStatus);
+    public ResponseEntity<?> login(@RequestBody User user) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String jwt = jwtService.generateTokenLogin(authentication);
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
     }
 
 }

@@ -1,113 +1,56 @@
 package com.codegym.inote.service.impl;
 
-import com.nimbusds.jose.JWSAlgorithm;
-import com.nimbusds.jose.JWSHeader;
-import com.nimbusds.jose.JWSSigner;
-import com.nimbusds.jose.JWSVerifier;
-import com.nimbusds.jose.crypto.MACSigner;
-import com.nimbusds.jose.crypto.MACVerifier;
-import com.nimbusds.jwt.JWTClaimsSet;
-import com.nimbusds.jwt.SignedJWT;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
+import com.codegym.inote.model.UserPrinciple;
+import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
 @Component
 public class JwtService {
-    public static final String USERNAME = "username";
     public static final String SECRET_KEY = "11111111111111111111111111111111";
-    public static final long EXPIRE_TIME = 8640000000L;
+    public static final long EXPIRE_TIME = 86400000000L;
     public static final Logger logger = LoggerFactory.getLogger(JwtService.class.getName());
 
-    public String generateTokenLogin(String username) {
-        String token = null;
+    public String generateTokenLogin(Authentication authentication) {
+        UserPrinciple userPrincipal = (UserPrinciple) authentication.getPrincipal();
+
+        return Jwts.builder()
+                .setSubject((userPrincipal.getUsername()))
+                .setIssuedAt(new Date())
+                 .setExpiration(new Date((new Date()).getTime() + EXPIRE_TIME * 1000))
+                .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
+                .compact();
+    }
+
+    public boolean validateJwtToken(String authToken) {
         try {
-            JWSSigner signer = new MACSigner(generateShareSecret());
-            JWTClaimsSet.Builder builder = new JWTClaimsSet.Builder();
-            builder.claim(USERNAME, username);
-            builder.expirationTime(generateExpirationDate());
-            JWTClaimsSet claimsSet = builder.build();
-            SignedJWT signedJWT = new SignedJWT(new JWSHeader(JWSAlgorithm.HS256), claimsSet);
-            signedJWT.sign(signer);
-            token = signedJWT.serialize();
-        } catch (Exception e) {
-            logger.error(e.getMessage());
+            Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(authToken);
+            return true;
+        } catch (SignatureException e) {
+            logger.error("Invalid JWT signature -> Message: {} ", e);
+        } catch (MalformedJwtException e) {
+            logger.error("Invalid JWT token -> Message: {}", e);
+        } catch (ExpiredJwtException e) {
+            logger.error("Expired JWT token -> Message: {}", e);
+        } catch (UnsupportedJwtException e) {
+            logger.error("Unsupported JWT token -> Message: {}", e);
+        } catch (IllegalArgumentException e) {
+            logger.error("JWT claims string is empty -> Message: {}", e);
         }
-        return token;
+
+        return false;
     }
 
-    private JWTClaimsSet getClaimsFromToken(String token) {
-        JWTClaimsSet claims = null;
-        try {
-            SignedJWT signedJWT = SignedJWT.parse(token);
-            JWSVerifier verifier = new MACVerifier(generateShareSecret());
-            if (signedJWT.verify(verifier)) {
-                claims = signedJWT.getJWTClaimsSet();
-            }
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-        }
-        return claims;
-    }
+    public String getUserNameFromJwtToken(String token) {
 
-    private Date generateExpirationDate() {
-        return new Date(System.currentTimeMillis() + EXPIRE_TIME);
-    }
-
-    private Date getExpirationDateFromToken(String token) {
-        Date expiration = null;
-        JWTClaimsSet claims = getClaimsFromToken(token);
-        expiration = claims.getExpirationTime();
-        return expiration;
-    }
-
-    public String getUsernameFromToken(String token) {
-        String username = null;
-        try {
-            JWTClaimsSet claims = getClaimsFromToken(token);
-            username = claims.getStringClaim(USERNAME);
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-        }
-        return username;
-    }
-
-    public Long getUserIdFromJWT(String token) {
-        Claims claims = Jwts.parser()
+        String userName = Jwts.parser()
                 .setSigningKey(SECRET_KEY)
                 .parseClaimsJws(token)
-                .getBody();
-
-        return Long.parseLong(claims.getSubject());
-    }
-
-    private byte[] generateShareSecret() {
-        byte[] sharedSecret;
-        sharedSecret = SECRET_KEY.getBytes();
-        return sharedSecret;
-    }
-
-    private Boolean isTokenExpired(String token) {
-        Date expiration = getExpirationDateFromToken(token);
-        return expiration.before(new Date());
-    }
-
-    public Boolean validateTokenLogin(String token) {
-        boolean isValidated = true;
-        if (token == null || token.trim().length() == 0) {
-            isValidated = false;
-        }
-        String username = getUsernameFromToken(token);
-        if (username == null || username.isEmpty()) {
-            isValidated = false;
-        }
-        if (Boolean.TRUE.equals(isTokenExpired(token))) {
-            isValidated = false;
-        }
-        return isValidated;
+                .getBody().getSubject();
+        return userName;
     }
 }
