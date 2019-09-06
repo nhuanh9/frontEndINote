@@ -114,7 +114,6 @@ public class UserController {
     @PostMapping("/doLogin")
     public ModelAndView login(User user) {
         ModelAndView modelAndView;
-
         if (userService.checkLogin(user)) {
             modelAndView = new ModelAndView("/user/homepage");
             modelAndView.addObject("user", user);
