@@ -1,6 +1,5 @@
 package com.codegym.inote.service.impl;
 
-import com.codegym.inote.model.LoginForm;
 import com.codegym.inote.model.User;
 import com.codegym.inote.model.UserPrinciple;
 import com.codegym.inote.repository.UserRepository;

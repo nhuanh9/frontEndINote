@@ -1,7 +1,6 @@
 package com.codegym.inote.controller.restful;
 
 import com.codegym.inote.model.JwtResponse;
-import com.codegym.inote.model.LoginForm;
 import com.codegym.inote.model.Role;
 import com.codegym.inote.service.RoleService;
 import com.codegym.inote.service.impl.JwtService;

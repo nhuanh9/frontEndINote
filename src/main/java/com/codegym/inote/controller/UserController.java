@@ -1,6 +1,5 @@
 package com.codegym.inote.controller;
 
-import com.codegym.inote.model.LoginForm;
 import com.codegym.inote.model.Role;
 import com.codegym.inote.model.User;
 import com.codegym.inote.service.RoleService;
