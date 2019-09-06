@@ -70,7 +70,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/restful/users").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/restful/**").access("hasRole('ROLE_USER')")
                 .anyRequest().authenticated()
-                .and().formLogin().loginPage("/login").permitAll()
+                .and().formLogin().loginPage("/login").permitAll().loginProcessingUrl("/doLogin").successHandler(this.customSuccessHandler)
                 .usernameParameter("username").passwordParameter("password")
                 .and().csrf()
                 .and().exceptionHandling().accessDeniedPage("/Access_Denied")
