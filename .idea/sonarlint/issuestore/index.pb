@@ -187,3 +187,5 @@ f
 6src/main/java/com/codegym/inote/model/JwtResponse.java,f/9/f9d8fe4fe3971f9b280003fc0c9dec25cf2ef431
 h
 8src/main/java/com/codegym/inote/model/UserPrinciple.java,5/1/5128e6bc4c04dafe80e45b235d8e67f8cb40bd42
+d
+4src/main/java/com/codegym/inote/model/LoginForm.java,a/a/aacbd707239b6ebb878960789dab617d8ef2eec8
