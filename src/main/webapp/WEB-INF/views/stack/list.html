@@ -15,8 +15,8 @@
 </div>
 <div th:replace="layout/select::select"></div>
 <div class="start">
-    <a href="/inote/stack/create">Create New Stack</a> |
-    <a href="/inote/noteType/noteTypeList">NoteTypes</a>
+    <a th:href="@{/stack/create/__${user.id}__}">Create New Stack</a> |
+    <a th:href="@{/noteType/noteTypeList/__${user.id}__}">NoteTypes</a>
     <br>
     <h1>Stacks</h1>
     <table>
@@ -25,7 +25,7 @@
         </tr>
         <th:block th:each="stack : ${stacks}">
             <tr>
-                <td><a th:href="@{/stack/view/__${stack.id}__}" th:text="${stack.name}"></a></td>
+                <td><a th:href="@{/stack/view/__${stack.id}__/__${user.id}__}" th:text="${stack.name}"></a></td>
             </tr>
         </th:block>
     </table>

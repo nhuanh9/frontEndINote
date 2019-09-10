@@ -42,12 +42,12 @@ public class NoteTypeController {
     }
 
     @ModelAttribute("user")
-    public User user(){
+    public User user() {
         return userService.getCurrentUser();
     }
 
-    @GetMapping("/noteTypeList")
-    public ModelAndView showNoteTypeList(@RequestParam("search") Optional<String> search, Pageable pageable) {
+    @GetMapping("/noteTypeList/{id}")
+    public ModelAndView showNoteTypeList(@PathVariable Long id, @RequestParam("search") Optional<String> search, Pageable pageable) {
         Page<NoteType> noteTypes;
 
         if (search.isPresent()) {
@@ -55,14 +55,15 @@ public class NoteTypeController {
         } else {
             noteTypes = noteTypeService.findAllByUser(userService.getCurrentUser(), pageable);
         }
-
         ModelAndView modelAndView = new ModelAndView("/noteType/list");
         modelAndView.addObject("noteTypes", noteTypes);
+        modelAndView.addObject("user", userService.getCurrentUser());
+
         return modelAndView;
     }
 
-    @GetMapping("/create")
-    public ModelAndView showCreateForm() {
+    @GetMapping("/create/{id}")
+    public ModelAndView showCreateForm(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("/noteType/create");
         modelAndView.addObject(NOTE_TYPE, new NoteType());
         return modelAndView;
@@ -72,19 +73,19 @@ public class NoteTypeController {
     public ModelAndView saveNoteType(@ModelAttribute NoteType noteType) {
         noteType.setUser(userService.getCurrentUser());
         noteTypeService.save(noteType);
-
         ModelAndView modelAndView = new ModelAndView("/noteType/create");
         modelAndView.addObject(NOTE_TYPE, new NoteType());
         modelAndView.addObject("message", "Created!");
         return modelAndView;
     }
 
-    @GetMapping("/edit/{id}")
-    public ModelAndView showEditForm(@PathVariable Long id) {
+    @GetMapping("/edit/{id}/{userId}")
+    public ModelAndView showEditForm(@PathVariable Long userId, @PathVariable Long id) {
         NoteType noteType = noteTypeService.findById(id);
         if (noteType != null) {
             ModelAndView modelAndView = new ModelAndView("/noteType/edit");
             modelAndView.addObject(NOTE_TYPE, noteType);
+            modelAndView.addObject("user", userService.getCurrentUser());
             return modelAndView;
         }
         return new ModelAndView(ERROR_404);
@@ -101,12 +102,13 @@ public class NoteTypeController {
         return modelAndView;
     }
 
-    @GetMapping("/delete/{id}")
-    public ModelAndView showDeleteForm(@PathVariable Long id) {
+    @GetMapping("/delete/{id}/{userId}")
+    public ModelAndView showDeleteForm(@PathVariable Long id, @PathVariable Long userId) {
         NoteType noteType = noteTypeService.findById(id);
         if (noteType != null) {
             ModelAndView modelAndView = new ModelAndView("/noteType/delete");
             modelAndView.addObject(NOTE_TYPE, noteType);
+            modelAndView.addObject("user", userService.getCurrentUser());
             return modelAndView;
         }
         return new ModelAndView(ERROR_404);
@@ -123,8 +125,8 @@ public class NoteTypeController {
         return "redirect:/noteType/noteTypeList";
     }
 
-    @GetMapping("/view/{id}")
-    public ModelAndView viewNoteType(@PathVariable Long id, Pageable pageable) {
+    @GetMapping("/view/{id}/{userId}")
+    public ModelAndView viewNoteType(@PathVariable Long id, @PathVariable Long userId, Pageable pageable) {
         NoteType noteType = noteTypeService.findById(id);
         if (noteType == null) {
             return new ModelAndView(ERROR_404);
@@ -133,6 +135,7 @@ public class NoteTypeController {
         ModelAndView modelAndView = new ModelAndView("/noteType/view");
         modelAndView.addObject(NOTE_TYPE, noteType);
         modelAndView.addObject("notes", notes);
+        modelAndView.addObject("user", userService.getCurrentUser());
         return modelAndView;
     }
 }

@@ -15,7 +15,7 @@
 </div>
 <div th:replace="layout/select::select"></div>
 <div class="start">
-    <a href="/inote/noteType/create">Create New NoteType</a>
+    <a th:href="@{/noteType/create/__${user.id}__}">Create New NoteType</a>
     <h1>NoteType List</h1>
     <form>
         Search by name:
@@ -29,7 +29,7 @@
         </tr>
         <th:block th:each="noteType : ${noteTypes}">
             <tr>
-                <td><a th:href="@{/noteType/view/__${noteType.id}__}" th:text="${noteType.name}"></a></td>
+                <td><a th:href="@{/noteType/view/__${noteType.id}__/__${user.id}__}" th:text="${noteType.name}"></a></td>
                 <td th:text="${noteType.stack.name}"></td>
             </tr>
         </th:block>

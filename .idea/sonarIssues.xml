@@ -178,6 +178,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/codegym/inote/configuration/WebSecurity.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/com/codegym/inote/controller/LoginController.java">
           <value>
             <set />
@@ -573,6 +578,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../Productive-working-music/src/main/java/com/codegym/music/configuration/CustomSuccessHandler.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../Productive-working-music/src/main/java/com/codegym/music/configuration/SecurityConfiguration.java">
           <value>
             <set />
@@ -583,7 +593,17 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../Productive-working-music/src/main/java/com/codegym/music/model/Role.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../Productive-working-music/src/main/java/com/codegym/music/model/User.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../Productive-working-music/src/main/java/com/codegym/music/repository/RoleRepository.java">
           <value>
             <set />
           </value>
@@ -593,12 +613,27 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../Productive-working-music/src/main/java/com/codegym/music/service/RoleService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../Productive-working-music/src/main/java/com/codegym/music/service/UserService.java">
           <value>
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../Productive-working-music/src/main/java/com/codegym/music/service/impl/RoleServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../Productive-working-music/src/main/java/com/codegym/music/service/impl/UserServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../Productive-working-music/src/main/webapp/WEB-INF/views/homepage.html">
           <value>
             <set />
           </value>

@@ -34,21 +34,23 @@ public class RecycleBinController {
         return userService.getCurrentUser();
     }
 
-    @GetMapping("/trashes")
-    public ModelAndView recycleBin(Pageable pageable) {
+    @GetMapping("/trashes/{id}")
+    public ModelAndView recycleBin(Pageable pageable,@PathVariable Long id) {
         Page<Trash> trashes = recycleBinService.findAllByUser(userService.getCurrentUser(), pageable);
 
         ModelAndView modelAndView = new ModelAndView("/recycleBin/list");
         modelAndView.addObject("trashes", trashes);
+        modelAndView.addObject("user", userService.getCurrentUser());
         return modelAndView;
     }
 
-    @GetMapping("/recovery/{id}")
-    public ModelAndView recoveryForm(@PathVariable Long id) {
+    @GetMapping("/recovery/{id}/{userId}")
+    public ModelAndView recoveryForm(@PathVariable Long id,@PathVariable Long userId) {
         Trash trash = recycleBinService.findById(id);
         if (trash != null) {
             ModelAndView modelAndView = new ModelAndView("/recycleBin/recovery");
             modelAndView.addObject(TRASH, trash);
+            modelAndView.addObject("user", userService.getCurrentUser());
             return modelAndView;
         }
         return new ModelAndView(ERROR_404);
@@ -64,19 +66,19 @@ public class RecycleBinController {
         note.setTime(currentTrash.getTime());
         noteService.save(note);
         recycleBinService.remove(trash.getId());
-
         ModelAndView modelAndView = new ModelAndView("/recycleBin/recovery");
         modelAndView.addObject(TRASH, trash);
         modelAndView.addObject("note", note);
         return "redirect:/recycleBin/trashes";
     }
 
-    @GetMapping("/delete/{id}")
-    public ModelAndView showDeleteForm(@PathVariable Long id) {
+    @GetMapping("/delete/{id}/{userId}")
+    public ModelAndView showDeleteForm(@PathVariable Long id,@PathVariable Long userId) {
         Trash trash = recycleBinService.findById(id);
         if (trash != null) {
             ModelAndView modelAndView = new ModelAndView("/recycleBin/delete");
             modelAndView.addObject(TRASH, trash);
+            modelAndView.addObject("user", userService.getCurrentUser());
             return modelAndView;
         }
         return new ModelAndView(ERROR_404);
@@ -88,7 +90,7 @@ public class RecycleBinController {
         return "redirect:/recycleBin/trashes";
     }
 
-    @GetMapping("/view/{id}")
+    @GetMapping("/view/{id}/{userId}")
     public ModelAndView viewNote(@PathVariable Long id) {
         Trash trash = recycleBinService.findById(id);
         if (trash == null) {
@@ -96,6 +98,7 @@ public class RecycleBinController {
         }
 
         ModelAndView modelAndView = new ModelAndView("/recycleBin/view");
+        modelAndView.addObject("user", userService.getCurrentUser());
         modelAndView.addObject(TRASH, trash);
         return modelAndView;
     }

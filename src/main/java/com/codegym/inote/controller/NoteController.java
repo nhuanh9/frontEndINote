@@ -51,22 +51,22 @@ public class NoteController {
         return userService.getCurrentUser();
     }
 
-    @GetMapping("/notes")
-    public ModelAndView showNoteList(@PageableDefault(size = 5, sort = "time", direction = Sort.Direction.DESC) Pageable pageable, @RequestParam("search") Optional<String> search) {
+    @GetMapping("/notes/{id}")
+    public ModelAndView showNoteList(@PathVariable Long id, @PageableDefault(size = 5, sort = "time", direction = Sort.Direction.DESC) Pageable pageable, @RequestParam("search") Optional<String> search) {
         Page<Note> notes;
+        ModelAndView modelAndView = new ModelAndView("/note/list");
         if (search.isPresent()) {
             notes = noteService.findNoteByTitleContains(search.get(), pageable);
         } else {
             notes = noteService.findAllByUser(userService.getCurrentUser(), pageable);
         }
-
-        ModelAndView modelAndView = new ModelAndView("/note/list");
+        modelAndView.addObject("user", userService.getCurrentUser());
         modelAndView.addObject("notes", notes);
         return modelAndView;
     }
 
-    @GetMapping("/create")
-    public ModelAndView showCreateForm() {
+    @GetMapping("/create/{id}")
+    public ModelAndView showCreateForm(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("/note/create");
         modelAndView.addObject("note", new Note());
         return modelAndView;
@@ -86,12 +86,13 @@ public class NoteController {
         return modelAndView;
     }
 
-    @GetMapping("/edit/{id}")
-    public ModelAndView showEditForm(@PathVariable Long id) {
+    @GetMapping("/edit/{id}/{userId}")
+    public ModelAndView showEditForm(@PathVariable Long id, @PathVariable Long userId) {
         Note note = noteService.findById(id);
         if (note != null) {
             ModelAndView modelAndView = new ModelAndView("/note/edit");
             modelAndView.addObject("note", note);
+            modelAndView.addObject("user", userService.getCurrentUser());
             return modelAndView;
         }
         return new ModelAndView(ERROR_404);
@@ -111,12 +112,13 @@ public class NoteController {
         return modelAndView;
     }
 
-    @GetMapping("/delete/{id}")
-    public ModelAndView showDeleteForm(@PathVariable Long id) {
+    @GetMapping("/delete/{id}/{userId}")
+    public ModelAndView showDeleteForm(@PathVariable Long id,@PathVariable Long userId) {
         Note note = noteService.findById(id);
         if (note != null) {
             ModelAndView modelAndView = new ModelAndView("/note/delete");
             modelAndView.addObject("note", note);
+            modelAndView.addObject("user", userService.getCurrentUser());
             return modelAndView;
         }
         return new ModelAndView(ERROR_404);
@@ -129,8 +131,8 @@ public class NoteController {
         return "redirect:/note/notes";
     }
 
-    @GetMapping("/view/{id}")
-    public ModelAndView viewNote(@PathVariable Long id) {
+    @GetMapping("/view/{id}/{userId}")
+    public ModelAndView viewNote(@PathVariable Long id, @PathVariable Long userId) {
         Note note = noteService.findById(id);
         if (note == null) {
             return new ModelAndView(ERROR_404);
@@ -139,9 +141,9 @@ public class NoteController {
         Set<Tag> tags;
         tags = (Set<Tag>) tagService.findAllByNotes(note);
         note.setTags(tags);
-
         ModelAndView modelAndView = new ModelAndView("/note/view");
         modelAndView.addObject("note", note);
+        modelAndView.addObject("user", userService.getCurrentUser());
         return modelAndView;
     }
 }

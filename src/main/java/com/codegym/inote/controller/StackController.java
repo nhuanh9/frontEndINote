@@ -34,19 +34,21 @@ public class StackController {
         return userService.getCurrentUser();
     }
 
-    @GetMapping("/stacks")
-    public ModelAndView showAllStack(Pageable pageable) {
+    @GetMapping("/stacks/{id}")
+    public ModelAndView showAllStack(@PathVariable Long id, Pageable pageable) {
         Page<Stack> stacks = stackService.findAllByUser(userService.getCurrentUser(), pageable);
 
         ModelAndView modelAndView = new ModelAndView("/stack/list");
         modelAndView.addObject("stacks", stacks);
+        modelAndView.addObject("user", userService.getCurrentUser());
         return modelAndView;
     }
 
-    @GetMapping("/create")
-    public ModelAndView showCreateForm() {
+    @GetMapping("/create/{id}")
+    public ModelAndView showCreateForm(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("/stack/create");
         modelAndView.addObject(STACK, new Stack());
+        modelAndView.addObject("user", userService.getCurrentUser());
         return modelAndView;
     }
 
@@ -54,19 +56,19 @@ public class StackController {
     public ModelAndView saveStack(@ModelAttribute Stack stack) {
         stack.setUser(userService.getCurrentUser());
         stackService.save(stack);
-
         ModelAndView modelAndView = new ModelAndView("/stack/create");
         modelAndView.addObject(STACK, new Stack());
         modelAndView.addObject("message", "Created!");
         return modelAndView;
     }
 
-    @GetMapping("/edit/{id}")
-    public ModelAndView showEditForm(@PathVariable Long id) {
+    @GetMapping("/edit/{id}/{userId}")
+    public ModelAndView showEditForm(@PathVariable Long id,@PathVariable Long userId) {
         Stack stack = stackService.findById(id);
         if (stack != null) {
             ModelAndView modelAndView = new ModelAndView("/stack/edit");
             modelAndView.addObject(STACK, stack);
+            modelAndView.addObject("user", userService.getCurrentUser());
             return modelAndView;
         }
         return new ModelAndView(ERROR_404);
@@ -76,19 +78,19 @@ public class StackController {
     public ModelAndView updateStack(@ModelAttribute Stack stack) {
         stack.setUser(userService.getCurrentUser());
         stackService.save(stack);
-
         ModelAndView modelAndView = new ModelAndView("/stack/edit");
         modelAndView.addObject(STACK, stack);
         modelAndView.addObject("message", "Updated!");
         return modelAndView;
     }
 
-    @GetMapping("/delete/{id}")
-    public ModelAndView showDeleteForm(@PathVariable Long id) {
+    @GetMapping("/delete/{id}/{userId}")
+    public ModelAndView showDeleteForm(@PathVariable Long id,@PathVariable Long userId) {
         Stack stack = stackService.findById(id);
         if (stack != null) {
             ModelAndView modelAndView = new ModelAndView("/stack/delete");
             modelAndView.addObject(STACK, stack);
+            modelAndView.addObject("user", userService.getCurrentUser());
             return modelAndView;
         }
         return new ModelAndView(ERROR_404);
@@ -107,8 +109,8 @@ public class StackController {
         return "redirect:/stack/stacks";
     }
 
-    @GetMapping("/view/{id}")
-    public ModelAndView viewTag(@PathVariable Long id, Pageable pageable) {
+    @GetMapping("/view/{id}/{userId}")
+    public ModelAndView viewTag(@PathVariable Long id,@PathVariable Long userId, Pageable pageable) {
         Stack stack = stackService.findById(id);
         if (stack == null) {
             return new ModelAndView(ERROR_404);
@@ -116,6 +118,7 @@ public class StackController {
         Page<NoteType> noteTypes = noteTypeService.findNoteTypeByStack(stack, pageable);
         ModelAndView modelAndView = new ModelAndView("/stack/view");
         modelAndView.addObject(STACK, stack);
+        modelAndView.addObject("user", userService.getCurrentUser());
         modelAndView.addObject("noteTypes", noteTypes);
         return modelAndView;
     }

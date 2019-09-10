@@ -52,6 +52,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    @Bean
+    public WebSecurity webSecurity(){
+        return  new WebSecurity();
+    }
+
     @Autowired
     public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
@@ -67,6 +72,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/register",
                         "/restful/register",
                         "/restful/login").permitAll()
+                .antMatchers("/note/notes/{userId}/**").access("@webSecurity.checkUserId(authentication,#userId)")
+                .antMatchers("/note/create/{userId}/**").access("@webSecurity.checkUserId(authentication,#userId)")
+                .antMatchers("/note/edit/{id}/{userId}/**").access("@webSecurity.checkUserId(authentication,#userId)")
+                .antMatchers("/note/delete/{id}/{userId}/**").access("@webSecurity.checkUserId(authentication,#userId)")
+                .antMatchers("/note/view/{id}/{userId}/**").access("@webSecurity.checkUserId(authentication,#userId)")
+                .antMatchers("/noteType/noteTypeList/{userId}/**").access("@webSecurity.checkUserId(authentication,#userId)")
+                .antMatchers("/noteType/create/{userId}/**").access("@webSecurity.checkUserId(authentication,#userId)")
+                .antMatchers("/noteType/edit/{id}/{userId}/**").access("@webSecurity.checkUserId(authentication,#userId)")
+                .antMatchers("/noteType/delete/{id}/{userId}/**").access("@webSecurity.checkUserId(authentication,#userId)")
+                .antMatchers("/noteType/view/{id}/{userId}/**").access("@webSecurity.checkUserId(authentication,#userId)")
                 .antMatchers(HttpMethod.GET, "/restful/users").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/restful/**").access("hasRole('ROLE_USER')")
                 .anyRequest().authenticated()

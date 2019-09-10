@@ -36,9 +36,9 @@
             <tr>
                 <td th:text="${note.title}"></td>
                 <td th:text="${note.content}"></td>
-                <td><a th:href="@{/note/edit/__${note.id}__}">edit</a></td>
-                <td><a th:href="@{/note/delete/__${note.id}__}">delete</a></td>
-                <td><a th:href="@{/note/view/__${note.id}__}">view</a></td>
+                <td><a th:href="@{/note/edit/__${note.id}__/__${user.id}__}">edit</a></td>
+                <td><a th:href="@{/note/delete/__${note.id}__/__${user.id}__}">delete</a></td>
+                <td><a th:href="@{/note/view/__${note.id}__/__${user.id}__}">view</a></td>
             </tr>
         </th:block>
     </table>

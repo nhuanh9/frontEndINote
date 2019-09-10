@@ -8,15 +8,15 @@
         <div class="select" th:fragment="select">
             <a href="/inote/homepage">Home</a>
             <br>
-            <a href="/inote/note/create">Create new note</a>
+            <a th:href="@{/note/create/__${user?.id}__}">Create new note</a>
             <br>
-            <a href="/inote/note/notes">List note</a>
+            <a th:href="@{/note/notes/__${user?.id}__}">List Note</a>
             <br>
-            <a href="/inote/tag/tags">Tags</a>
+            <a th:href="@{/tag/tags/__${user?.id}__}">Tags</a>
             <br>
-            <a href="/inote/stack/stacks">Stacks</a>
+            <a th:href="@{/stack/stacks/__${user?.id}__}">Stacks</a>
             <br>
-            <a href="/inote/recycleBin/trashes">Recycle Bin</a>
+            <a th:href="@{/recycleBin/trashes/__${user?.id}__}">Recycle Bin</a>
         </div>
     </body>
 </html>
