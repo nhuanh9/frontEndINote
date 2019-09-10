@@ -32,6 +32,7 @@
                         <option th:each="p:${stacks}" th:value="${p.id}" th:text="${p.name}"></option>
                     </select>
                 </td>
+                <td><a th:href="@{/stack/create}">create new stack</a></td>
             </tr>
             <tr>
                 <td></td>
