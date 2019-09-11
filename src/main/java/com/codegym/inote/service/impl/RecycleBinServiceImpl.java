@@ -51,7 +51,8 @@ public class RecycleBinServiceImpl implements RecycleBinService {
     public Trash addNoteToRecycleBin(Note note) {
         Trash trash = new Trash();
         trash.setTitle(note.getTitle());
-        trash.setContent(note.getContent());
+        trash.setContentHtml(note.getContentHtml());
+        trash.setContentDelta(note.getContentDelta());
         trash.setUser(userService.getCurrentUser());
         trash.setTime(note.getTime());
         this.save(trash);

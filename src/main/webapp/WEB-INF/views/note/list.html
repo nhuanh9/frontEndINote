@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <title>List Note</title>
     <style th:replace="layout/head::style"></style>
+    <!-- Main Quill library -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <!-- Theme included stylesheets -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <link href="http://cdn.quilljs.com/1.2.0/quill.bubble.css" rel="stylesheet">
 </head>
 <body>
 <div th:if="${user}">
@@ -35,7 +40,7 @@
         <th:block th:each="note : ${notes}">
             <tr>
                 <td th:text="${note.title}"></td>
-                <td th:text="${note.content}"></td>
+                <td th:text="${note.contentHtml}"></td>
                 <td><a th:href="@{/note/edit/__${note.id}__/__${user.id}__}">edit</a></td>
                 <td><a th:href="@{/note/delete/__${note.id}__/__${user.id}__}">delete</a></td>
                 <td><a th:href="@{/note/view/__${note.id}__/__${user.id}__}">view</a></td>

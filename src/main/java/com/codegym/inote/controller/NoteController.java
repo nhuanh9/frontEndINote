@@ -107,7 +107,6 @@ public class NoteController {
         Date date = new Date(millis);
         note.setTime(date);
         noteService.save(note);
-
         ModelAndView modelAndView = new ModelAndView("/note/edit");
         modelAndView.addObject("note", note);
         modelAndView.addObject("message", "Updated!");

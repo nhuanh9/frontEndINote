@@ -14,8 +14,12 @@ public class Trash implements Serializable {
 
     private String title;
 
-    @Column(name = "content",columnDefinition = "LONGTEXT")
-    private String content;
+    @Column(name = "contentDelta",columnDefinition = "LONGTEXT")
+    private String contentDelta;
+
+    @Column(name = "contentHtml",columnDefinition = "LONGTEXT")
+    private String contentHtml;
+
     private Date time;
 
     public Date getTime() {
@@ -41,9 +45,9 @@ public class Trash implements Serializable {
     public Trash() {
     }
 
-    public Trash(String title, String content) {
+    public Trash(String title, String contentHtml) {
         this.title = title;
-        this.content = content;
+        this.contentHtml = contentHtml;
     }
 
     public Long getId() {
@@ -62,11 +66,19 @@ public class Trash implements Serializable {
         this.title = title;
     }
 
-    public String getContent() {
-        return content;
+    public String getContentDelta() {
+        return contentDelta;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setContentDelta(String contentDelta) {
+        this.contentDelta = contentDelta;
+    }
+
+    public String getContentHtml() {
+        return contentHtml;
+    }
+
+    public void setContentHtml(String contentHtml) {
+        this.contentHtml = contentHtml;
     }
 }

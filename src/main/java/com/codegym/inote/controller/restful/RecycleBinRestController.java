@@ -51,7 +51,8 @@ public class RecycleBinRestController {
         Note note = new Note();
         note.setUser(trash.getUser());
         note.setTitle(trash.getTitle());
-        note.setContent(trash.getContent());
+        note.setContentDelta(trash.getContentDelta());
+        note.setContentHtml(trash.getContentHtml());
         note.setTime(trash.getTime());
         noteService.save(note);
         recycleBinService.remove(trash.getId());

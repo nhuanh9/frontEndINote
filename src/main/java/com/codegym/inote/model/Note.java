@@ -15,8 +15,12 @@ public class Note implements Serializable {
 
     private String title;
 
-    @Column(name = "content", columnDefinition = "LONGTEXT")
-    private String content;
+    @Column(name = "contentDelta", columnDefinition = "LONGTEXT")
+    private String contentDelta;
+
+    @Column(name = "contentHtml", columnDefinition = "LONGTEXT")
+    private String contentHtml;
+
     private Date time;
 
     public Date getTime() {
@@ -61,9 +65,25 @@ public class Note implements Serializable {
     public Note() {
     }
 
-    public Note(String title, String content) {
+    public Note(String title, String contentHtml) {
         this.title = title;
-        this.content = content;
+        this.contentHtml = contentHtml;
+    }
+
+    public String getContentDelta() {
+        return contentDelta;
+    }
+
+    public void setContentDelta(String contentDelta) {
+        this.contentDelta = contentDelta;
+    }
+
+    public String getContentHtml() {
+        return contentHtml;
+    }
+
+    public void setContentHtml(String contentHtml) {
+        this.contentHtml = contentHtml;
     }
 
     public Long getId() {
@@ -80,14 +100,6 @@ public class Note implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
     }
 
     public NoteType getNoteType() {

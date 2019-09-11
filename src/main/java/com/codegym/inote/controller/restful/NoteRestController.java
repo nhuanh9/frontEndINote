@@ -65,7 +65,8 @@ public class NoteRestController {
         long millis = System.currentTimeMillis();
         Date date = new Date(millis);
         currentNote.setTitle(note.getTitle());
-        currentNote.setContent(note.getContent());
+        currentNote.setContentDelta(note.getContentDelta());
+        currentNote.setContentHtml(note.getContentHtml());
         currentNote.setUser(note.getUser());
         currentNote.setTime(date);
         currentNote.setNoteType(note.getNoteType());
