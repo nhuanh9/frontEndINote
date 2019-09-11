@@ -122,7 +122,7 @@ public class NoteTypeController {
             recycleBinService.addNoteToRecycleBin(note);
         }
         noteTypeService.remove(noteType.getId());
-        return "redirect:/noteType/noteTypeList";
+        return "redirect:/noteType/noteTypeList/"+ userService.getCurrentUser().getId();
     }
 
     @GetMapping("/view/{id}/{userId}")

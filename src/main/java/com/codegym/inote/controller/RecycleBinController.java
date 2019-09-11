@@ -69,7 +69,7 @@ public class RecycleBinController {
         ModelAndView modelAndView = new ModelAndView("/recycleBin/recovery");
         modelAndView.addObject(TRASH, trash);
         modelAndView.addObject("note", note);
-        return "redirect:/recycleBin/trashes";
+        return "redirect:/recycleBin/trashes/"+ userService.getCurrentUser().getId();
     }
 
     @GetMapping("/delete/{id}/{userId}")
@@ -87,11 +87,11 @@ public class RecycleBinController {
     @PostMapping("/delete")
     public String deleteNoteType(@ModelAttribute Trash trash) {
         recycleBinService.remove(trash.getId());
-        return "redirect:/recycleBin/trashes";
+        return "redirect:/recycleBin/trashes/"+ userService.getCurrentUser().getId();
     }
 
     @GetMapping("/view/{id}/{userId}")
-    public ModelAndView viewNote(@PathVariable Long id) {
+    public ModelAndView viewNote(@PathVariable Long id, @PathVariable Long userId) {
         Trash trash = recycleBinService.findById(id);
         if (trash == null) {
             return new ModelAndView(ERROR_404);

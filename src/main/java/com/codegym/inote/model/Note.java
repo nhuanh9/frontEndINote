@@ -3,7 +3,7 @@ package com.codegym.inote.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "note")
@@ -36,7 +36,7 @@ public class Note implements Serializable {
     @JoinTable(name = "note_tags",
             joinColumns = {@JoinColumn(name = "note_id")},
             inverseJoinColumns = {@JoinColumn(name = "tag_id")})
-    private Set<Tag> tags;
+    private List<Tag> tags;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -50,11 +50,11 @@ public class Note implements Serializable {
         this.user = user;
     }
 
-    public Set<Tag> getTags() {
+    public List<Tag> getTags() {
         return tags;
     }
 
-    public void setTags(Set<Tag> tags) {
+    public void setTags(List<Tag> tags) {
         this.tags = tags;
     }
 

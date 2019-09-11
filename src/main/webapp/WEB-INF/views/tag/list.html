@@ -23,7 +23,7 @@
     </form>
 </div>
 <div class="start">
-    <a href="/inote/tag/create">Create New Tag</a>
+    <a th:href="@{/tag/create/__${user.id}__}">Create New Tag</a>
     <h1>Tags</h1>
     <table>
         <tr>

@@ -32,11 +32,15 @@
         </tr>
         <tr>
             <td>Note type:</td>
-            <td><a th:href="@{/user/noteType/view/__${note.noteType.id}__}" th:text="${note.noteType.name}"></a></td>
+            <td><a th:href="@{/noteType/view/__${note.noteType.id}__/__${user.id}__}"
+                   th:text="${note.noteType.name}"></a></td>
         </tr>
         <tr>
             <td>Tag:</td>
-            <td th:each="tag:${note.tags}"><a th:href="@{/user/tag/view/__${tag.id}__}" th:text="${tag.name}"></a></td>
+            <div th:if="${note.tags.size() != 0}">
+                <td th:each="tag:${note.tags}"><a th:href="@{/tag/view/__${tag.id}__/__${user.id}__}"
+                                                  th:text="${tag.name}"></a></td>
+            </div>
         </tr>
     </table>
 </div>

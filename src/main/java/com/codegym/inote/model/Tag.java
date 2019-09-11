@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "tag")
@@ -20,7 +20,7 @@ public class Tag implements Serializable {
     @ManyToMany(fetch = FetchType.EAGER,
             mappedBy = "tags")
 
-    private Set<Note> notes;
+    private List<Note> notes;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -34,11 +34,11 @@ public class Tag implements Serializable {
         this.user = user;
     }
 
-    public Set<Note> getNotes() {
+    public List<Note> getNotes() {
         return notes;
     }
 
-    public void setNotes(Set<Note> notes) {
+    public void setNotes(List<Note> notes) {
         this.notes = notes;
     }
 

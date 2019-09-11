@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/note")
@@ -69,6 +69,7 @@ public class NoteController {
     public ModelAndView showCreateForm(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("/note/create");
         modelAndView.addObject("note", new Note());
+        modelAndView.addObject("user", userService.getCurrentUser());
         return modelAndView;
     }
 
@@ -82,6 +83,7 @@ public class NoteController {
 
         ModelAndView modelAndView = new ModelAndView("/note/create");
         modelAndView.addObject("note", new Note());
+        modelAndView.addObject("user", userService.getCurrentUser());
         modelAndView.addObject("message", "Created!");
         return modelAndView;
     }
@@ -128,7 +130,7 @@ public class NoteController {
     public String deleteNoteType(@ModelAttribute Note note) {
         Note currentNote = noteService.findById(note.getId());
         recycleBinService.addNoteToRecycleBin(currentNote);
-        return "redirect:/note/notes";
+        return "redirect:/note/notes/" + userService.getCurrentUser().getId();
     }
 
     @GetMapping("/view/{id}/{userId}")
@@ -138,8 +140,8 @@ public class NoteController {
             return new ModelAndView(ERROR_404);
         }
 
-        Set<Tag> tags;
-        tags = (Set<Tag>) tagService.findAllByNotes(note);
+        List<Tag> tags;
+        tags = (List<Tag>) tagService.findAllByNotes(note);
         note.setTags(tags);
         ModelAndView modelAndView = new ModelAndView("/note/view");
         modelAndView.addObject("note", note);

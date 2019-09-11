@@ -106,7 +106,7 @@ public class StackController {
             noteTypeService.save(noteType);
         }
         stackService.remove(stack.getId());
-        return "redirect:/stack/stacks";
+        return "redirect:/stack/stacks/"+ userService.getCurrentUser().getId();
     }
 
     @GetMapping("/view/{id}/{userId}")

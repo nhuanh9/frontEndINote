@@ -92,7 +92,7 @@ public class TagController {
     }
 
     @GetMapping("/delete/{id}/{userId}")
-    public ModelAndView showDeleteForm(@PathVariable Long id) {
+    public ModelAndView showDeleteForm(@PathVariable Long id,@PathVariable Long userId) {
         Tag tag = tagService.findById(id);
         if (tag != null) {
             ModelAndView modelAndView = new ModelAndView("/tag/delete");
@@ -113,11 +113,11 @@ public class TagController {
             noteService.save(note);
         }
         tagService.remove(tag.getId());
-        return "redirect:/tag/tags";
+        return "redirect:/tag/tags/"+ userService.getCurrentUser().getId();
     }
 
     @GetMapping("/view/{id}/{userId}")
-    public ModelAndView viewTag(@PathVariable Long id, Pageable pageable) {
+    public ModelAndView viewTag(@PathVariable Long id, Pageable pageable,@PathVariable Long userId) {
         Tag tag = tagService.findById(id);
         if (tag == null) {
             return new ModelAndView(ERROR_404);
