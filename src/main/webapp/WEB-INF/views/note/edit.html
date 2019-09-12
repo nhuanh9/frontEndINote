@@ -50,7 +50,6 @@
                 <div>
                     <input type="checkbox" th:text="${tag.name}" th:value="${tag.id}" th:field="*{tags}">
                 </div>
-                </td>
             </th:block>
             <a th:href="@{/tag/create/__${user.id}__}">new tag</a>
         </div>

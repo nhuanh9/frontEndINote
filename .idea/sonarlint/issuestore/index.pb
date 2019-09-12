@@ -189,3 +189,5 @@ h
 8src/main/java/com/codegym/inote/model/UserPrinciple.java,5/1/5128e6bc4c04dafe80e45b235d8e67f8cb40bd42
 d
 4src/main/java/com/codegym/inote/model/LoginForm.java,a/a/aacbd707239b6ebb878960789dab617d8ef2eec8
+`
+0src/main/webapp/WEB-INF/views/layout/script.html,f/a/fa606d1bfa3aa56acf8f9ad1b2f9be6c786830a4
