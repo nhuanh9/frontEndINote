@@ -288,6 +288,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/codegym/inote/model/ConfirmationToken.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/com/codegym/inote/model/CustomUserDetails.java">
           <value>
             <set />
@@ -348,12 +353,32 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/codegym/inote/repository/ConfirmationTokenRepository.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/com/codegym/inote/repository/NoteRepository.java">
           <value>
             <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/main/java/com/codegym/inote/repository/RoleRepository.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/codegym/inote/repository/UserRepository.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/codegym/inote/service/ConfirmationTokenService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/codegym/inote/service/EmailService.java">
           <value>
             <set />
           </value>
@@ -379,6 +404,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/main/java/com/codegym/inote/service/UserService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/codegym/inote/service/impl/ConfirmationTokenServiceImpl.java">
           <value>
             <set />
           </value>

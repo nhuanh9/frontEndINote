@@ -61,6 +61,11 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
     }
 
     @Bean
+    public ConfirmationTokenService confirmationTokenService() {
+        return new ConfirmationTokenServiceImpl();
+    }
+
+    @Bean
     public TagService tagService() {
         return new TagServiceImpl();
     }

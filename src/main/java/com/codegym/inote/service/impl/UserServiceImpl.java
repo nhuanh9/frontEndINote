@@ -1,5 +1,6 @@
 package com.codegym.inote.service.impl;
 
+import com.codegym.inote.model.ConfirmationToken;
 import com.codegym.inote.model.User;
 import com.codegym.inote.model.UserPrinciple;
 import com.codegym.inote.repository.UserRepository;
@@ -106,6 +107,11 @@ public class UserServiceImpl implements UserService {
             }
         }
         return isRegister;
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
 }

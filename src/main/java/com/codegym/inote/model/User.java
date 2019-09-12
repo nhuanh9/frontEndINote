@@ -6,6 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -28,9 +29,18 @@ public class User implements Serializable {
     @Size(min = 6, max = 15, message = "username length must be between 6 and 15")
     private String username;
 
+    @Column(nullable = false, unique = true)
+    @NotEmpty(message = "email must be fill")
+    @Email(message = "Incorrect form")
+    private String email;
+
     @NotEmpty(message = "password must be fill")
     @Size(min = 6, message = "password length must be at least 6 characters")
     private String password;
+
+    @NotEmpty(message = "confirm password must be fill")
+    @Size(min = 6, message = "password length must be at least 6 characters")
+    private String confirmPassword;
 
     @Column(name = "enabled", nullable = false, columnDefinition = "TINYINT(1)")
     private boolean enabled;
@@ -62,11 +72,14 @@ public class User implements Serializable {
     @OneToMany(targetEntity = Trash.class, fetch = FetchType.EAGER)
     private Set<Trash> trashes;
 
+    @OneToOne(mappedBy = "user")
+    private ConfirmationToken confirmationToken;
+
     public Set<Trash> getTrashes() {
         return trashes;
     }
 
-    public void setTrash(Set<Trash> trashes) {
+    public void setTrashes(Set<Trash> trashes) {
         this.trashes = trashes;
     }
 
@@ -105,9 +118,11 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String username, String password, boolean enabled, Set<Role> roles) {
+    public User(String username, String email, String password, String confirmPassword, boolean enabled, Set<Role> roles) {
         this.username = username;
         this.password = password;
+        this.confirmPassword = confirmPassword;
+        this.email = email;
         this.enabled = enabled;
         this.roles = roles;
     }
@@ -151,6 +166,23 @@ public class User implements Serializable {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+
 
     @Transient
     public List<GrantedAuthority> getAuthorities() {
