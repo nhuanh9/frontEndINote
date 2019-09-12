@@ -8,9 +8,12 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -83,6 +86,31 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
     @Bean
     public RoleService roleService() {
         return new RoleServiceImpl();
+    }
+
+    @Bean
+    public JavaMailSender javaMailSender(){
+        JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
+        javaMailSender.setProtocol("smtp");
+        javaMailSender.setHost("smtp.gmail.com");
+        javaMailSender.setPort(465);
+        javaMailSender.setUsername("maplestory2017vn@gmail.com");
+        javaMailSender.setPassword("superffo3");
+
+        Properties mailProps = new Properties();
+        mailProps.put("mail.smtps.auth", "true");
+        mailProps.put("mail.smtp.starttls.enable", "true");
+        mailProps.put("mail.smtp.debug", "true");
+        mailProps.put("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");
+        mailProps.put("mail.smtp.socketFactory.fallback","false");
+
+        javaMailSender.setJavaMailProperties(mailProps);
+        return javaMailSender;
+    }
+
+    @Bean
+    public EmailService emailService(JavaMailSender javaMailSender){
+        return new EmailService(javaMailSender);
     }
 
     @Bean(name = "Hello World")

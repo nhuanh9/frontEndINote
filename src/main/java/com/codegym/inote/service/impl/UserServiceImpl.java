@@ -101,7 +101,8 @@ public class UserServiceImpl implements UserService {
         boolean isRegister = false;
         Iterable<User> users = this.findAll();
         for (User currentUser : users) {
-            if (user.getUsername().equals(currentUser.getUsername())) {
+            if (user.getUsername().equals(currentUser.getUsername())||
+                    user.getEmail().equals(currentUser.getEmail())) {
                 isRegister = true;
                 break;
             }

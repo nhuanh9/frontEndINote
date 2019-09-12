@@ -71,7 +71,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/doLogin",
                         "/register",
                         "/restful/register",
-                        "/restful/login").permitAll()
+                        "/restful/login",
+                        "/confirm").permitAll()
                 .antMatchers("/note/notes/{userId}/**").access("@webSecurity.checkUserId(authentication,#userId)")
                 .antMatchers("/note/create/{userId}/**").access("@webSecurity.checkUserId(authentication,#userId)")
                 .antMatchers("/note/edit/{id}/{userId}/**").access("@webSecurity.checkUserId(authentication,#userId)")

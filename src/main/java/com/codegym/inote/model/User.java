@@ -183,6 +183,13 @@ public class User implements Serializable {
         this.confirmPassword = confirmPassword;
     }
 
+    public ConfirmationToken getConfirmationToken() {
+        return confirmationToken;
+    }
+
+    public void setConfirmationToken(ConfirmationToken confirmationToken) {
+        this.confirmationToken = confirmationToken;
+    }
 
     @Transient
     public List<GrantedAuthority> getAuthorities() {
