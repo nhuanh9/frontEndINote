@@ -118,12 +118,12 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String username, String email, String password, String confirmPassword, boolean enabled, Set<Role> roles) {
+    public User(String username, String email, String password, String confirmPassword, Set<Role> roles) {
         this.username = username;
         this.password = password;
         this.confirmPassword = confirmPassword;
         this.email = email;
-        this.enabled = enabled;
+        this.enabled = false;
         this.roles = roles;
     }
 

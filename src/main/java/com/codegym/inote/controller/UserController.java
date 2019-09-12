@@ -81,14 +81,13 @@ public class UserController {
             mailMessage.setSubject("Complete Registration!");
             mailMessage.setFrom("chand312902@gmail.com");
             mailMessage.setText("To confirm your account, please click here : "
-                    + "http://localhost:8080/confirm-account?token=" + confirmationToken.getConfirmationToken());
+                    + "http://localhost:8080/inote/confirm-account?token=" + confirmationToken.getConfirmationToken());
 
             emailService.sendEmail(mailMessage);
 
 
             modelAndView.addObject("user", currentUser);
             modelAndView.addObject("email",currentUser.getEmail());
-            modelAndView.addObject(MESSAGE, "Success!");
             return modelAndView;
         }
     }

@@ -72,7 +72,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/register",
                         "/restful/register",
                         "/restful/login",
-                        "/confirm").permitAll()
+                        "/confirm-account/**").permitAll()
                 .antMatchers("/note/notes/{userId}/**").access("@webSecurity.checkUserId(authentication,#userId)")
                 .antMatchers("/note/create/{userId}/**").access("@webSecurity.checkUserId(authentication,#userId)")
                 .antMatchers("/note/edit/{id}/{userId}/**").access("@webSecurity.checkUserId(authentication,#userId)")
