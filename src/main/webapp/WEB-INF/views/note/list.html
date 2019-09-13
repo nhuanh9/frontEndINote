@@ -36,7 +36,7 @@
                 <tr>
                     <td th:cellpadding="3px" th:cellspacing="3px" ><a th:href="@{/note/edit/__${note.id}__/__${user.id}__}" ><p th:text="${note.title}"></p></a>
                     </td>
-                    <td th:cellpadding="3px" th:cellspacing="3px"><a th:href="@{/note/delete/__${note.id}__/__${user.id}__}"><p>X</p></a></td>
+                    <td th:cellpadding="3px" th:cellspacing="3px"><a th:href="@{/note/delete/__${note.id}__/__${user.id}__}"><p style="color: red">X</p></a></td>
                 </tr>
             </th:block>
         </table>
