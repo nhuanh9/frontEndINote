@@ -1,6 +1,5 @@
 package com.codegym.inote.service.impl;
 
-import com.codegym.inote.model.ConfirmationToken;
 import com.codegym.inote.model.User;
 import com.codegym.inote.model.UserPrinciple;
 import com.codegym.inote.repository.UserRepository;
@@ -74,14 +73,7 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             throw new NullPointerException();
         }
-        boolean enabled = true;
-        boolean accountNonExpired = true;
-        boolean credentialsNonExpired = true;
-        boolean accountNonLocked = true;
-
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
-                enabled, accountNonExpired, credentialsNonExpired,
-                accountNonLocked, user.getAuthorities());
+        return UserPrinciple.build(user);
     }
 
     @Override
@@ -89,7 +81,8 @@ public class UserServiceImpl implements UserService {
         Iterable<User> users = this.findAll();
         for (User currentUser : users) {
             if (currentUser.getUsername().equals(user.getUsername())
-                    && passwordEncoder.matches(user.getPassword(), currentUser.getPassword())) {
+                    && passwordEncoder.matches(user.getPassword(), currentUser.getPassword())&&
+                    currentUser.isEnabled()) {
                 return true;
             }
         }
@@ -113,6 +106,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public boolean isCorrectConfirmPassword(User user) {
+        boolean isCorrentConfirmPassword = false;
+        if(user.getPassword().equals(user.getConfirmPassword())){
+            isCorrentConfirmPassword = true;
+        }
+        return isCorrentConfirmPassword;
     }
 
 }

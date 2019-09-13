@@ -59,6 +59,10 @@ public class UserController {
             ModelAndView modelAndView = new ModelAndView(USER_REGISTER);
             modelAndView.addObject(MESSAGE, "username or email is already registered");
             return modelAndView;
+        } else if (!userService.isCorrectConfirmPassword(user)) {
+            ModelAndView modelAndView = new ModelAndView(USER_REGISTER);
+            modelAndView.addObject(MESSAGE, "Confirm Password is incorrect");
+            return modelAndView;
         } else {
             ModelAndView modelAndView = new ModelAndView("user/successfulRegister");
             Role role = roleService.findRoleByName(DEFAULT_ROLE);
@@ -87,29 +91,25 @@ public class UserController {
 
 
             modelAndView.addObject("user", currentUser);
-            modelAndView.addObject("email",currentUser.getEmail());
+            modelAndView.addObject("email", currentUser.getEmail());
             return modelAndView;
         }
     }
 
-    @RequestMapping(value="/confirm-account", method= {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView confirmUserAccount(@RequestParam("token")String confirmationToken)
-    {
+    @RequestMapping(value = "/confirm-account", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView confirmUserAccount(@RequestParam("token") String confirmationToken) {
         ModelAndView modelAndView;
         ConfirmationToken token = confirmationTokenService.findByConfirmationToken(confirmationToken);
 
-        if(token != null)
-        {
+        if (token != null) {
             User user = userService.findByEmail(token.getUser().getEmail());
             user.setEnabled(true);
             userService.save(user);
             modelAndView = new ModelAndView("/user/accountVerified");
             return modelAndView;
-        }
-        else
-        {
+        } else {
             modelAndView = new ModelAndView("/user/error");
-            modelAndView.addObject(MESSAGE,"The link is invalid or broken!");
+            modelAndView.addObject(MESSAGE, "The link is invalid or broken!");
             return modelAndView;
         }
 
