@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
+<head th:replace="layout/head::head">
     <meta charset="UTF-8">
     <title>Recycle Bin</title>
     <style th:replace="layout/head::style"></style>
@@ -23,8 +23,9 @@
         </tr>
         <th:block th:each="trash : ${trashes}">
             <tr>
-                <td><a th:href="@{/recycleBin/view/__${trash.id}__/__${user.id}__}" th:text="${trash.title}"></a></td>
-                <td th:text="${trash.content}"></td>
+                <td><a th:href="@{/recycleBin/view/__${trash.id}__/__${user.id}__}" th:text="${trash.title}"></a>
+                </td>
+                <td th:text="${trash.contentHtml}"></td>
             </tr>
         </th:block>
     </table>

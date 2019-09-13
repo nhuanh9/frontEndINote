@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
+<head th:replace="layout/head::head">
     <meta charset="UTF-8">
     <title>Tag List</title>
     <style th:replace="layout/head::style"></style>
@@ -15,16 +15,17 @@
     </div>
 </div>
 <div th:replace="layout/select::select"></div>
-<div class="search">
-    <form>
-        Search by name:
-        <input type="text" name="search">
-        <input type="submit" value="Search">
-    </form>
-</div>
+
 <div class="start">
     <a th:href="@{/tag/create/__${user.id}__}">Create New Tag</a>
     <h1>Tags</h1>
+    <div class="search">
+        <form>
+            Search by name:
+            <input type="text" name="search">
+            <input type="submit" value="Search">
+        </form>
+    </div>
     <table>
         <tr>
             <td>Name</td>

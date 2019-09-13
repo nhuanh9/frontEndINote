@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
+<head th:replace="layout/head::head">
     <meta charset="UTF-8">
     <title>Delete Note</title>
     <style th:replace="layout/head::style"></style>
@@ -24,7 +24,7 @@
             </tr>
             <tr>
                 <td>Content:</td>
-                <td th:text="${trash.content}"></td>
+                <td th:text="${trash.contentHtml}"></td>
             </tr>
             <tr>
                 <td></td>

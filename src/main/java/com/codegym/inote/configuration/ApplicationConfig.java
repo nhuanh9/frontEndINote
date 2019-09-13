@@ -22,6 +22,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.spring4.SpringTemplateEngine;
@@ -162,8 +163,8 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/inote?useUnicode=yes&characterEncoding=utf-8");
-        dataSource.setUsername("root");
-        dataSource.setPassword("123456");
+        dataSource.setUsername("nhuanh");
+        dataSource.setPassword("nhuanh");
         return dataSource;
     }
 
